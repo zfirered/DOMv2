@@ -31,6 +31,16 @@ class Kalender extends BaseController
         ]);
     }
 
+    function update()
+    {
+        $this->KalenderModel->save([
+            'id' => 8,
+            'agenda' => $this->request->getVar('title'),
+            'start' => $this->request->getVar('start'),
+            'end' => $this->request->getVar('end'),
+        ]);
+    }
+
     //--------------------------------------------------------------------
 
 }

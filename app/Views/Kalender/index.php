@@ -256,6 +256,41 @@
           })
           .then(response => console.log(response))
           .catch(error => console.log(error));
+      },
+      // data update
+      eventDrop: function(info) {
+        var eventData = {
+          id: info.event.id,
+          title: info.event.title,
+          start: moment(info.event.start).format("YYYY/MM/DD HH:MM:SS"),
+          end: moment(info.event.end).format("YYYY/MM/DD HH:MM:SS"),
+        };
+        fetch('/kalender/update', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json'
+            },
+            body: encodeFormData(eventData)
+          })
+          .then(response => console.log(response))
+          .catch(error => console.log(error));
+      },
+      eventResize: function(info) {
+        var eventData = {
+          id: info.event.id,
+          title: info.event.title,
+          start: moment(info.event.start).format("YYYY/MM/DD HH:MM:SS"),
+          end: moment(info.event.end).format("YYYY/MM/DD HH:MM:SS"),
+        };
+        fetch('/kalender/update', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json'
+            },
+            body: encodeFormData(eventData)
+          })
+          .then(response => console.log(response))
+          .catch(error => console.log(error));
       }
     });
 
