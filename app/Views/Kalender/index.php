@@ -175,17 +175,6 @@
     });
 
     var calendar = new Calendar(calendarEl, {
-      timeZone: 'local',
-      events: [{
-          start: '2018-09-01T12:30:00Z'
-        }, // will be shifted to local
-        {
-          start: '2018-09-01T12:30:00+XX:XX'
-        }, // already same offset as local, so won't shift
-        {
-          start: '2018-09-01T12:30:00'
-        } // will be parsed as if it were '2018-09-01T12:30:00+XX:XX'
-      ],
       plugins: ['bootstrap', 'interaction', 'dayGrid', 'timeGrid'],
       header: {
         left: 'prev,next today',
@@ -254,8 +243,8 @@
         //get the bits of data we want to send into a simple object
         var eventData = {
           title: info.event.title,
-          start: info.event.start,
-          end: info.event.end,
+          start: moment(info.event.start).format("YYYY/MM/DD HH:MM:SS"),
+          end: moment(info.event.end).format("YYYY/MM/DD HH:MM:SS"),
         };
         //send the data via an AJAX POST request, and log any response which comes from the server
         fetch('/kalender/save', {
