@@ -9,7 +9,6 @@ class Kalender extends BaseController
     protected $KalenderModel;
     public function __construct()
     {
-
         $this->KalenderModel = new KalenderModel();
     }
 
@@ -19,6 +18,20 @@ class Kalender extends BaseController
             'title' => 'Home | Kalender',
         ];
         return view('/kalender/index', $data);
+    }
+
+    function load()
+    {
+        $event_data = $this->KalenderModel->fetch_all_event();
+        foreach ($event_data->get()->getResultArray() as $row) {
+            $data[] = array(
+                'id' => $row['id'],
+                'title' => $row['title'],
+                'start' => $row['start_event'],
+                'end' => $row['end_event']
+            );
+        }
+        echo json_encode($data);
     }
 
     function save()
@@ -31,10 +44,10 @@ class Kalender extends BaseController
         ]);
     }
 
-    function update()
+    function update($id)
     {
         $this->KalenderModel->save([
-            'id' => 8,
+            'id' => $id,
             'agenda' => $this->request->getVar('title'),
             'start' => $this->request->getVar('start'),
             'end' => $this->request->getVar('end'),

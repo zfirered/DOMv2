@@ -256,6 +256,8 @@
           })
           .then(response => console.log(response))
           .catch(error => console.log(error));
+        calendar.refetchEvents()
+        alert("Added Successfully");
       },
       // data update
       eventDrop: function(info) {
@@ -274,6 +276,8 @@
           })
           .then(response => console.log(response))
           .catch(error => console.log(error));
+        calendar.refetchEvents()
+        alert("Update Successfully");
       },
       eventResize: function(info) {
         var eventData = {
