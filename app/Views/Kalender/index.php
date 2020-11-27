@@ -182,53 +182,23 @@
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
       'themeSystem': 'bootstrap',
-      //Random default events
-      events: [{
-          title: 'All Day Event',
-          start: new Date(y, m, 1),
-          backgroundColor: '#f56954', //red
-          borderColor: '#f56954', //red
-          allDay: true
-        },
-        {
-          title: 'Long Event',
-          start: new Date(y, m, d - 5),
-          end: new Date(y, m, d - 2),
-          backgroundColor: '#f39c12', //yellow
-          borderColor: '#f39c12' //yellow
-        },
-        {
-          title: 'Meeting',
-          start: new Date(y, m, d, 10, 30),
-          allDay: false,
-          backgroundColor: '#0073b7', //Blue
-          borderColor: '#0073b7' //Blue
-        },
-        {
-          title: 'Lunch',
-          start: new Date(y, m, d, 12, 0),
-          end: new Date(y, m, d, 14, 0),
-          allDay: false,
-          backgroundColor: '#00c0ef', //Info (aqua)
-          borderColor: '#00c0ef' //Info (aqua)
-        },
-        {
-          title: 'Birthday Party',
-          start: new Date(y, m, d + 1, 19, 0),
-          end: new Date(y, m, d + 1, 22, 30),
-          allDay: false,
-          backgroundColor: '#00a65a', //Success (green)
-          borderColor: '#00a65a' //Success (green)
-        },
-        {
-          title: 'Click for Google',
-          start: new Date(y, m, 28),
-          end: new Date(y, m, 29),
-          url: 'http://google.com/',
-          backgroundColor: '#3c8dbc', //Primary (light-blue)
-          borderColor: '#3c8dbc' //Primary (light-blue)
-        }
-      ],
+
+      // events: '/kalender/load',
+      events: function(start, end, timezone, callback) {
+        $.ajax({
+          url: '<?php base_url() ?>kalender/get_events',
+          dataType: 'json',
+          data: {
+            // our hypothetical feed requires UNIX timestamps
+            start: start.unix(),
+            end: end.unix()
+          },
+          success: function(msg) {
+            var events = msg.events;
+            callback(events);
+          }
+        });
+      },
       forceEventDuration: true,
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar !!!
@@ -247,17 +217,19 @@
           end: moment(info.event.end).format("YYYY/MM/DD HH:MM:SS"),
         };
         //send the data via an AJAX POST request, and log any response which comes from the server
-        fetch('/kalender/save', {
+        fetch('/kalender/add_event', {
             method: 'POST',
             headers: {
               'Accept': 'application/json'
             },
-            body: encodeFormData(eventData)
+            body: encodeFormData(eventData),
+            success: function(eventData) {
+              calendar.refetchEvents();
+              alert("Added Successfully");
+            },
           })
           .then(response => console.log(response))
-          .catch(error => console.log(error));
-        calendar.refetchEvents()
-        alert("Added Successfully");
+          .catch(error => console.log(error))
       },
       // data update
       eventDrop: function(info) {
@@ -276,8 +248,7 @@
           })
           .then(response => console.log(response))
           .catch(error => console.log(error));
-        calendar.refetchEvents()
-        alert("Update Successfully");
+
       },
       eventResize: function(info) {
         var eventData = {

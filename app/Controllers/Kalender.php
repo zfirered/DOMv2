@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use \App\Models\KalenderModel;
+use DateTime;
 
 class Kalender extends BaseController
 {
@@ -20,19 +21,39 @@ class Kalender extends BaseController
         return view('/kalender/index', $data);
     }
 
-    function load()
+    public function get_events()
     {
-        $event_data = $this->KalenderModel->fetch_all_event();
-        foreach ($event_data->get()->getResultArray() as $row) {
-            $data[] = array(
-                'id' => $row['id'],
-                'title' => $row['title'],
-                'start' => $row['start_event'],
-                'end' => $row['end_event']
+        // Our Start and End Dates
+        $start = $this->request->getVar("start");
+        $end = $this->request->getVar("end");
+
+        $startdt = new DateTime('now'); // setup a local datetime
+        $startdt->setTimestamp($start); // Set the date based on timestamp
+        $start_format = $startdt->format('Y-m-d H:i:s');
+
+        $enddt = new DateTime('now'); // setup a local datetime
+        $enddt->setTimestamp($end); // Set the date based on timestamp
+        $end_format = $enddt->format('Y-m-d H:i:s');
+
+        $events = $this->KalenderModel->get_events($start_format, $end_format);
+
+        $data_events = array();
+
+        foreach ($events->result() as $r) {
+
+            $data_events[] = array(
+                "id" => $r->ID,
+                "agenda" => $r->title,
+                "end" => $r->end,
+                "start" => $r->start
             );
         }
-        echo json_encode($data);
+
+        echo json_encode(array("events" => $data_events));
+        exit();
     }
+
+    // DATA LAMA
 
     function save()
     {
@@ -43,6 +64,7 @@ class Kalender extends BaseController
             'end' => $this->request->getVar('end'),
         ]);
     }
+
 
     function update($id)
     {
