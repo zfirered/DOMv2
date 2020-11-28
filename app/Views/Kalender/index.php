@@ -202,7 +202,7 @@
           end: moment(info.event.end).format("YYYY/MM/DD HH:MM:SS"),
         };
         //send the data via an AJAX POST request, and log any response which comes from the server
-        fetch('/kalender/add_event', {
+        fetch('/kalender/save', {
             method: 'POST',
             headers: {
               'Accept': 'application/json'
