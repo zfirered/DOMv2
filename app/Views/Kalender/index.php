@@ -173,7 +173,6 @@
         };
       }
     });
-
     var calendar = new Calendar(calendarEl, {
       plugins: ['bootstrap', 'interaction', 'dayGrid', 'timeGrid'],
       header: {
@@ -184,21 +183,7 @@
       'themeSystem': 'bootstrap',
 
       // events: '/kalender/load',
-      events: function(start, end, timezone, callback) {
-        $.ajax({
-          url: '<?php base_url() ?>kalender/get_events',
-          dataType: 'json',
-          data: {
-            // our hypothetical feed requires UNIX timestamps
-            start: start.unix(),
-            end: end.unix()
-          },
-          success: function(msg) {
-            var events = msg.events;
-            callback(events);
-          }
-        });
-      },
+
       forceEventDuration: true,
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar !!!
