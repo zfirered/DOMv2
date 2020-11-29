@@ -45,15 +45,15 @@ class Kalender extends BaseController
         $query = $db->query("SELECT * FROM calendar ORDER BY id DESC");
         $results = $query->getResult();
         foreach ($results as $row) {
-            $data = [
-                'id'        => $row->id,
-                'agenda'    => $row->agenda,
+            $data[] = [
+                'title'     => $row->agenda,
                 'start'     => $row->start,
                 'end'       => $row->end,
             ];
         }
 
         echo json_encode($data);
+        exit;
     }
 
     // DATA LAMA

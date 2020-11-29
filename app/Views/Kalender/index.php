@@ -182,34 +182,9 @@
       },
       'themeSystem': 'bootstrap',
 
-      // events: '/kalender/load',
-      events: function(info, successCallback, failureCallback) {
-        $.ajax({
-          url: '/kalender/load',
-          type: 'POST',
-          dataType: 'json',
-          data: {
-            // our hypothetical feed requires UNIX timestamps
-            id: info.id,
-            agenda: info.agenda,
-            start: info.start,
-            end: info.end,
-          },
-          success: function(doc) {
-            var events = [];
-            if (!!doc.result) {
-              $.map(doc.result, function(r) {
-                events.push({
-                  id: r.id,
-                  title: r.title,
-                  start: r.start,
-                  end: r.end
-                });
-              });
-            }
-            successCallback(events);
-          }
-        });
+      events: {
+        method: 'POST',
+        url: '/kalender/load',
       },
 
       forceEventDuration: true,
@@ -222,7 +197,7 @@
           info.draggedEl.parentNode.removeChild(info.draggedEl);
         }
       },
-      eventReceive: function(info) {
+      eventReceive: function(info, event, delta, revertFunc) {
         //get the bits of data we want to send into a simple object
         var eventData = {
           title: info.event.title,
@@ -243,6 +218,7 @@
           })
           .then(response => console.log(response))
           .catch(error => console.log(error))
+
       },
       // data update
       eventDrop: function(info) {
