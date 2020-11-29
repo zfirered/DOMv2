@@ -183,6 +183,34 @@
       'themeSystem': 'bootstrap',
 
       // events: '/kalender/load',
+      events: function(info, successCallback, failureCallback) {
+        $.ajax({
+          url: '/kalender/load',
+          type: 'POST',
+          dataType: 'json',
+          data: {
+            // our hypothetical feed requires UNIX timestamps
+            id: info.id,
+            agenda: info.agenda,
+            start: info.start,
+            end: info.end,
+          },
+          success: function(doc) {
+            var events = [];
+            if (!!doc.result) {
+              $.map(doc.result, function(r) {
+                events.push({
+                  id: r.id,
+                  title: r.title,
+                  start: r.start,
+                  end: r.end
+                });
+              });
+            }
+            successCallback(events);
+          }
+        });
+      },
 
       forceEventDuration: true,
       editable: true,

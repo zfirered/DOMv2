@@ -3,10 +3,10 @@
 namespace App\Controllers;
 
 use \App\Models\KalenderModel;
-use DateTime;
 
 class Kalender extends BaseController
 {
+
     protected $KalenderModel;
     public function __construct()
     {
@@ -21,36 +21,39 @@ class Kalender extends BaseController
         return view('/kalender/index', $data);
     }
 
-    public function get_events()
+    public function get_event()
     {
-        // Our Start and End Dates
-        $start = $this->request->getVar("start");
-        $end = $this->request->getVar("end");
+        $db = \Config\Database::connect();
+        if (isset($_POST['id'])) {
+            $row = $db->query("SELECT* FROM calendar where id=?", [$_POST['id']]);
+            $data = [
+                'id'        => $row->id,
+                'title'     => $row->title,
+                'start'     => date('d-m-Y H:i:s', strtotime($row->start_event)),
+                'end'       => date('d-m-Y H:i:s', strtotime($row->end_event)),
+            ];
 
-        $startdt = new DateTime('now'); // setup a local datetime
-        $startdt->setTimestamp($start); // Set the date based on timestamp
-        $start_format = $startdt->format('Y-m-d H:i:s');
+            echo json_encode($data);
+        }
+    }
 
-        $enddt = new DateTime('now'); // setup a local datetime
-        $enddt->setTimestamp($end); // Set the date based on timestamp
-        $end_format = $enddt->format('Y-m-d H:i:s');
+    public function load()
+    {
+        $db = \Config\Database::connect();
+        $data = [];
 
-        $events = $this->KalenderModel->get_events($start_format, $end_format);
-
-        $data_events = array();
-
-        foreach ($events->result() as $r) {
-
-            $data_events[] = array(
-                "id" => $r->ID,
-                "agenda" => $r->title,
-                "end" => $r->end,
-                "start" => $r->start
-            );
+        $query = $db->query("SELECT * FROM calendar ORDER BY id DESC");
+        $results = $query->getResult();
+        foreach ($results as $row) {
+            $data = [
+                'id'        => $row->id,
+                'agenda'    => $row->agenda,
+                'start'     => $row->start,
+                'end'       => $row->end,
+            ];
         }
 
-        echo json_encode(array("events" => $data_events));
-        exit();
+        echo json_encode($data);
     }
 
     // DATA LAMA
