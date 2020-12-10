@@ -145,19 +145,12 @@
 
     /* initialize the calendar
      -----------------------------------------------------------------*/
-    //Date for the calendar events (dummy data)
-    var date = new Date()
-    var d = date.getDate(),
-      m = date.getMonth(),
-      y = date.getFullYear()
-
     var Calendar = FullCalendar.Calendar;
     var Draggable = FullCalendarInteraction.Draggable;
 
     var containerEl = document.getElementById('external-events');
     var checkbox = document.getElementById('drop-remove');
     var calendarEl = document.getElementById('calendar');
-
     // initialize the external events
     // -----------------------------------------------------------------
 
@@ -181,12 +174,10 @@
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
       'themeSystem': 'bootstrap',
-
       events: {
         method: 'POST',
         url: '/kalender/load',
       },
-
       forceEventDuration: true,
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar !!!
@@ -197,10 +188,11 @@
           info.draggedEl.parentNode.removeChild(info.draggedEl);
         }
       },
-      eventReceive: function(info, event, delta, revertFunc) {
+      eventReceive: function(info) {
         //get the bits of data we want to send into a simple object
         var eventData = {
           title: info.event.title,
+          color: info.event.backgroundColor,
           start: moment(info.event.start).format("YYYY/MM/DD HH:MM:SS"),
           end: moment(info.event.end).format("YYYY/MM/DD HH:MM:SS"),
         };
@@ -211,37 +203,15 @@
               'Accept': 'application/json'
             },
             body: encodeFormData(eventData),
-            success: function(eventData) {
-              calendar.refetchEvents();
-              alert("Added Successfully");
-            },
           })
           .then(response => console.log(response))
           .catch(error => console.log(error))
-
       },
       // data update
       eventDrop: function(info) {
         var eventData = {
           id: info.event.id,
-          title: info.event.title,
-          start: moment(info.event.start).format("YYYY/MM/DD HH:MM:SS"),
-          end: moment(info.event.end).format("YYYY/MM/DD HH:MM:SS"),
-        };
-        fetch('/kalender/update', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json'
-            },
-            body: encodeFormData(eventData)
-          })
-          .then(response => console.log(response))
-          .catch(error => console.log(error));
-
-      },
-      eventResize: function(info) {
-        var eventData = {
-          id: info.event.id,
+          color: info.event.backgroundColor,
           title: info.event.title,
           start: moment(info.event.start).format("YYYY/MM/DD HH:MM:SS"),
           end: moment(info.event.end).format("YYYY/MM/DD HH:MM:SS"),
@@ -257,7 +227,6 @@
           .catch(error => console.log(error));
       }
     });
-
     const encodeFormData = (data) => {
       var form_data = new FormData();
 
@@ -308,6 +277,7 @@
       //Remove event from text input
       $('#new-event').val('')
     })
+
   })
 </script>
 

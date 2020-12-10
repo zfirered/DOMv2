@@ -21,21 +21,21 @@ class Kalender extends BaseController
         return view('/kalender/index', $data);
     }
 
-    public function get_event()
-    {
-        $db = \Config\Database::connect();
-        if (isset($_POST['id'])) {
-            $row = $db->query("SELECT* FROM calendar where id=?", [$_POST['id']]);
-            $data = [
-                'id'        => $row->id,
-                'title'     => $row->title,
-                'start'     => date('d-m-Y H:i:s', strtotime($row->start_event)),
-                'end'       => date('d-m-Y H:i:s', strtotime($row->end_event)),
-            ];
+    // public function get_event()
+    // {
+    //     $db = \Config\Database::connect();
+    //     if (isset($_POST['id'])) {
+    //         $row = $db->query("SELECT* FROM calendar where id=?", [$_POST['id']]);
+    //         $data = [
+    //             'id'        => $row->id,
+    //             'title'     => $row->title,
+    //             'start'     => date('d-m-Y H:i:s', strtotime($row->start_event)),
+    //             'end'       => date('d-m-Y H:i:s', strtotime($row->end_event)),
+    //         ];
 
-            echo json_encode($data);
-        }
-    }
+    //         echo json_encode($data);
+    //     }
+    // }
 
     public function load()
     {
@@ -46,9 +46,11 @@ class Kalender extends BaseController
         $results = $query->getResult();
         foreach ($results as $row) {
             $data[] = [
-                'title'     => $row->agenda,
-                'start'     => $row->start,
-                'end'       => $row->end,
+                'id'                => $row->id,
+                'title'             => $row->agenda,
+                'color'             => $row->color,
+                'start'             => $row->start,
+                'end'               => $row->end,
             ];
         }
 
@@ -62,9 +64,10 @@ class Kalender extends BaseController
     {
         // dd($this->request->getVar());
         $this->KalenderModel->save([
-            'agenda' => $this->request->getVar('title'),
-            'start' => $this->request->getVar('start'),
-            'end' => $this->request->getVar('end'),
+            'agenda'            => $this->request->getVar('title'),
+            'color'             => $this->request->getVar('color'),
+            'start'             => $this->request->getVar('start'),
+            'end'               => $this->request->getVar('end'),
         ]);
     }
 
@@ -74,6 +77,7 @@ class Kalender extends BaseController
         $this->KalenderModel->save([
             'id' => $id,
             'agenda' => $this->request->getVar('title'),
+            'color'  => $this->request->getVar('color'),
             'start' => $this->request->getVar('start'),
             'end' => $this->request->getVar('end'),
         ]);
