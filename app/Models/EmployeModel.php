@@ -1,0 +1,66 @@
+<?php namespace App\Models;
+use CodeIgniter\Model;
+ 
+class EmployeModel extends Model
+{
+    protected $table = 'employe';
+     
+    public function getData($id = false)
+    {
+        if($id === false){
+            return $this->db->table('employe')
+            ->join('division','division.id=employe.division')
+            ->join('position','position.id=employe.position')
+            ->join('employe_status','employe_status.id=employe.status')
+            ->join('bank_account','bank_account.bank_code=employe.bank_code')
+            ->orderby('employe.join_date','DESC')
+            ->get()->getResultArray();
+        }else{
+            return $this->db->table('employe')
+            ->join('division','division.id=employe.division')
+            ->join('position','position.id=employe.position')
+            ->join('employe_status','employe_status.id=employe.status')
+            ->join('bank_account','bank_account.bank_code=employe.bank_code')
+            ->getWhere(['employe.nip' => $id]);
+    }
+}
+
+public function getDataLatest()
+    {
+       
+        return $this->db->table('employe')
+        ->join('division','division.id=employe.division')
+        ->join('position','position.id=employe.position')
+        ->join('employe_status','employe_status.id=employe.status')
+        ->join('bank_account','bank_account.bank_code=employe.bank_code')
+        ->orderby('employe.join_date','DESC')
+        ->limit(8)
+        ->get()->getResultArray();
+       
+
+}
+    public function saveEmploye($data)
+    {
+        $query = $this->db->table($this->table)->insert($data);
+        return $query;
+    }
+    public function updateEmploye($data, $id)
+    {
+        $query = $this->db->table($this->table)->update($data, array('nip' => $id));
+        return $query;
+    }
+    public function deleteEmploye($id)
+    {
+        $query = $this->db->table($this->table)->delete(array('nip' => $id));
+        return $query;
+    } 
+
+    public function cari()
+    {
+        return $this->db->table('employe')
+        ->orderby('nip','DESC')
+        ->get()->getResultArray();
+
+    }
+
+}

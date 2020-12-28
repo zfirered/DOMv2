@@ -20,6 +20,32 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- My CSS -->
     <link rel="stylesheet" href="<?= base_url() ?>/css/style.css">
+    <!-- data table -->
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/css/jquery.dataTables.min.css"/>
+    <!-- jQuery Upload Foto-->
+    <script type="text/javascript">
+        window.onload = function(){
+        var tm_pilih = document.getElementById('pilih');
+        var file = document.getElementById('file');
+        tm_pilih.addEventListener('click', function () {
+            file.click();
+        })
+        file.addEventListener('change', function () {
+            gambar(this);
+        })
+        function gambar(a) {
+            if (a.files && a.files[0]) {     
+                 var reader = new FileReader();    
+                 reader.onload = function (e) {
+                     document.getElementById('gambar').src=e.target.result;
+                 }    
+                 reader.readAsDataURL(a.files[0]);
+            }
+
+        }
+    }
+    </script>
+
     <title><?= $title; ?></title>
 </head>
 
@@ -28,6 +54,17 @@
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
     <script src="<?= base_url() ?>/template/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery Data Tables-->
+    <script src="<?= base_url() ?>/template/plugins/datatables/jquery.dataTables.min2.js"></script>
+<script>
+$(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+
+
+    
+    
     <!-- Bootstrap -->
     <script src="<?= base_url() ?>/template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- ADMIN LTE -->
@@ -37,6 +74,10 @@
     <?= $this->include('layout/sidebar'); ?>
     <?= $this->renderSection('content'); ?>
     <?= $this->include('layout/footer'); ?>
+
+    
+
+
 
 </body>
 

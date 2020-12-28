@@ -32,27 +32,67 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/pegawai" class="nav-link <?php if ($title == 'Home | Data Pegawai') {
+                    <a href="/employe" class="nav-link <?php if ($title == 'Home | Data Employe') {
                                                             print 'active';
                                                         } ?>">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Data Pegawai</p>
+                        <p>Data Employe</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link <?php if ($title == 'Home | Data Divisi') {
-                                                    print 'active';
-                                                } ?>">
+                    <a href="/users" class="nav-link <?php if ($title == 'Home | Data Users') {
+                                                            print 'active';
+                                                        } ?>">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Data Divisi</p>
+                        <p>Data Users</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link <?php if ($title == 'Home | Data Jabatan') {
+                    <a href="/dataAttendance" class="nav-link <?php if ($title == 'Home | Data Attendance') {
+                                                            print 'active';
+                                                        } ?>">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Data Attendance</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/time" class="nav-link <?php if ($title == 'Home | Master Time') {
                                                     print 'active';
                                                 } ?>">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Data Jabatan</p>
+                        <p>Master Time</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/divisi" class="nav-link <?php if ($title == 'Home | Master Divisi') {
+                                                    print 'active';
+                                                } ?>">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Master Divisi</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/position" class="nav-link <?php if ($title == 'Home | Master Position') {
+                                                    print 'active';
+                                                } ?>">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Master Position</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/employestatus" class="nav-link <?php if ($title == 'Home | Master Employe Status') {
+                                                    print 'active';
+                                                } ?>">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Master Employe Status</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/bankaccount" class="nav-link <?php if ($title == 'Home | Master Bank Account') {
+                                                    print 'active';
+                                                } ?>">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Master Bank Account</p>
                     </a>
                 </li>
                 <li class="nav-item">

@@ -8,13 +8,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Tambah Pegawai</h1>
+                    <h1 class="m-0 text-dark">Edit Position</h1>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active">Tambah Pegawai</li>
+                        <li class="breadcrumb-item active">Edit Position</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -33,43 +33,34 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action="/position/update" method="post" >
                         <div class="card-body">
                             <div class="form">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
-                                            <label>Nama</label>
-                                            <input type="text" class="form-control" placeholder="Enter ...">
-                                        </div>
+                                            <label>Position Name</label>
+                                            <input type="text" name="id" value="<?= $data->id; ?>" hidden>
+                                            <input type="text" class="form-control" placeholder="Enter ..." name="pos_nm" value="<?= $data->position_name; ?>" required>
+                                           </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Foto</label>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="sampul" name="sampul">
-                                                <label class="custom-file-label" for="sampul">Pilih gambar..</label>
+                                    <div class="form-group">
+                                            <label>Describe</label>
+                                            <textarea class="form-control" rows="5" placeholder="Enter ..." type="text" name="pos_desc"  required><?= $data->position_desc; ?></textarea>
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <!-- textarea -->
-                                        <div class="form-group">
-                                            <label>Alamat</label>
-                                            <textarea class="form-control" rows="12" placeholder="Enter ..."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="<?= base_url() ?>/img/placeholder.jpg" class="card-img" alt="...">
-                                    </div>
                                 </div>
+                                </div>
+                                
                                 <!-- /.card-body -->
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-info">Simpan</button>
-                                    <a href="/pegawai" type="submit" class="btn btn-danger float-right">Batal</a>
+                                <div class="card-footer" >
+                                <div class="float-right">
+                                <button type="submit" class="btn btn-info">Update</button>
+                                    <a href="/position" type="submit" class="btn btn-danger">Back</a> 
+                                    </div>
                                 </div>
                                 <!-- /.card-footer -->
                             </div>
