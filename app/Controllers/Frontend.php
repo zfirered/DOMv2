@@ -2,11 +2,16 @@
 
 namespace App\Controllers;
 
-class Home extends BaseController
+class Frontend extends BaseController
 {
 	public function index()
 	{
-		return view('welcome_message');
+		return view('frontend/login');
+	}
+
+	public function register()
+	{
+		return view('frontend/register');
 	}
 
 	//--------------------------------------------------------------------
