@@ -31,8 +31,9 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-// $routes->get('/', 'Pages::index');
-$routes->get('/', 'Frontend::index');
+$routes->get('/', 'Pages::index', ['filter' => 'auth']);
+// $routes->get('/', 'Frontend::index');
+// $routes->get('/dashboard', 'Dashboard::index', ['filter' => 'auth']);
 
 // Pegawai
 $routes->get('/pegawai/create', 'Pegawai::create');

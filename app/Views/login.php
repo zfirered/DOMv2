@@ -29,8 +29,10 @@
     <div class="card">
       <div class="card-body login-card-body">
         <p class="login-box-msg">Sign in to start your session</p>
-        <?= session()->get('pesan')?>
-        <form action="/auth/login" method="post">
+        <?php if (session()->getFlashdata('msg')) : ?>
+          <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
+        <?php endif; ?>
+        <form action="/login/auth" method="post">
           <div class="input-group mb-3">
             <input type="text" class="form-control" name="nip" placeholder="nip">
             <div class="input-group-append">
