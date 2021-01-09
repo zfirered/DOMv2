@@ -22,7 +22,8 @@ class Login extends Controller
         $data = $model->where('nip', $nip)->first();
         if ($data) {
             $pass = $data['password'];
-            $verify_pass = password_verify($password, $pass);
+            // $verify_pass = password_verify($password, $pass);
+            $verify_pass = ($password == $pass) ? true : false;
             if ($verify_pass) {
                 $ses_data = [
                     'id'   => $data['id'],
