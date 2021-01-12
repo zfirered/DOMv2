@@ -10,6 +10,8 @@ class Pages extends BaseController
             'title' => 'Home',
         ];
         return view('pages/home', $data);
+        $session = session();
+        echo "Welcome back, " . $session->get('nip');
     }
 
     public function about()

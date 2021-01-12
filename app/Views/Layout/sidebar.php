@@ -49,48 +49,48 @@
                 </li>
                 <li class="nav-item">
                     <a href="/dataAttendance" class="nav-link <?php if ($title == 'Home | Data Attendance') {
-                                                            print 'active';
-                                                        } ?>">
+                                                                    print 'active';
+                                                                } ?>">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Data Attendance</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="/time" class="nav-link <?php if ($title == 'Home | Master Time') {
-                                                    print 'active';
-                                                } ?>">
+                                                        print 'active';
+                                                    } ?>">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Master Time</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="/divisi" class="nav-link <?php if ($title == 'Home | Master Divisi') {
-                                                    print 'active';
-                                                } ?>">
+                                                            print 'active';
+                                                        } ?>">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Master Divisi</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="/position" class="nav-link <?php if ($title == 'Home | Master Position') {
-                                                    print 'active';
-                                                } ?>">
+                                                            print 'active';
+                                                        } ?>">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Master Position</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="/employestatus" class="nav-link <?php if ($title == 'Home | Master Employe Status') {
-                                                    print 'active';
-                                                } ?>">
+                                                                    print 'active';
+                                                                } ?>">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Master Employe Status</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="/bankaccount" class="nav-link <?php if ($title == 'Home | Master Bank Account') {
-                                                    print 'active';
-                                                } ?>">
+                                                                print 'active';
+                                                            } ?>">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Master Bank Account</p>
                     </a>
@@ -118,6 +118,13 @@
                             Simple Link
                             <span class="right badge badge-danger">New</span>
                         </p>
+                    </a>
+                </li>
+                <li class="nav-header">MENU</li>
+                <li class="nav-item">
+                    <a href="/login/logout" class="nav-link">
+                        <i class="fas fa-sign-out-alt nav-icon"></i>
+                        <p>LOGOUT</p>
                     </a>
                 </li>
             </ul>
