@@ -31,19 +31,71 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="/employe" class="nav-link <?php if ($title == 'Home | Data Employe') {
-                                                            print 'active';
-                                                        } ?>">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Data Employe</p>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-database"></i>
+                        <p>
+                            Data Master
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/employe" class="nav-link <?php if ($title == 'Home | Data Employe') {
+                                                                    print 'active';
+                                                                } ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Employe</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/time" class="nav-link <?php if ($title == 'Home | Master Time') {
+                                                                print 'active';
+                                                            } ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Time</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/divisi" class="nav-link <?php if ($title == 'Home | Master Divisi') {
+                                                                    print 'active';
+                                                                } ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Divisi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/position" class="nav-link <?php if ($title == 'Home | Master Position') {
+                                                                    print 'active';
+                                                                } ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Position</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/employestatus" class="nav-link <?php if ($title == 'Home | Master Employe Status') {
+                                                                            print 'active';
+                                                                        } ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Employe Status</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/bankaccount" class="nav-link <?php if ($title == 'Home | Master Bank Account') {
+                                                                        print 'active';
+                                                                    } ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Master Bank Account</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
                 <li class="nav-item">
                     <a href="/users" class="nav-link <?php if ($title == 'Home | Data Users') {
                                                             print 'active';
                                                         } ?>">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="fas fa-users nav-icon"></i>
                         <p>Data Users</p>
                     </a>
                 </li>
@@ -51,55 +103,15 @@
                     <a href="/dataAttendance" class="nav-link <?php if ($title == 'Home | Data Attendance') {
                                                                     print 'active';
                                                                 } ?>">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="fas fa-bell nav-icon"></i>
                         <p>Data Attendance</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/time" class="nav-link <?php if ($title == 'Home | Master Time') {
-                                                        print 'active';
-                                                    } ?>">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Master Time</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/divisi" class="nav-link <?php if ($title == 'Home | Master Divisi') {
-                                                            print 'active';
-                                                        } ?>">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Master Divisi</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/position" class="nav-link <?php if ($title == 'Home | Master Position') {
-                                                            print 'active';
-                                                        } ?>">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Master Position</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/employestatus" class="nav-link <?php if ($title == 'Home | Master Employe Status') {
-                                                                    print 'active';
-                                                                } ?>">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Master Employe Status</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/bankaccount" class="nav-link <?php if ($title == 'Home | Master Bank Account') {
-                                                                print 'active';
-                                                            } ?>">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Master Bank Account</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="/kalender" class="nav-link <?php if ($title == 'Home | Kalender') {
                                                             print 'active';
                                                         } ?>">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="far fa-calendar-times nav-icon"></i>
                         <p>Kalender</p>
                     </a>
                 </li>
@@ -107,7 +119,7 @@
                     <a href="#" class="nav-link <?php if ($title == 'Home | About Us') {
                                                     print 'active';
                                                 } ?>">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="far fa-address-card nav-icon"></i>
                         <p>About Us</p>
                     </a>
                 </li>
