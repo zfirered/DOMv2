@@ -45,6 +45,17 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Position Level</label>
+                                            <select class="form-control" name="level" >
+                        <option value="" disabled selected>- Choose Level -</option>
+                        <?php for($i = 1; $i <= 3; $i++): ?>
+                            <option value="<?= $i ?>"><?= $i; ?></option>
+                        <?php endfor; ?>
+                    </select>                                        
+                                 </div>
+                                    </div>
+                                    <div class="col-sm-6">
                                     <div class="form-group">
                                             <label>Describe</label>
                                             <textarea class="form-control" rows="5" placeholder="Enter ..." type="text" name="pos_desc" required></textarea>

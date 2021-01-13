@@ -84,6 +84,8 @@
                                      </div>
                                      
                                      <div class="col-sm-6">
+                                     <div class="form-group">
+
                                         <label >Status</label>
                                          <select class="form-control" name="stat" required>
                                          <option value="" >- Choose Status -</option>
@@ -95,6 +97,15 @@
                                          <?php endforeach; ?>
                                                  </select>
                                      </div>
+                                     </div>
+
+                                    <div class="col-sm-6">
+                                        <!-- text input -->
+                                        <div class="form-group">
+                                            <label>Right to Leave</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..." name="right_leave" required>
+                                        </div>
+                                    </div> 
                                 </div>
                             </div>
                          </div>

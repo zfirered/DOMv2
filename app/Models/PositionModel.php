@@ -8,11 +8,14 @@ class PositionModel extends Model
     public function getData($id = false)
     {
         if($id === false){
-            return $this->findAll();
+            return $this->db->table('position')
+            ->orderby('level','ASC')
+            ->get()->getResultArray();
+
         }else{
             return $this->getWhere(['id' => $id]);
         }   
-    }
+    } 
     public function savePosition($data)
     {
         $query = $this->db->table($this->table)->insert($data);

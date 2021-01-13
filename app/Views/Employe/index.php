@@ -181,6 +181,13 @@
                                                  <div class="col-sm-6">
                                              <!-- text input -->
                                              <div class="form-group">
+                                             <label>Right to Leave</label>
+                                             <input type="text" class="form-control" value="<?= $row['right_to_leave'];?>" readonly>
+                                              </div>
+                                                 </div> 
+                                                 <div class="col-sm-6">
+                                             <!-- text input -->
+                                             <div class="form-group">
                                              <label>Address</label>
                                              <textarea class="form-control" cols="5" rows="5"  readonly><?= $row['address'];?></textarea>
                                               </div>
@@ -196,7 +203,6 @@
                                                               
                                                               </div>
                                                                 <a href="employe/edit/<?= $row['nip'];?>" class="btn btn-primary">Edit</a>
-                                                                <a href="employe/delete/<?= $row['nip'];?>" class="btn btn-danger">Delete</a>
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></a>
                                                                  
                                                                 </div>
@@ -350,6 +356,13 @@
                                                  <div class="col-sm-6">
                                              <!-- text input -->
                                              <div class="form-group">
+                                             <label>Right to Leave</label>
+                                             <input type="text" class="form-control" value="<?= $row['right_to_leave'];?>" readonly>
+                                              </div>
+                                                 </div> 
+                                                 <div class="col-sm-6">
+                                             <!-- text input -->
+                                             <div class="form-group">
                                              <label>Address</label>
                                              <textarea class="form-control" cols="5" rows="5"  readonly><?= $row['address'];?></textarea>
                                               </div>
@@ -376,7 +389,7 @@
                             </div>
                             <!--/.card -->
                         </div>
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>

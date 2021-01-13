@@ -61,6 +61,7 @@ class Employe extends Controller
             'last_name'  => $this->request->getPost('last_nm'),
             'division'  => $this->request->getPost('div'),
             'position'  => $this->request->getPost('pos'),
+            'right_to_leave'  => $this->request->getPost('right_leave'),
             'email'  => $this->request->getPost('email'),
             'no_telp'  => $this->request->getPost('no_telp'),
             'join_date'  => date('Y-m-d H:i:s'),
@@ -134,6 +135,7 @@ class Employe extends Controller
             'last_name'  => $this->request->getPost('last_nm'),
             'division'  => $this->request->getPost('div'),
             'position'  => $this->request->getPost('pos'),
+            'right_to_leave'  => $this->request->getPost('right_leave'),
             'email'  => $this->request->getPost('email'),
             'no_telp'  => $this->request->getPost('no_telp'),
             'status'  => $this->request->getPost('stat'),
@@ -155,10 +157,11 @@ class Employe extends Controller
     public function delete($id)
     {
         $model = new EmployeModel();
+        
         $data = $model->getData($id)->getRow(); 
         unlink('../public/img/'.$data->foto);
         $model->deleteEmploye($id);
         return redirect()->to('/employe');
     }
-}
+} 
  

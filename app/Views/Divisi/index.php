@@ -34,7 +34,10 @@
                             <!-- CARD DATA PEGAWAI -->
                             <div class="card">
                                 <div class="card-header">
-                                <a href="/divisi/create" class="btn btn-sm btn-info float-left">Add New</a>
+                                <a href="/divisi/create" class="btn btn-sm btn-info float-left">Add New</a>  
+                                <form action="" method="post">
+            <button type="submit" name="submit" value="print" class="btn btn-primary">Download Pdf</button>
+                                </form>
                                                                           
                                 </div>
                                 <div class="card-body" >

@@ -11,10 +11,24 @@ class Divisi extends Controller
     {
         
         $model = new DivisiModel();
+        $this->request->getPost('submit')== "print" ?  $this->htmlToPDF() : '';
+
         $data['data'] = $model->getData();
         $data['title']= 'Home | Master Divisi';
         echo view('/divisi/index',$data);
     }
+
+    function htmlToPDF(){
+
+        $model = new DivisiModel();
+        $data['data'] = $model->getData();
+
+        $dompdf = new \Dompdf\Dompdf(); 
+        $dompdf->loadHtml(view('/divisi/printAll',$data));
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream();
+    } 
 
     public function create()
     {

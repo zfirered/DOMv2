@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2020 at 08:09 AM
+-- Generation Time: Jan 06, 2021 at 11:03 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -207,8 +207,19 @@ INSERT INTO `bank_account` (`bank_code`, `bank_name`) VALUES
 CREATE TABLE `calendar` (
   `id` int(11) NOT NULL,
   `agenda` varchar(20) DEFAULT NULL,
-  `date` date DEFAULT NULL
+  `color` varchar(20) DEFAULT NULL,
+  `start` datetime NOT NULL,
+  `end` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `calendar`
+--
+
+INSERT INTO `calendar` (`id`, `agenda`, `color`, `start`, `end`, `created_at`, `updated_at`) VALUES
+(1, 'Cuti Bersama', 'Red', '2021-01-01 17:52:56', '2021-01-01 17:52:56', '2021-01-01 17:52:56', '2021-01-01 17:52:56');
 
 -- --------------------------------------------------------
 
@@ -220,6 +231,7 @@ CREATE TABLE `disc_submission` (
   `id` int(11) NOT NULL,
   `user` varchar(20) DEFAULT NULL,
   `approver` varchar(20) DEFAULT NULL,
+  `submission_for` varchar(20) DEFAULT NULL,
   `submission_date` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `approve_date` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `implementation_date` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
@@ -227,6 +239,13 @@ CREATE TABLE `disc_submission` (
   `approver_desc` varchar(20) DEFAULT NULL,
   `status` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `disc_submission`
+--
+
+INSERT INTO `disc_submission` (`id`, `user`, `approver`, `submission_for`, `submission_date`, `approve_date`, `implementation_date`, `user_desc`, `approver_desc`, `status`) VALUES
+(1, '11190002', '11190003', 'Sakit', '2021-01-02 08:58:41', '2021-01-02 08:58:41', '2021-01-04 08:58:41', 'Sakit flu', 'Diizinkan', 'Y');
 
 -- --------------------------------------------------------
 
@@ -345,38 +364,24 @@ CREATE TABLE `news` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `overtime_submission`
---
-
-CREATE TABLE `overtime_submission` (
-  `id` int(11) NOT NULL,
-  `nip` varchar(20) DEFAULT NULL,
-  `submission_date` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  `submission_approve` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  `submission_implementation` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  `overtime_hour` varchar(10) DEFAULT NULL,
-  `overtime_desc` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `position`
 --
 
 CREATE TABLE `position` (
   `id` int(11) NOT NULL,
   `position_name` varchar(20) DEFAULT NULL,
-  `position_desc` varchar(100) DEFAULT NULL
+  `position_desc` varchar(100) DEFAULT NULL,
+  `level` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `position`
 --
 
-INSERT INTO `position` (`id`, `position_name`, `position_desc`) VALUES
-(1, 'Kepala Divisi', 'Bertanggung jawab atas proses bisnis divisi'),
-(2, 'Wakil Kepala Divisi', 'Bertanggung jawab dalam membantu kepala divisi');
+INSERT INTO `position` (`id`, `position_name`, `position_desc`, `level`) VALUES
+(1, 'Kepala Divisi', 'Bertanggung jawab atas proses bisnis divisi', 2),
+(2, 'Wakil Kepala Divisi', 'Bertanggung jawab dalam membantu kepala divisi', 3),
+(3, 'Human Resource', 'Bertanggung jawab dalam approve kepala divisi', 1);
 
 -- --------------------------------------------------------
 
@@ -411,7 +416,6 @@ CREATE TABLE `subsidy` (
 CREATE TABLE `time` (
   `id_time` int(11) NOT NULL,
   `start` time NOT NULL,
-  `finish` time NOT NULL,
   `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -419,9 +423,9 @@ CREATE TABLE `time` (
 -- Dumping data for table `time`
 --
 
-INSERT INTO `time` (`id_time`, `start`, `finish`, `status`) VALUES
-(1, '07:00:00', '16:00:00', 'in'),
-(2, '16:00:00', '18:00:00', 'out');
+INSERT INTO `time` (`id_time`, `start`, `status`) VALUES
+(1, '07:00:59', 'in'),
+(2, '16:00:59', 'out');
 
 -- --------------------------------------------------------
 
@@ -446,7 +450,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nip`, `password`, `last_login`, `role`, `created_at`, `updated_at`, `deleted_at`, `allow`) VALUES
-(3, '11190587', '12345', NULL, NULL, '2020-12-06 07:21:49', '2020-12-06 07:58:40', NULL, 'N'),
+(3, '11190587', '12345', NULL, NULL, '2020-12-06 07:21:49', '2021-01-02 04:50:25', NULL, 'Y'),
 (4, '11190002', '12345', NULL, NULL, '2020-12-06 07:26:22', '2020-12-06 07:51:23', NULL, 'N'),
 (6, '11190003', '12345', NULL, NULL, '2020-12-07 16:30:13', NULL, NULL, 'N'),
 (7, '11190004', '12345', NULL, NULL, '2020-12-21 14:26:58', NULL, NULL, 'N');
@@ -520,13 +524,6 @@ ALTER TABLE `news`
   ADD KEY `fk_news_employe_1` (`created_by`);
 
 --
--- Indexes for table `overtime_submission`
---
-ALTER TABLE `overtime_submission`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_overtime_submission_employe_1` (`nip`);
-
---
 -- Indexes for table `position`
 --
 ALTER TABLE `position`
@@ -571,13 +568,13 @@ ALTER TABLE `attendance`
 -- AUTO_INCREMENT for table `calendar`
 --
 ALTER TABLE `calendar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `disc_submission`
 --
 ALTER TABLE `disc_submission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `division`
@@ -604,16 +601,10 @@ ALTER TABLE `news`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `overtime_submission`
---
-ALTER TABLE `overtime_submission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `position`
 --
 ALTER TABLE `position`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `submission`
@@ -677,12 +668,6 @@ ALTER TABLE `memo`
 --
 ALTER TABLE `news`
   ADD CONSTRAINT `fk_news_employe_1` FOREIGN KEY (`created_by`) REFERENCES `employe` (`nip`);
-
---
--- Constraints for table `overtime_submission`
---
-ALTER TABLE `overtime_submission`
-  ADD CONSTRAINT `fk_overtime_submission_employe_1` FOREIGN KEY (`nip`) REFERENCES `employe` (`nip`);
 
 --
 -- Constraints for table `user`

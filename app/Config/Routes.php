@@ -32,7 +32,6 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Pages::index');
-
 // Pegawai
 $routes->get('/pegawai/create', 'Pegawai::create');
 $routes->get('/pegawai/(:any)', 'Pegawai::detail/$1');

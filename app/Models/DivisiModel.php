@@ -28,5 +28,6 @@ class DivisiModel extends Model
         $query = $this->db->table($this->table)->delete(array('id' => $id));
         return $query;
     } 
+
  
 }

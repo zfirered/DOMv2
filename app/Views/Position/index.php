@@ -33,6 +33,9 @@
                             <div class="card">
                                 <div class="card-header">
                                 <a href="/position/create" class="btn btn-sm btn-info float-left">Add New</a>
+                                <form action="" method="post">
+            <button type="submit" name="submit" value="print" class="btn btn-primary">Download Pdf</button>
+                                </form>
                                 </div>
                                 <div class="card-body">
                                     <!-- TABLE DATA PEGAWAI -->
@@ -76,7 +79,9 @@
                                                                     <p><?= $row['position_desc'];?></p>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                              
+                                                                <div class="modal-footer-info" >
+                                                       <span class="users-list-name">Level: <?= $row['level']; ?></span>
+                                                                                                                            </div>
                                                                 <a href="position/edit/<?= $row['id'];?>" class="btn btn-primary">Edit</a>
                                                                 <a href="position/delete/<?= $row['id'];?>" class="btn btn-danger">Delete</a>
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></a>
