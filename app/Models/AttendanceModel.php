@@ -23,29 +23,18 @@ class AttendanceModel extends Model
     }
 }
 
-public function cekAttend()
-    {   
-        
-        
-            return $this->db->table('employe')
-            ->join('attendance','attendance.nip=employe.nip' and ['attendance.date' => "2020-12-08"],'LEFT')
-            ->where(['attendance.date' => "2020-12-08"])
-            ->getWhere(['employe.nip' => "11190002"])
-            ->getResultArray();
-            
-        
-}
+
 
 public function get_absen($id, $bulan, $tahun)
     {
    
         return $this->db->table('attendance a')
         ->select("DATE_FORMAT(a.date, '%Y-%m-%d') AS date, a.check_in AS jam_masuk, a.check_out AS jam_pulang, a.overtime_in AS jam_masuk_lembur, a.overtime_out AS jam_pulang_lembur")
-        ->where('nip', $id)
-        ->where("DATE_FORMAT(date, '%m') = ", $bulan)
-        ->where("DATE_FORMAT(date, '%Y') = ", $tahun)
-        ->groupby("date")
-        ->groupby("nip")
+        ->where('a.nip', $id)
+        ->where("DATE_FORMAT(a.date, '%m') = ", $bulan)
+        ->where("DATE_FORMAT(a.date, '%Y') = ", $tahun)
+        ->groupby("a.date")
+        ->groupby("a.nip")
         ->get()->getResultArray();
     
 }

@@ -55,11 +55,19 @@ public function getDataLatest()
         return $query;
     } 
 
-    public function cari()
+    public function cari($div= false)
     {
+        if($div === false){
         return $this->db->table('employe')
-        ->orderby('nip','DESC')
+        ->orderby('employe.nip','DESC')
         ->get()->getResultArray();
+
+        }else{
+        return $this->db->table('employe')
+        ->where('employe.division', $div)
+        ->orderby('employe.nip','DESC')
+        ->get()->getResultArray();
+        }
 
     }
 

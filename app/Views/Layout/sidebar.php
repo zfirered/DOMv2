@@ -120,7 +120,8 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-header">MENU</li>
+
+             <li class="nav-header">MENU</li>
                 <li class="nav-item">
                     <a href="/login/logout" class="nav-link">
                         <i class="fas fa-sign-out-alt nav-icon"></i>

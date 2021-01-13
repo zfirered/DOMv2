@@ -8,10 +8,24 @@ class Position extends Controller
     public function index()
     {
         $model = new PositionModel();
+        $this->request->getPost('submit')== "print" ?  $this->htmlToPDF() : '';
+
         $data['data'] = $model->getData();
         $data['title']= 'Home | Master Position';
         echo view('/position/index',$data);
     }
+
+    function htmlToPDF(){
+
+        $model = new PositionModel();
+        $data['data'] = $model->getData();
+
+        $dompdf = new \Dompdf\Dompdf(); 
+        $dompdf->loadHtml(view('/position/printAll',$data));
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream();
+    } 
 
     public function create()
     {
@@ -26,6 +40,7 @@ class Position extends Controller
         $data = array(
             'position_name'  => $this->request->getPost('pos_nm'),
             'position_desc'  => $this->request->getPost('pos_desc'),
+            'level'  => $this->request->getPost('level'),
         );
         $model->savePosition($data);
         return redirect()->to('/position');
@@ -46,6 +61,7 @@ class Position extends Controller
         $data = array(
             'position_name'  => $this->request->getPost('pos_nm'),
             'position_desc'  => $this->request->getPost('pos_desc'),
+            'level'  => $this->request->getPost('level'),
         );
         $model->updatePosition($data, $id);
         return redirect()->to('/position');

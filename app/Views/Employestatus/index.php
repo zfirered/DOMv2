@@ -76,7 +76,6 @@
                                                                     <p><?= $row['status_desc'];?></p>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                              
                                                                 <a href="employestatus/edit/<?= $row['id'];?>" class="btn btn-primary">Edit</a>
                                                                 <a href="employestatus/delete/<?= $row['id'];?>" class="btn btn-danger">Delete</a>
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></a>
