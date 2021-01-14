@@ -38,10 +38,15 @@ class aboutus extends Controller
 
         $default_img = "placeholder.jpg";
         $cek_img = $this->request->getFile('logo');
-
-        if ($cek_img == "") {
-            $file = $default_img;
+        $dataLama = $model->find($this->request->getPost('id'));
+        // dd($dataLama, $cek_img->getError());
+        if ($cek_img->getError() == 4) {
+            $file = $dataLama['logo'];
         } else {
+
+            if ($dataLama['logo'] != $default_img) {
+                unlink('img/' . $dataLama['logo']);
+            }
 
             $cek_img->move(ROOTPATH . 'public/img');
             $file = ['gambar' => $cek_img->getName()];

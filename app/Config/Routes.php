@@ -41,6 +41,15 @@ $routes->get('/pegawai/(:any)', 'Pegawai::detail/$1');
 // Kalender
 $routes->get('/kalender', 'Kalender::index');
 
+// Rest API
+$routes->group('api', ['filter' => 'apiauth'], function ($routes) {
+	// $routes->get('login', 'api\Login::index');
+	$routes->post('login', 'api\Login::auth');
+	$routes->get('logout', 'api\Login::logout');
+
+	$routes->get('users', 'api\Users::index');
+});
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
