@@ -16,6 +16,15 @@ class UsersModel extends Model
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
+    public function getDataAPI($id = null)
+    {
+        if ($id == null) {
+            return $this->findAll();
+        } else {
+            return $this->getWhere('id', $id)->getRowArray();
+        }
+    }
+
     public function getData($id = false)
     {
         if ($id === false) {
