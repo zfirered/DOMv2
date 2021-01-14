@@ -4,25 +4,12 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\UsersModel;
-
-use CodeIgniter\RESTful\ResourceController;
 use Config\Format;
 
 class Users extends Controller
 {
-
-    protected $format = 'json';
-    protected $modelName = 'App\Models\UsersModel';
-
-    public function __construct()
-    {
-        $this->users = new UsersModel();
-    }
-
     public function index()
     {
-        $user = $this->users->getDataAPI();
-        return $this->respond($user, 200);
 
         $model = new UsersModel();
         $data['data'] = $model->getData();
