@@ -33,7 +33,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form class="form-horizontal" action="/position/update" method="post" >
+                    <form class="form-horizontal" action="/position/update" method="post">
                         <div class="card-body">
                             <div class="form">
                                 <div class="row">
@@ -43,33 +43,33 @@
                                             <label>Position Name</label>
                                             <input type="text" name="id" value="<?= $data->id; ?>" hidden>
                                             <input type="text" class="form-control" placeholder="Enter ..." name="pos_nm" value="<?= $data->position_name; ?>" required>
-                                           </div>
+                                        </div>
                                     </div>
                                     <div class="col-sm-6">
-                                    <div class="form-group">
+                                        <div class="form-group">
                                             <label>Describe</label>
-                                            <textarea class="form-control" rows="5" placeholder="Enter ..." type="text" name="pos_desc"  required><?= $data->position_desc; ?></textarea>
-                                            </div>
+                                            <textarea class="form-control" rows="5" placeholder="Enter ..." type="text" name="pos_desc" required><?= $data->position_desc; ?></textarea>
+                                        </div>
                                     </div>
                                 </div>
-                                </div>
-                                </div>
-                                
-                                <!-- /.card-body -->
-                                <div class="card-footer" >
-                                <div class="float-right">
-                                <button type="submit" class="btn btn-info">Update</button>
-                                    <a href="/position" type="submit" class="btn btn-danger">Back</a> 
-                                    </div>
-                                </div>
-                                <!-- /.card-footer -->
                             </div>
                         </div>
-                    </form>
+
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-info">Update</button>
+                                <a href="/position" type="submit" class="btn btn-danger">Back</a>
+                            </div>
+                        </div>
+                        <!-- /.card-footer -->
                 </div>
-                <!-- /.card -->
             </div>
+            </form>
         </div>
+        <!-- /.card -->
     </div>
+</div>
+</div>
 </div>
 <?= $this->endSection(); ?>

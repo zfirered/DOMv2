@@ -32,7 +32,32 @@
                     <div class="row">
                         <div class="col md-6">
                             <!-- Isi Konten -->
-                            <h1>TEST</h1>
+                            <div class="card">
+                                <div class="card-header">
+                                    <a href="/aboutus/edit" class="btn btn-sm btn-info float-left">Edit</a>
+                                </div>
+                                <div class="card-body">
+                                    <!-- TABLE DATA PEGAWAI -->
+                                    <img src="img/<?= $data['logo']; ?>" alt="" class=logo>
+                                    <br>
+                                    <br>
+                                    <h4>
+                                        <i class="fas fa-globe"></i> <?= $data['naper']; ?>
+                                    </h4>
+                                    <i class="fas fa-address-card"></i> Alamat Kantor: <?= $data['alamatkantor']; ?>
+                                    <br>
+                                    <i class="fas fa-phone"></i> Nomor Telepon: <?= $data['notelp']; ?>
+                                    <br>
+                                    <i class="fas fa-fax"></i> Nomor Fax: <?= $data['nofax']; ?>
+                                    <br>
+                                    <i class="fas fa-envelope-square"></i> Email: <?= $data['email']; ?>
+                                    <br>
+                                    <i class="fas fa-sitemap"></i> Website: <?= $data['website']; ?>
+
+                                </div>
+                                <div class="card-footer clearfix">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -12,19 +12,27 @@ use App\Models\EmployeModel;
 class aboutus extends Controller
 {
 
+
     public function index()
     {
+        $model = new AboutUsModel();
+        // dd($model->first());
         $data['title'] = 'Home | About Us';
+        $data['data'] = $model->first();
         echo view('/AboutUs/index', $data);
     }
 
-    public function create()
+    public function edit()
     {
+        $model = new AboutUsModel();
         $data['title'] = 'Home | About Us';
-        echo view('/AboutUs/create', $data);
+        $data['data'] = $model->first();
+        // dd($data);
+        // 'AboutUs' => $this->AboutUsModel->getAboutUs;
+        echo view('/AboutUs/edit', $data);
     }
 
-    public function save()
+    public function update()
     {
         $model = new AboutUsModel();
 
@@ -32,7 +40,6 @@ class aboutus extends Controller
         $cek_img = $this->request->getFile('logo');
 
         if ($cek_img == "") {
-
             $file = $default_img;
         } else {
 
@@ -41,6 +48,7 @@ class aboutus extends Controller
         }
 
         $data = array(
+            'id' => $this->request->getPost('id'),
             'naper'  => $this->request->getPost('naper'),
             'nofax'  => $this->request->getPost('nofax'),
             'notelp'  => $this->request->getPost('notelp'),
@@ -50,7 +58,7 @@ class aboutus extends Controller
             'logo'  => $file,
         );
 
-        $model->saveAboutUs($data);
+        $model->save($data);
         return redirect()->to('/AboutUs');
     }
 }
