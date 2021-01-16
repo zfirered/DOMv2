@@ -108,11 +108,19 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/announcement" class="nav-link <?php if ($title == 'Home | Announcement') {
+                                                                print 'active';
+                                                            } ?>">
+                        <i class="fas fa-bullhorn nav-icon"></i>
+                        <p>Announcement</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/kalender" class="nav-link <?php if ($title == 'Home | Kalender') {
                                                             print 'active';
                                                         } ?>">
                         <i class="far fa-calendar-times nav-icon"></i>
-                        <p>Kalender</p>
+                        <p>Calendar</p>
                     </a>
                 </li>
                 <li class="nav-item">

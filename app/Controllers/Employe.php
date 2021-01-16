@@ -1,5 +1,7 @@
-<?php namespace App\Controllers;
- 
+<?php
+
+namespace App\Controllers;
+
 use CodeIgniter\Controller;
 use App\Models\EmployeModel;
 use App\Models\DivisiModel;
@@ -7,7 +9,7 @@ use App\Models\PositionModel;
 use App\Models\EmployestatusModel;
 use App\Models\BankAccountModel;
 use App\Models\UsersModel;
- 
+
 class Employe extends Controller
 {
     public function index()
@@ -15,45 +17,42 @@ class Employe extends Controller
         $model = new EmployeModel();
         $data['data'] = $model->getData();
         $data['latest'] = $model->getDataLatest();
-        $data['title']= 'Home | Data Employe';
-        echo view('/employe/index',$data);
+        $data['title'] = 'Home | Data Employe';
+        echo view('/employe/index', $data);
     }
 
     public function create()
     {
-        $model1= new DivisiModel();
-        $model2= new PositionModel();
-        $model3= new EmployestatusModel();
-        $model4= new BankAccountModel();
-       
-          
+        $model1 = new DivisiModel();
+        $model2 = new PositionModel();
+        $model3 = new EmployestatusModel();
+        $model4 = new BankAccountModel();
+
+
         $data['data'] = $model1->getData();
         $data['data2'] = $model2->getData();
         $data['data3'] = $model3->getData();
         $data['data4'] = $model4->getData();
-        $data['title']= 'Home | Data Employe';
-        echo view('/employe/create',$data);
-        
+        $data['title'] = 'Home | Data Employe';
+        echo view('/employe/create', $data);
     }
- 
+
     public function save()
     {
         $model = new EmployeModel();
         $model2 = new UsersModel();
 
-        $default_img= "placeholder.jpg";
+        $default_img = "placeholder.jpg";
         $cek_img = $this->request->getFile('foto');
-        
-            if($cek_img == ""){
 
-                $file = $default_img;
+        if ($cek_img == "") {
 
-            } else {
-               
-                $cek_img->move(ROOTPATH.'public/img');
-                $file= ['gambar' => $cek_img->getName()];
+            $file = $default_img;
+        } else {
 
-            }
+            $cek_img->move(ROOTPATH . 'public/img');
+            $file = ['gambar' => $cek_img->getName()];
+        }
 
         $data = array(
             'nip'  => $this->request->getPost('nip'),
@@ -79,7 +78,7 @@ class Employe extends Controller
 
         $data2 = array(
             'nip'  => $this->request->getPost('nip'),
-            'password'  => "12345", 
+            'password'  => "12345",
             'created_at'  => date('Y-m-d H:i:s'),
             'allow'  => "N",
         );
@@ -93,19 +92,19 @@ class Employe extends Controller
     {
 
         $model = new EmployeModel();
-        $model1= new DivisiModel();
-        $model2= new PositionModel();
-        $model3= new EmployestatusModel();
-        $model4= new BankAccountModel();
-       
-        $data['data'] = $model->getData($id)->getRow(); 
+        $model1 = new DivisiModel();
+        $model2 = new PositionModel();
+        $model3 = new EmployestatusModel();
+        $model4 = new BankAccountModel();
+
+        $data['data'] = $model->getData($id)->getRow();
         $data['data1'] = $model1->getData();
         $data['data2'] = $model2->getData();
         $data['data3'] = $model3->getData();
         $data['data4'] = $model4->getData();
-       
-        $data['title']= 'Home | Data Employe';
-        echo view('/employe/edit',$data);
+
+        $data['title'] = 'Home | Data Employe';
+        echo view('/employe/edit', $data);
     }
 
     public function update()
@@ -114,19 +113,17 @@ class Employe extends Controller
 
         $img_old = $this->request->getPost('foto_old');
         $cek_img = $this->request->getFile('foto');
-        
-            if($cek_img == ""){
 
-                $file = $img_old;
+        if ($cek_img == "") {
 
-            } else {
-               
-                $cek_img->move(ROOTPATH.'public/img');
-                $file= ['gambar' => $cek_img->getName()];
-                unlink('../public/img/'.$img_old);
+            $file = $img_old;
+        } else {
 
-            }
-            
+            $cek_img->move(ROOTPATH . 'public/img');
+            $file = ['gambar' => $cek_img->getName()];
+            unlink('../public/img/' . $img_old);
+        }
+
 
         $id = $this->request->getPost('nip');
         $data = array(
@@ -155,10 +152,9 @@ class Employe extends Controller
     public function delete($id)
     {
         $model = new EmployeModel();
-        $data = $model->getData($id)->getRow(); 
-        unlink('../public/img/'.$data->foto);
+        $data = $model->getData($id)->getRow();
+        unlink('../public/img/' . $data->foto);
         $model->deleteEmploye($id);
         return redirect()->to('/employe');
     }
 }
- 

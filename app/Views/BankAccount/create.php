@@ -33,7 +33,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form class="form-horizontal" action="/bankAccount/save" method="post" >
+                    <form class="form-horizontal" action="/bankAccount/save" method="post">
                         <div class="card-body">
                             <div class="form">
                                 <div class="row">
@@ -45,29 +45,29 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                    <div class="form-group">
+                                        <div class="form-group">
                                             <label>Bank Name</label>
                                             <textarea class="form-control" rows="5" placeholder="Enter ..." type="text" name="bank_nm" required></textarea>
-                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                </div>
-                                </div>
-                                <!-- /.card-body -->
-                                <div class="card-footer" >
-                                <div class="float-right">
-                                <button type="submit" class="btn btn-info">Save</button>
-                                    <a href="/bankAccount" type="submit" class="btn btn-danger">Back</a> 
-                                    </div>
-                                </div>
-                                <!-- /.card-footer -->
                             </div>
                         </div>
-                    </form>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-info">Save</button>
+                                <a href="/bankAccount" type="submit" class="btn btn-danger">Back</a>
+                            </div>
+                        </div>
+                        <!-- /.card-footer -->
                 </div>
-                <!-- /.card -->
             </div>
+            </form>
         </div>
+        <!-- /.card -->
     </div>
+</div>
+</div>
 </div>
 <?= $this->endSection(); ?>
