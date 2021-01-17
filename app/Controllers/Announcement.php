@@ -27,7 +27,7 @@ class Announcement extends Controller
         $model = new AnnouncementModel();
 
         $default_img = "placeholder.jpg";
-        $cek_img = $this->request->getFile('foto');
+        $cek_img = $this->request->getFile('thumbnail');
 
         if ($cek_img == "") {
 
@@ -41,7 +41,7 @@ class Announcement extends Controller
         $data = array(
             'title'  => $this->request->getPost('title'),
             'body'  => $this->request->getPost('body'),
-            'foto'  => $file,
+            'thumbnail'  => $file,
         );
         $model->saveAnnouncement($data);
         return redirect()->to('/announcement');

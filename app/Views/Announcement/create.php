@@ -33,7 +33,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form class="form-horizontal" action="/announcement/save" method="post">
+                    <form class="form-horizontal" action="/announcement/save" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="form">
                                 <div class="row">
@@ -50,7 +50,7 @@
                                             <div class="form-group">
                                                 <label>Thumbnail</label>
                                                 <div class="custom-file">
-                                                    <input type="file" id="file" name="foto" required>
+                                                    <input type="file" id="file" name="thumbnail" required>
                                                     <button id="pilih" type="" style="display: none;"></button>
                                                 </div>
                                             </div>
