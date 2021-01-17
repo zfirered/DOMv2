@@ -31,7 +31,7 @@ class UserAbsence extends BaseController
 
         $model= new UserAbsenceModel();
 
-        $id="11190002";
+        $id="11190002"; 
         $date= date('Y-m-d');
         $hour= date('H:i:s');
         $cek_event= date_event(strtotime($date));
@@ -46,7 +46,8 @@ class UserAbsence extends BaseController
                 if($cek_absence == FALSE){
                     if($cek_overtime_sub == FALSE){
                     
-                    print "<script type='text/javascript'> alert('Belum daftar lembur');</script>";
+                    $data = ['message' => 'Belum daftar lembur'];
+                    return $this->respond($data, 500);
 
                     }else{
                     $data = array(
@@ -55,14 +56,17 @@ class UserAbsence extends BaseController
                         'overtime_in'  => $hour,
                     );
                 $model->save_absent($data);
-                print "<script type='text/javascript'> alert('Absence OT-in Success');</script>";
-                    }
+                    
+                    $data = ['message' => 'Absen masuk lembur berhasil'];
+                    return $this->respond($data, 200);
+                    
+                }
                 }else{
                    
                     if($cek_absence->overtime_in == TRUE){
                 
-                        print "<script type='text/javascript'> alert('You have been absent OT-in');</script>";
-        
+                        $data = ['message' => 'Anda sudah absen masuk lembur'];
+                        return $this->respond($data, 500);
                         }
                 }
 
@@ -77,32 +81,39 @@ class UserAbsence extends BaseController
                     'check_in'  => $hour,
                 );
                 $model->save_absent($data);
-                print "<script type='text/javascript'> alert('Absence in Success');</script>";
-            
+
+                $data = ['message' => 'Absen masuk berhasil'];
+                return $this->respond($data, 200);
             }else{
 
                 if($cek_absence->check_in == TRUE && $cek_absence->check_out == FALSE){
                 
-                print "<script type='text/javascript'> alert('You have been absent in');</script>";
+                $data = ['message' => 'Anda sudah absen masuk'];
+                return $this->respond($data, 500);
 
                 }else if ($cek_absence->check_in == TRUE && $cek_absence->check_out == TRUE && $cek_absence->overtime_in == FALSE){
                     if($cek_overtime_sub == FALSE){
                     
-                        print "<script type='text/javascript'> alert('Belum daftar lembur');</script>";
-    
+                        $data = ['message' => 'Anda belum daftar lembur'];
+                        return $this->respond($data, 500);
+
                         }else{
                     $id= $cek_absence->id;
                     $data = array(
                        'overtime_in'  => $hour,
                     );
                     $model->update_absent($data, $id);
-                print "<script type='text/javascript'> alert('Absence OT-in Success');</script>";
+
+                $data = ['message' => 'Absen masuk lembur berhasil'];
+                return $this->respond($data, 200);
+
                     }
                 }
                 else if ($cek_absence->check_in == TRUE && $cek_absence->check_out == TRUE && $cek_absence->overtime_in == TRUE){
 
-                    print "<script type='text/javascript'> alert('You have been absent OT-in');</script>";
-    
+                $data = ['message' => 'Anda sudah absen masuk lembur'];
+                return $this->respond($data, 500);
+
                 }
 
             }
@@ -116,8 +127,9 @@ class UserAbsence extends BaseController
 
                 if($cek_absence == FALSE){
 
-                print "<script type='text/javascript'> alert('Sorry you have not absent OT-in yet');</script>";
-                
+                $data = ['message' => 'Anda belum absen masuk lembur'];
+                return $this->respond($data, 500);
+
                 }else{
                    
                     if($cek_absence->overtime_in == TRUE && $cek_absence->overtime_out == FALSE){
@@ -127,13 +139,15 @@ class UserAbsence extends BaseController
                            'overtime_out'  => $hour,
                         );
                         $model->update_absent($data, $id);
-                        print "<script type='text/javascript'> alert('Absence OT-out Success');</script>";
-        
+
+                        $data = ['message' => 'Absen pulang berhasil'];
+                        return $this->respond($data, 200);
+
                         }
                     else if($cek_absence->overtime_in == TRUE && $cek_absence->overtime_out == TRUE){
                 
-                        print "<script type='text/javascript'> alert('You have been absent OT-out');</script>";
-            
+                        $data = ['message' => 'Anda sudah absen pulang lembur'];
+                        return $this->respond($data, 500);
                         }
 
                 }
@@ -141,15 +155,17 @@ class UserAbsence extends BaseController
             }else{ 
 
             if($cek_absence == FALSE){
+                
+                $data = ['message' => 'Anda belum absen masuk'];
+                return $this->respond($data, 500);
 
-                print "<script type='text/javascript'> alert('Sorry you have not absent in yet');</script>";
-            
             }else{
 
                 if($cek_absence->check_in == FALSE){
                 
-                    print "<script type='text/javascript'> alert('Sorry you have not absent in yet');</script>";
-    
+                    $data = ['message' => 'Anda belum absen masuk'];
+                    return $this->respond($data, 500);
+                    
                 }else if ($cek_absence->check_in == TRUE && $cek_absence->check_out == FALSE && $cek_absence->overtime_in == FALSE && $cek_absence->overtime_out == FALSE){
                     
                     $time_out= $model->get_timeout()->getRow();
@@ -160,16 +176,20 @@ class UserAbsence extends BaseController
                        'check_out'  => $hour,
                     );
                     $model->update_absent($data, $id);
-                    print "<script type='text/javascript'> alert('Absence out Success');</script>";
+
+                    $data = ['message' => 'Absen pulang berhasil'];
+                    return $this->respond($data, 200);
+
                 }else{
-                    print "<script type='text/javascript'> alert('Belum waktunya pulang');</script>";
+                    $data = ['message' => 'Belum jam pulang'];
+                    return $this->respond($data, 500);
                 }
                     }  
                 else if ($cek_absence->check_in == TRUE && $cek_absence->check_out == TRUE && $cek_absence->overtime_in == FALSE && $cek_absence->overtime_out == FALSE){
 
-                    print "<script type='text/javascript'> alert('You have been absent out');</script>";
-            
-                    }   
+                    $data = ['message' => 'Anda sudah absen pulang'];
+                    return $this->respond($data, 500);
+                }   
                 else if ($cek_absence->check_in == TRUE && $cek_absence->check_out == TRUE && $cek_absence->overtime_in == TRUE && $cek_absence->overtime_out == FALSE){
 
                     $id= $cek_absence->id;
@@ -177,13 +197,16 @@ class UserAbsence extends BaseController
                        'overtime_out'  => $hour,
                     );
                     $model->update_absent($data, $id);
-                    print "<script type='text/javascript'> alert('Absence OT-out Success');</script>";
-                
+
+                    $data = ['message' => 'Absen pulang lembur berhasil'];
+                    return $this->respond($data, 200);
+
                     }   
                 else if ($cek_absence->check_in == TRUE && $cek_absence->check_out == TRUE && $cek_absence->overtime_in == TRUE && $cek_absence->overtime_out == TRUE){
 
-                    print "<script type='text/javascript'> alert('You have been absent OT-out');</script>";
-                
+                    $data = ['message' => 'Anda sudah absen pulang lembur'];
+                    return $this->respond($data, 500);
+                    
                     }   
             }
             }

@@ -39,7 +39,7 @@ class UserSubmission extends Controller
     $data['approver']= $this->cekApprover($id);
     $data['title']= 'Home | User Submission';
     echo view('/userSubmission/create',$data);
-    } 
+    }  
     
     public function detail($id)
     {
@@ -67,7 +67,8 @@ class UserSubmission extends Controller
 
         if($getSubPending == TRUE){
 
-        return print "<script type='text/javascript'> alert('Sorry, Please check your pending submission');window.location=('/userSubmission'); </script>";
+        $data = ['message' => 'Silahkan check pengajuan anda yang masih pending'];
+        return $this->respond($data, 500);
 
         }else{
 
@@ -108,9 +109,14 @@ class UserSubmission extends Controller
                 'status_sub'  => "P",
             );
             $model->saveSubmission($data);
-            return print "<script type='text/javascript'> alert('Save Success');window.location=('/userSubmission'); </script>";
+
+            $data = ['message' => 'Pengajuan berhasil'];
+            return $this->respond($data, 200);
+        
         }else {
-            return print "<script type='text/javascript'> alert('Sorry, Please check your remaining leave rights');window.location=('/userSubmission'); </script>";
+
+            $data = ['message' => 'Silahkan check sisa hak cuti anda'];
+            return $this->respond($data, 500);
         }         
     }
 }
@@ -133,8 +139,9 @@ class UserSubmission extends Controller
                 'status_sub'  => $status,
             );
             $model->updateSubmission($data, $id);
-            return print "<script type='text/javascript'> alert('$alert Success');window.location=('/userSubmission'); </script>";
-             
+            
+            $data = ['message' => 'Proses Berhasil'];
+            return $this->respond($data, 200);
     }
  
     public function cekApprover($id)

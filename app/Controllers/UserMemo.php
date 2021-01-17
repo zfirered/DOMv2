@@ -20,7 +20,7 @@ class UserMemo extends Controller
     }
 
     public function approver()
-    {
+    { 
         $model = new UserSubmissionModel();
 
         $id="11190004";
@@ -77,7 +77,9 @@ class UserMemo extends Controller
                 
             );
             $model->saveMemo($data);
-            return print "<script type='text/javascript'> alert('Save Success');window.location=('/userMemo'); </script>";
+
+            $data = ['message' => 'Memo berhasil'];
+            return $this->respond($data, 200);
         }   
     
 public function memoSend()

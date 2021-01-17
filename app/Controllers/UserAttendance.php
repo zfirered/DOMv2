@@ -16,7 +16,7 @@ class UserAttendance extends BaseController
     public function __construct(){
         helper('all');
         helper('cekAttend');
-    }
+    } 
     
     public function index()
     {   

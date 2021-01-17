@@ -11,7 +11,7 @@ class UserSubmissionOvertime extends Controller
 
     public function index()
     {
-        $model = new UserSubmissionOvertimeModel();
+        $model = new UserSubmissionOvertimeModel(); 
 
         $id="202101160001";
         $data['user'] = $model->getDataEmploye($id)->getRow();
@@ -71,7 +71,7 @@ class UserSubmissionOvertime extends Controller
     }
 
 public function save()
-    {
+    { 
         $model = new UserSubmissionOvertimeModel();
 
         $id= $this->request->getPost('user');
@@ -80,7 +80,8 @@ public function save()
 
         if($getSubPending == TRUE){
 
-        return print "<script type='text/javascript'> alert('Sorry, Please check your pending submission');window.location=('/userSubmissionOvertime'); </script>";
+        $data = ['message' => 'Silahkan check pengajuan lembur anda yang masih pending'];
+        return $this->respond($data, 500);
 
         }else{
 
@@ -95,8 +96,8 @@ public function save()
                 'status_sub_ot'  => "P",
             );
             $model->saveSubmission($data);
-            return print "<script type='text/javascript'> alert('Save Success');window.location=('/userSubmissionOvertime'); </script>";
-             
+              $data = ['message' => 'Pengajuan lembur berhasil'];
+                return $this->respond($data, 200);
     }
 }
     
@@ -136,8 +137,9 @@ public function save()
                 'status_sub_ot'  => $status,
             );
             $model->updateSubmission($data, $id);
-            return print "<script type='text/javascript'> alert('$alert Success');window.location=('/userSubmissionOvertime'); </script>";
-             
+
+            $data = ['message' => 'Proses Berhasil'];
+            return $this->respond($data, 200);
     }
  
     
