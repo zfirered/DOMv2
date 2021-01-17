@@ -37,7 +37,7 @@
 <?php echo month($bulan);?>  <?php echo $tahun;?> 
 
 <form action="" method="post">
-<div class="header-search">
+<div class="header-search"> 
 <select class="form-control" name="divisi">
                         <option value="">- All Division -</option>
                         <?php foreach($divisi as $div): ?>
@@ -60,18 +60,74 @@
                     </select>     
 &nbsp;&nbsp;&nbsp;
                     <button type="submit" name="submit" value="data" class="btn btn-primary">Show </button>
-                    &nbsp;&nbsp;&nbsp;
-
-                <button type="submit" name="submit" value="print" class="btn btn-primary">Download Pdf</button> 
-                                                    </div>
-                                                </form>                  
+                                                    </div>     
+                    </form>   
+<div class="float-right">                              
+ <!-- Button trigger modal -->
+ <button  class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">Download Pdf</button>                    &nbsp;&nbsp;&nbsp;
+     
+ </div>
 </div>
                                 <div class="card-body" >
-                                    <!-- TABLE DATA PEGAWAI -->
+                                 <!-- Modal -->
+                                   <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="staticBackdropLabel">Download Pdf</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body" style="white-space:normal">
+                                                                 <div class="body-detail-user">
 
+                                                                 <form class="form-horizontal" action="/dataAttendance/htmlToPDF" method="post" >
+                                                                   <table class="tabel-detail-user">
+                                                                   <tr>
+                                                                             <th>Division <br><br></th>
+                                                                             <td> <select class="form-control" name="divisi" required>
+                                                                             <option value="">- Choose Division -</option>
+                                                                             <?php foreach($divisi as $row): ?>
+                                                                                <option value="<?= $row['id']; ?>"><?= $row['division_name']; ?></option>
+                                                                            <?php endforeach; ?>
+                                                                             </select><br>
+                                                                            </td>
+                                                                         </tr> 
+                                                                         <tr>
+                                                                             <th>Month <br><br></th>
+                                                                             <td> <select class="form-control" name="bulan">
+                                                                                    <option value="" disabled selected>- Choose Month -</option>
+                                                                                    <?php foreach($all_bulan as $bn => $bt): ?>
+                                                                                    <option value="<?= $bn ?>" <?= ($bn == $bulan) ? 'selected' : '' ?>><?= $bt ?></option>
+                                                                                    <?php endforeach; ?>
+                                                                                    </select><br>
+                                                                            </td>
+                                                                         </tr>
+                                                                         <tr>
+                                                                             <th>Year <br><br></th>
+                                                                             <td> <select class="form-control" name="tahun">
+                                                                                    <option value="" disabled selected>- Choose Year -</option>
+                                                                                    <?php for($i = date('Y'); $i >= (date('Y') - 5); $i--): ?>
+                                                                                    <option value="<?= $i ?>" <?= ($i == $tahun) ? 'selected' : '' ?>><?= $i ?></option>
+                                                                                    <?php endfor; ?>
+                                                                                    </select>  <br>
+                                                                            </td>
+                                                                         </tr>
+                                                                     </table>
 
-
-                                    <!-- /.TABLE DATA PEGAWAI -->
+                                                                     </div>
+                                                                 </div>
+                                                                <div class="modal-footer">
+                                                              
+                                                                <button type="submit" class="btn btn-primary">Download</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></a>
+                                                             </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.Modal --> 
                                 <pre>
 
                                     <table class="table_attend" cellpadding="5">

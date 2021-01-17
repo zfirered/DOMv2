@@ -65,14 +65,14 @@
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>Date Start</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="d_start" required>
+                                            <input type="date" class="form-control" placeholder="Enter ..." name="d_start" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>Date End</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="d_end" required>
+                                            <input type="date" class="form-control" placeholder="Enter ..." name="d_end" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">

@@ -5,10 +5,15 @@ use App\Models\PositionModel;
  
 class Position extends Controller
 {
+    public function __construct()
+    {
+        helper('all');
+       
+    }
+
     public function index()
     {
         $model = new PositionModel();
-        $this->request->getPost('submit')== "print" ?  $this->htmlToPDF() : '';
 
         $data['data'] = $model->getData();
         $data['title']= 'Home | Master Position';
@@ -19,6 +24,8 @@ class Position extends Controller
 
         $model = new PositionModel();
         $data['data'] = $model->getData();
+        $data['bulan'] = month(date('m'));
+        $data['tahun'] = date('Y');
 
         $dompdf = new \Dompdf\Dompdf(); 
         $dompdf->loadHtml(view('/position/printAll',$data));

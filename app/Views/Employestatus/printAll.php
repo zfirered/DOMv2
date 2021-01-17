@@ -58,7 +58,7 @@
     <div class="header">
         <p1>Nama Perusahaan</p1> <br>
         <p3>Address:..... Telp:..... Email:...... Fax:....</p3> <br><br>
-        <p2>Data Position Report</p2> <br>
+        <p2>Data Status Employe Report</p2> <br>
         <p4><?= $bulan; ?> <?= $tahun; ?></p4>
         </div>
         <hr>
@@ -69,9 +69,8 @@
                                             <tr>
   
                                                 <th>#</th>
-                                                <th>Name Position</th>
+                                                <th>Name Status</th>
                                                 <th>Describe</th>
-                                                <th>Level</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -82,9 +81,8 @@
                                                      foreach($data as $row):?>
                                             <tr>
                                                 <td><?= $i++ ?>.</td>
-                                                <td><?= $row['position_name'];?></td>
-                                                <td><?= $row['position_desc'];?></td>
-                                                <td><?= $row['level'];?></td>
+                                                <td><?= $row['status_name'];?></td>
+                                                <td><?= $row['status_desc'];?></td>
 
                                             </tr>
                                             <?php endforeach; ?>

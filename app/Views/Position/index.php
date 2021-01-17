@@ -21,7 +21,7 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
+ 
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -31,11 +31,13 @@
                         <div class="col md-6">
                             <!-- CARD DATA PEGAWAI -->
                             <div class="card">
-                                <div class="card-header">
+                            <div class="card-header">
                                 <a href="/position/create" class="btn btn-sm btn-info float-left">Add New</a>
-                                <form action="" method="post">
-            <button type="submit" name="submit" value="print" class="btn btn-primary">Download Pdf</button>
+                                <div class="header-search">
+                                <form action="/position/htmlToPDF" method="post">
+                                <button type="submit" name="submit" value="print" class="btn btn-primary">Download Pdf</button>
                                 </form>
+                                </div>
                                 </div>
                                 <div class="card-body">
                                     <!-- TABLE DATA PEGAWAI -->
@@ -104,6 +106,7 @@
                                     
                                 </div>
                             </div>
+                            
                         </div>
                         
                     </div>

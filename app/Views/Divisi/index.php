@@ -35,10 +35,11 @@
                             <div class="card">
                                 <div class="card-header">
                                 <a href="/divisi/create" class="btn btn-sm btn-info float-left">Add New</a>  
-                                <form action="" method="post">
-            <button type="submit" name="submit" value="print" class="btn btn-primary">Download Pdf</button>
+                                <div class="header-search">
+                                <form action="/divisi/htmlToPDF" method="post">
+                                <button type="submit" name="submit" value="print" class="btn btn-primary">Download Pdf</button>
                                 </form>
-                                                                          
+                                </div>
                                 </div>
                                 <div class="card-body" >
                                     <!-- TABLE DATA PEGAWAI -->

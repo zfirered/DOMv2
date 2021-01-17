@@ -13,7 +13,7 @@ class UserSubmissionOvertime extends Controller
     {
         $model = new UserSubmissionOvertimeModel();
 
-        $id="11190002";
+        $id="202101160001";
         $data['user'] = $model->getDataEmploye($id)->getRow();
         $data['data'] = $model->getData($id);
         $data['title']= 'Home | User Submission Overtime';
@@ -24,7 +24,7 @@ class UserSubmissionOvertime extends Controller
     {
         $model = new UserSubmissionOvertimeModel();
 
-        $id="11190004";
+        $id="202101160001";
         $data['user'] = $model->getDataEmploye($id)->getRow();
         $data['data'] = $model->getDataSubApprover($id);
         $data['title']= 'Home | User Submission Overtime';
@@ -34,7 +34,7 @@ class UserSubmissionOvertime extends Controller
     public function create()
     {
     
-    $id= "11190002";
+    $id= "202101160001";
     $data['user']= $id;
     $data['approver']= $this->cekApprover($id);
     $data['title']= 'Home | User Submission Overtime';

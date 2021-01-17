@@ -10,23 +10,60 @@ use App\Models\UsersModel;
  
 class Employe extends Controller
 {
+    public function __construct(){
+        helper('all');
+    }
+
     public function index()
     {
         $model = new EmployeModel();
+        $model2= new DivisiModel();
+
         $data['data'] = $model->getData();
+        $data['data2'] = $model2->getData();
         $data['latest'] = $model->getDataLatest();
         $data['title']= 'Home | Data Employe';
         echo view('/employe/index',$data);
     }
 
+    function htmlToPDF(){
+
+        $model = new EmployeModel();
+        $model2 = new DivisiModel();
+        $div= $this->request->getPost('div');
+        $id= $this->request->getPost('div');
+
+        $data['data'] = $model->getDataPrint($div);
+        $data['divisi'] = $model2->getData($id)->getRow();
+        $data['bulan'] = month(date('m'));
+        $data['tahun'] = date('Y');
+
+        $dompdf = new \Dompdf\Dompdf(); 
+        $dompdf->loadHtml(view('/employe/printAll',$data));
+        $dompdf->setPaper('A4', 'potrait');
+        $dompdf->render();
+        $dompdf->stream();
+    } 
+
     public function create()
     {
+        session();
+        $data['validation']= \Config\Services::validation();
+
+        $model = new EmployeModel();
         $model1= new DivisiModel();
         $model2= new PositionModel();
         $model3= new EmployestatusModel();
         $model4= new BankAccountModel();
        
-          
+        $now= date('Ymd');
+        $cekLastNumber= $model->getLastNumber($now);
+        $lastNo = $cekLastNumber->nip;
+        $lastNoUrut = substr($lastNo, 8, 4); 
+        $nextNoUrut = $lastNoUrut + 1;
+        $nextNoNip = $now.sprintf('%04s', $nextNoUrut);
+
+        $data['nip']= $nextNoNip;
         $data['data'] = $model1->getData();
         $data['data2'] = $model2->getData();
         $data['data3'] = $model3->getData();
@@ -38,11 +75,151 @@ class Employe extends Controller
  
     public function save()
     {
+        if($this->request->getPost('insurance')==null){
+            $rule_insurance= 'max_length[20]';
+        }else{
+            $rule_insurance= 'numeric|max_length[20]';
+        }
+
+        if(!$this->validate([
+            'first_nm' => [
+                'rules' => 'required|max_length[20]|alpha_space',
+                'errors' => [
+                    'required' => 'Harus diisi',
+                    'max_length' => 'Maksimal 20 karakter',
+                    'alpha_space' => 'Harus Huruf'
+                ]
+                ],
+                'last_nm' => [
+                    'rules' => 'required|max_length[20]|alpha_space',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'max_length' => 'Maksimal 20 karakter',
+                        'alpha_space' => 'Harus Huruf'
+                ]
+                ],
+                'div' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Harus Pilih'
+                ]
+                ],
+                'pos' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Harus Pilih'
+                ]
+                ],
+                'stat' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Harus Pilih'
+                ]
+                ],
+                'right_leave' => [
+                    'rules' => 'required|numeric|max_length[2]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'numeric' => 'Harus angka',
+                        'max_length' => 'Maksimal 2 karakter'
+                ]
+                ],
+                'bank_cd' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Harus Pilih'
+                ]
+                ],
+                'no_rek' => [
+                    'rules' => 'required|numeric|max_length[20]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'numeric' => 'Harus angka',
+                        'max_length' => 'Maksimal 20 karakter'
+                ]
+                ],
+                'an_rek' => [
+                    'rules' => 'required|alpha_space|max_length[20]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'alpha_space' => 'Harus huruf',
+                        'max_length' => 'Maksimal 20 karakter'
+                ]
+                ],
+                'bpjs_ks' => [
+                    'rules' => 'required|numeric|max_length[20]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'numeric' => 'Harus angka',
+                        'max_length' => 'Maksimal 20 karakter'
+                ]
+                ],
+                'bpjs_tk' => [
+                    'rules' => 'required|numeric|max_length[20]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'numeric' => 'Harus angka',
+                        'max_length' => 'Maksimal 20 karakter'
+                ]
+                ],
+                'insurance' => [
+                    'rules' => $rule_insurance,
+                    'errors' => [
+                        'numeric' => 'Harus angka',
+                        'max_length' => 'Maksimal 20 karakter'
+                ]
+                ],
+                'nik' => [
+                    'rules' => 'required|numeric|max_length[20]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'numeric' => 'Harus angka',
+                        'max_length' => 'Maksimal 20 karakter'
+                ]
+                ],
+                'last_edu' => [
+                    'rules' => 'required|max_length[20]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'max_length' => 'Maksimal 20 karakter'
+                ]
+                ],
+                'no_telp' => [
+                    'rules' => 'required|numeric|max_length[15]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'numeric' => 'Harus angka',
+                        'max_length' => 'Maksimal 15 karakter'
+                ]
+                ],
+                'email' => [
+                    'rules' => 'required|valid_email|max_length[50]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'valid_email' => 'Email tidak valid',
+                        'max_length' => 'Maksimal 50 karakter'
+                ]
+                ],
+                'adress' => [
+                    'rules' => 'required|max_length[100]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'max_length' => 'Maksimal 100 karakter'
+                ]
+                ],
+               
+  
+        ])){
+     $validation= \Config\Services::validation();
+     return redirect()->to('/employe/create')->withInput()->with('validation',$validation);
+        }
+
         $model = new EmployeModel();
         $model2 = new UsersModel();
 
         $default_img= "placeholder.jpg";
         $cek_img = $this->request->getFile('foto');
+        $name= $this->request->getPost('nip')."-profil.jpg";
         
             if($cek_img == ""){
 
@@ -50,8 +227,8 @@ class Employe extends Controller
 
             } else {
                
-                $cek_img->move(ROOTPATH.'public/img');
-                $file= ['gambar' => $cek_img->getName()];
+                $cek_img->move(ROOTPATH.'public/img', $name);
+                $file= $name;
 
             }
 
