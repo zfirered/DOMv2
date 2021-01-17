@@ -145,19 +145,12 @@
 
     /* initialize the calendar
      -----------------------------------------------------------------*/
-    //Date for the calendar events (dummy data)
-    var date = new Date()
-    var d = date.getDate(),
-      m = date.getMonth(),
-      y = date.getFullYear()
-
     var Calendar = FullCalendar.Calendar;
     var Draggable = FullCalendarInteraction.Draggable;
 
     var containerEl = document.getElementById('external-events');
     var checkbox = document.getElementById('drop-remove');
     var calendarEl = document.getElementById('calendar');
-
     // initialize the external events
     // -----------------------------------------------------------------
 
@@ -173,7 +166,6 @@
         };
       }
     });
-
     var calendar = new Calendar(calendarEl, {
       plugins: ['bootstrap', 'interaction', 'dayGrid', 'timeGrid'],
       header: {
@@ -182,53 +174,11 @@
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
       'themeSystem': 'bootstrap',
-      //Random default events
-      events: [{
-          title: 'All Day Event',
-          start: new Date(y, m, 1),
-          backgroundColor: '#f56954', //red
-          borderColor: '#f56954', //red
-          allDay: true
-        },
-        {
-          title: 'Long Event',
-          start: new Date(y, m, d - 5),
-          end: new Date(y, m, d - 2),
-          backgroundColor: '#f39c12', //yellow
-          borderColor: '#f39c12' //yellow
-        },
-        {
-          title: 'Meeting',
-          start: new Date(y, m, d, 10, 30),
-          allDay: false,
-          backgroundColor: '#0073b7', //Blue
-          borderColor: '#0073b7' //Blue
-        },
-        {
-          title: 'Lunch',
-          start: new Date(y, m, d, 12, 0),
-          end: new Date(y, m, d, 14, 0),
-          allDay: false,
-          backgroundColor: '#00c0ef', //Info (aqua)
-          borderColor: '#00c0ef' //Info (aqua)
-        },
-        {
-          title: 'Birthday Party',
-          start: new Date(y, m, d + 1, 19, 0),
-          end: new Date(y, m, d + 1, 22, 30),
-          allDay: false,
-          backgroundColor: '#00a65a', //Success (green)
-          borderColor: '#00a65a' //Success (green)
-        },
-        {
-          title: 'Click for Google',
-          start: new Date(y, m, 28),
-          end: new Date(y, m, 29),
-          url: 'http://google.com/',
-          backgroundColor: '#3c8dbc', //Primary (light-blue)
-          borderColor: '#3c8dbc' //Primary (light-blue)
-        }
-      ],
+      events: {
+        method: 'POST',
+        url: '/kalender/load',
+      },
+      forceEventDuration: true,
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar !!!
       drop: function(info) {
@@ -237,8 +187,54 @@
           // if so, remove the element from the "Draggable Events" list
           info.draggedEl.parentNode.removeChild(info.draggedEl);
         }
+      },
+      eventReceive: function(info) {
+        //get the bits of data we want to send into a simple object
+        var eventData = {
+          title: info.event.title,
+          color: info.event.backgroundColor,
+          start: moment(info.event.start).format("YYYY/MM/DD HH:MM:SS"),
+          end: moment(info.event.end).format("YYYY/MM/DD HH:MM:SS"),
+        };
+        //send the data via an AJAX POST request, and log any response which comes from the server
+        fetch('/kalender/save', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json'
+            },
+            body: encodeFormData(eventData),
+          })
+          .then(response => console.log(response))
+          .catch(error => console.log(error))
+      },
+      // data update
+      eventDrop: function(info) {
+        var eventData = {
+          id: info.event.id,
+          color: info.event.backgroundColor,
+          title: info.event.title,
+          start: moment(info.event.start).format("YYYY/MM/DD HH:MM:SS"),
+          end: moment(info.event.end).format("YYYY/MM/DD HH:MM:SS"),
+        };
+        fetch('/kalender/update', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json'
+            },
+            body: encodeFormData(eventData)
+          })
+          .then(response => console.log(response))
+          .catch(error => console.log(error));
       }
     });
+    const encodeFormData = (data) => {
+      var form_data = new FormData();
+
+      for (var key in data) {
+        form_data.append(key, data[key]);
+      }
+      return form_data;
+    }
 
     calendar.render();
     // $('#calendar').fullCalendar()
@@ -281,6 +277,7 @@
       //Remove event from text input
       $('#new-event').val('')
     })
+
   })
 </script>
 

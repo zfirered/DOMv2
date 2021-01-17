@@ -25,6 +25,8 @@ class Pages extends BaseController
         $data['position']= count($totalPosition);
         $data['title']= 'Dashboard';
         return view('pages/home', $data);
+        $session = session();
+        echo "Welcome back, " . $session->get('nip');
     }
 
     public function about()
