@@ -58,19 +58,33 @@ class Announcement extends Controller
     public function update()
     {
         $model = new AnnouncementModel();
-        $id = $this->request->getPost('bank_cd');
+
+        $img_old = $this->request->getPost('thumbnail_old');
+        $cek_img = $this->request->getFile('thumbnail');
+
+        if ($cek_img == "") {
+
+            $file = $img_old;
+        } else {
+
+            $cek_img->move(ROOTPATH . 'public/img');
+            $file = ['gambar' => $cek_img->getName()];
+            unlink('../public/img/' . $img_old);
+        }
+
+        $id = $this->request->getPost('id');
         $data = array(
-            'bank_code'  => $this->request->getPost('bank_cd'),
-            'bank_name'  => $this->request->getPost('bank_nm'),
+            'title'  => $this->request->getPost('title'),
+            'body'  => $this->request->getPost('body'),
         );
-        $model->updateBankAccount($data, $id);
+        $model->updateAnnouncement($data, $id);
         return redirect()->to('/announcement');
     }
 
     public function delete($id)
     {
         $model = new AnnouncementModel();
-        $model->deleteBankAccount($id);
+        $model->deleteAnnouncement($id);
         return redirect()->to('/announcement');
     }
 }

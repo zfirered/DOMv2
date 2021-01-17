@@ -27,4 +27,16 @@ class AnnouncementModel extends Model
         $query = $this->db->table($this->table)->insert($data);
         return $query;
     }
+
+    public function updateAnnouncement($data, $id)
+    {
+        $query = $this->db->table($this->table)->update($data, array('id' => $id));
+        return $query;
+    }
+
+    public function deleteAnnouncement($id)
+    {
+        $query = $this->db->table($this->table)->delete(array('id' => $id));
+        return $query;
+    }
 }

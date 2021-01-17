@@ -110,6 +110,8 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
+                                                                        <a href="announcement/edit/<?= $row['id']; ?>" class="btn btn-primary">Edit</a>
+                                                                        <a href="announcement/delete/<?= $row['id']; ?>" class="btn btn-danger">Delete</a>
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></a>
                                                                     </div>
                                                                 </div>
