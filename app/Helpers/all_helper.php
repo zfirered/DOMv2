@@ -24,6 +24,50 @@ function date_now($now)
         return $hari;
     }
 
+    function date_now_half_pertama($now)
+    {
+        $today= $now;
+        $start= date('Y-m-01', strtotime($today));
+        $end= date('Y-m-15', strtotime($today));
+        $awal = $start;
+        $akhir = $end;
+ 
+        // tanggalnya diubah formatnya ke Y-m-d 
+
+        $awal = strtotime($awal);
+        $akhir= strtotime($akhir);
+ 
+        $hari = array();
+        $sabtuminggu = array();
+ 
+        for ($i=$awal; $i <= $akhir; $i += (60 * 60 * 24)) {
+        $hari[] = $i; 
+        }
+        return $hari;
+    }
+
+    function date_now_half_kedua($now)
+    {
+        $today= $now;
+        $start= date('Y-m-16', strtotime($today));
+        $end= date('Y-m-t', strtotime($today));
+        $awal = $start;
+        $akhir = $end;
+ 
+        // tanggalnya diubah formatnya ke Y-m-d 
+
+        $awal = strtotime($awal);
+        $akhir= strtotime($akhir);
+ 
+        $hari = array();
+        $sabtuminggu = array();
+ 
+        for ($i=$awal; $i <= $akhir; $i += (60 * 60 * 24)) {
+        $hari[] = $i; 
+        }
+        return $hari;
+    }
+
     function range_date($start, $end)
     {
         $start= $start;

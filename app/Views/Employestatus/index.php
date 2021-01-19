@@ -33,6 +33,11 @@
                             <div class="card">
                                 <div class="card-header">
                                 <a href="/employestatus/create" class="btn btn-sm btn-info float-left">Add New</a>
+                                <div class="header-search">
+                                <form action="/employestatus/htmlToPDF" method="post">
+                                <button type="submit" name="submit" value="print" class="btn btn-primary">Download Pdf</button>
+                                </form>
+                                </div>
                                 </div>
                                 <div class="card-body">
                                     <!-- TABLE DATA PEGAWAI -->

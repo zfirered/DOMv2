@@ -5,6 +5,11 @@ use App\Models\BankAccountModel;
  
 class BankAccount extends Controller
 {
+    public function __construct()
+    {
+        helper('all');
+    }
+
     public function index()
     {
         $model = new BankAccountModel();
@@ -12,6 +17,21 @@ class BankAccount extends Controller
         $data['title']= 'Home | Master Bank Account';
         echo view('/bankAccount/index',$data);
     }
+
+    function htmlToPDF(){
+
+        $model = new BankAccountModel();
+        $data['data'] = $model->getData();
+        $data['bulan'] = month(date('m'));
+        $data['tahun'] = date('Y');
+
+
+        $dompdf = new \Dompdf\Dompdf(); 
+        $dompdf->loadHtml(view('/bankAccount/printAll',$data));
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream();
+    } 
 
     public function create()
     {

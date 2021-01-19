@@ -1,11 +1,14 @@
-<?php namespace App\Controllers;
- 
+<?php
+
+namespace App\Controllers;
+
 use CodeIgniter\Controller;
 use App\Models\UserSubmissionOvertimeModel;
- 
+
 class UserSubmissionOvertime extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         helper('all');
     }
 
@@ -13,76 +16,72 @@ class UserSubmissionOvertime extends Controller
     {
         $model = new UserSubmissionOvertimeModel();
 
-        $id="11190002";
+        $id = session()->get('nip');
         $data['user'] = $model->getDataEmploye($id)->getRow();
         $data['data'] = $model->getData($id);
-        $data['title']= 'Home | User Submission Overtime';
-        echo view('/userSubmissionOvertime/index',$data);
+        $data['title'] = 'Home | User Submission Overtime';
+        echo view('/userSubmissionOvertime/index', $data);
     }
 
     public function approver()
     {
         $model = new UserSubmissionOvertimeModel();
 
-        $id="11190004";
+        $id = session()->get('nip');
         $data['user'] = $model->getDataEmploye($id)->getRow();
         $data['data'] = $model->getDataSubApprover($id);
-        $data['title']= 'Home | User Submission Overtime';
-        echo view('/userSubmissionOvertime/subApprover',$data);
-    } 
+        $data['title'] = 'Home | User Submission Overtime';
+        echo view('/userSubmissionOvertime/subApprover', $data);
+    }
 
     public function create()
     {
-    
-    $id= "11190002";
-    $data['user']= $id;
-    $data['approver']= $this->cekApprover($id);
-    $data['title']= 'Home | User Submission Overtime';
-    echo view('/userSubmissionOvertime/create',$data);
-    } 
+
+        $id = session()->get('nip');
+        $data['user'] = $id;
+        $data['approver'] = $this->cekApprover($id);
+        $data['title'] = 'Home | User Submission Overtime';
+        echo view('/userSubmissionOvertime/create', $data);
+    }
 
     public function cekApprover($id)
     {
         $model = new UserSubmissionOvertimeModel();
 
-        $getEmploye= $model->getDataEmploye($id)->getRow();
+        $getEmploye = $model->getDataEmploye($id)->getRow();
 
-        if($getEmploye->level == 3){
-        $div= $getEmploye->division;
-        $lev= '2';
+        if ($getEmploye->level == 3) {
+            $div = $getEmploye->division;
+            $lev = '2';
 
-        $getApprover= $model->getDataApprover($div, $lev);
-        return $getApprover;
-        }
-        else if($getEmploye->level == 2){
-            $lev= '1';
-    
-            $getApprover= $model->getDataApprover($div, $lev);
+            $getApprover = $model->getDataApprover($div, $lev);
             return $getApprover;
-            }
-        else if($getEmploye->level == 1){
-                $lev= '1';
-        
-                $getApprover= $model->getDataApprover($div, $lev);
-                return $getApprover;
-                }
-      
+        } else if ($getEmploye->level == 2) {
+            $lev = '1';
 
+            $getApprover = $model->getDataApprover($div, $lev);
+            return $getApprover;
+        } else if ($getEmploye->level == 1) {
+            $lev = '1';
+
+            $getApprover = $model->getDataApprover($div, $lev);
+            return $getApprover;
+        }
     }
 
-public function save()
+    public function save()
     {
         $model = new UserSubmissionOvertimeModel();
 
-        $id= $this->request->getPost('user');
-        $getEmploye= $model->getDataEmploye($id)->getRow();
-        $getSubPending= $model->getDataPending($id)->getRow();
+        $id = $this->request->getPost('user');
+        $getEmploye = $model->getDataEmploye($id)->getRow();
+        $getSubPending = $model->getDataPending($id)->getRow();
 
-        if($getSubPending == TRUE){
+        if ($getSubPending == TRUE) {
 
-        return print "<script type='text/javascript'> alert('Sorry, Please check your pending submission');window.location=('/userSubmissionOvertime'); </script>";
-
-        }else{
+            $data = ['message' => 'Silahkan check pengajuan lembur anda yang masih pending'];
+            return $this->respond($data, 500);
+        } else {
 
             $data = array(
                 'user'  => $this->request->getPost('user'),
@@ -95,54 +94,49 @@ public function save()
                 'status_sub_ot'  => "P",
             );
             $model->saveSubmission($data);
-            return print "<script type='text/javascript'> alert('Save Success');window.location=('/userSubmissionOvertime'); </script>";
-             
+            $data = ['message' => 'Pengajuan lembur berhasil'];
+            return $this->respond($data, 200);
+        }
     }
-}
-    
+
     public function detail($id)
     {
-    $model = new UserSubmissionOvertimeModel();
-    $data['data'] = $model->getDetailSub($id)->getRow();
-    $data['title']= 'Home | User Submission Overtime';
-    echo view('/userSubmissionOvertime/detail',$data);
+        $model = new UserSubmissionOvertimeModel();
+        $data['data'] = $model->getDetailSub($id)->getRow();
+        $data['title'] = 'Home | User Submission Overtime';
+        echo view('/userSubmissionOvertime/detail', $data);
     }
 
     public function detailApprover($id)
     {
-    $model = new UserSubmissionOvertimeModel();
-    $data['data'] = $model->getDetailApprover($id)->getRow();
-    $data['title']= 'Home | User Submission Overtime';
-    echo view('/userSubmissionOvertime/detailApprover',$data);
+        $model = new UserSubmissionOvertimeModel();
+        $data['data'] = $model->getDetailApprover($id)->getRow();
+        $data['title'] = 'Home | User Submission Overtime';
+        echo view('/userSubmissionOvertime/detailApprover', $data);
     }
 
-    
+
 
     public function update()
     {
         $model = new UserSubmissionOvertimeModel();
 
-        if($this->request->getPost('submit')== "approve"){
-            $status= "Y";
-            $alert= "Approve";
-        }else if($this->request->getPost('submit') == "reject"){
-            $status= "N";
-            $alert= "Reject";
+        if ($this->request->getPost('submit') == "approve") {
+            $status = "Y";
+            $alert = "Approve";
+        } else if ($this->request->getPost('submit') == "reject") {
+            $status = "N";
+            $alert = "Reject";
         }
-            $id= $this->request->getPost('idSub');
-            $data = array(
-                'approve_date'  => date('Y-m-d'),
-                'approver_desc'  => $this->request->getPost('approver_desc'),
-                'status_sub_ot'  => $status,
-            );
-            $model->updateSubmission($data, $id);
-            return print "<script type='text/javascript'> alert('$alert Success');window.location=('/userSubmissionOvertime'); </script>";
-             
+        $id = $this->request->getPost('idSub');
+        $data = array(
+            'approve_date'  => date('Y-m-d'),
+            'approver_desc'  => $this->request->getPost('approver_desc'),
+            'status_sub_ot'  => $status,
+        );
+        $model->updateSubmission($data, $id);
+
+        $data = ['message' => 'Proses Berhasil'];
+        return $this->respond($data, 200);
     }
- 
-    
-
-    
 }
- 
-

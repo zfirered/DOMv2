@@ -33,8 +33,7 @@
                         <div class="col md-6">
                             <!-- CARD DATA PEGAWAI -->
                             <div class="card">
-                                
-                                <div class="card-body" >
+                            <div class="card-body" >
                                     <!-- TABLE DATA PEGAWAI -->
                                     <table class="table table-hover text-nowrap" id="myTable" >
                                         <thead class="thead-light">
@@ -60,7 +59,7 @@
                                                 $help="";
                                                 if( $row['allow'] == "N"){
 
-                                                    echo "Not allowed";
+                                                    echo "No";
                                                 }else{
                                                     echo "Allowed";
                                                 }
@@ -102,11 +101,11 @@
                                                                                 <option value="<?= $row['allow'];?>"> <?= 
                                                                                                                             $help="";
                                                                                                                             if( $row['allow'] == "N"){
-                                                                                                                             echo "Not allowed </option>
+                                                                                                                             echo "No </option>
                                                                                                                              <option value='Y'>Allowed</option>";
                                                                                                                             }else{
                                                                                                                               echo "Allowed </option>
-                                                                                                                                <option value='N'>Not allowed</option>";
+                                                                                                                                <option value='N'>No</option>";
                                                                                                                              } 
                                                                                                                              ?>
                                                                                                                     </select>

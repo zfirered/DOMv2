@@ -162,7 +162,7 @@
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>Insurance</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="insurance" value="<?= $data->insurance; ?>" required>
+                                            <input type="text" class="form-control" placeholder="Enter ..." name="insurance" value="<?= $data->insurance; ?>">
                                         </div>
                                     </div> 
                               </div> 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2021 at 11:03 AM
+-- Generation Time: Jan 15, 2021 at 04:47 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -45,7 +45,9 @@ INSERT INTO `attendance` (`id`, `nip`, `date`, `check_in`, `check_out`, `overtim
 (1, '11190002', '2020-12-07', '08:00:18', NULL, NULL, NULL),
 (2, '11190002', '2020-11-30', '22:59:26', NULL, NULL, NULL),
 (3, '11190003', '2020-12-17', NULL, '22:01:19', NULL, NULL),
-(4, '11190587', '2020-12-19', NULL, '22:28:18', NULL, NULL);
+(4, '11190587', '2020-12-19', NULL, '22:28:18', NULL, NULL),
+(9, '11190002', '2021-01-11', '19:11:23', '19:11:52', '19:12:08', '19:12:25'),
+(18, '11190002', '2021-01-13', '12:07:08', '21:31:48', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -228,24 +230,28 @@ INSERT INTO `calendar` (`id`, `agenda`, `color`, `start`, `end`, `created_at`, `
 --
 
 CREATE TABLE `disc_submission` (
-  `id` int(11) NOT NULL,
+  `id_sub` int(11) NOT NULL,
   `user` varchar(20) DEFAULT NULL,
   `approver` varchar(20) DEFAULT NULL,
   `submission_for` varchar(20) DEFAULT NULL,
   `submission_date` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `approve_date` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  `implementation_date` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  `user_desc` varchar(20) DEFAULT NULL,
-  `approver_desc` varchar(20) DEFAULT NULL,
-  `status` varchar(10) DEFAULT NULL
+  `implementation_date_start` timestamp NULL DEFAULT NULL,
+  `implementation_date_end` timestamp NULL DEFAULT NULL,
+  `user_desc` varchar(50) DEFAULT NULL,
+  `approver_desc` varchar(50) DEFAULT NULL,
+  `attachment` varchar(50) DEFAULT NULL,
+  `status_sub` varchar(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `disc_submission`
 --
 
-INSERT INTO `disc_submission` (`id`, `user`, `approver`, `submission_for`, `submission_date`, `approve_date`, `implementation_date`, `user_desc`, `approver_desc`, `status`) VALUES
-(1, '11190002', '11190003', 'Sakit', '2021-01-02 08:58:41', '2021-01-02 08:58:41', '2021-01-04 08:58:41', 'Sakit flu', 'Diizinkan', 'Y');
+INSERT INTO `disc_submission` (`id_sub`, `user`, `approver`, `submission_for`, `submission_date`, `approve_date`, `implementation_date_start`, `implementation_date_end`, `user_desc`, `approver_desc`, `attachment`, `status_sub`) VALUES
+(31, '11190002', '11190004', 'SAKIT', '2021-01-08 16:23:39', '2021-01-08 16:23:39', '2021-01-12 17:00:00', '2021-01-13 17:00:00', 'PUSING', NULL, '', 'Y'),
+(32, '11190003', '11190587', 'CUTI', '2021-01-08 18:49:52', '2021-01-08 18:49:52', '2021-01-06 17:00:00', '2021-01-08 17:00:00', 'Izin', NULL, '', 'Y'),
+(37, '11190002', '11190004', 'SAKIT', '2021-01-09 15:22:13', '2021-01-09 15:22:13', '2021-01-19 17:00:00', '2021-01-20 17:00:00', 'istirahat', ' okedeh', 'boxed-bg.jpg', 'P');
 
 -- --------------------------------------------------------
 
@@ -280,6 +286,7 @@ CREATE TABLE `employe` (
   `last_name` varchar(20) DEFAULT NULL,
   `division` int(11) DEFAULT NULL,
   `position` int(11) DEFAULT NULL,
+  `right_to_leave` varchar(5) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `no_telp` varchar(15) DEFAULT NULL,
   `join_date` timestamp NULL DEFAULT NULL,
@@ -300,11 +307,12 @@ CREATE TABLE `employe` (
 -- Dumping data for table `employe`
 --
 
-INSERT INTO `employe` (`nip`, `first_name`, `last_name`, `division`, `position`, `email`, `no_telp`, `join_date`, `status`, `bank_code`, `bank_no`, `bank_account`, `bpjs_ks`, `bpjs_tk`, `insurance`, `ktp`, `address`, `education`, `foto`) VALUES
-('11190002', 'Ahmad', 'Nurjati', 4, 2, 'ajeng@gmail.com', '089653834999', '2020-12-06 07:26:22', 1, '002', '096501011604999', 'Ajeng Nurhapsari', '0001454326999', '0001454327999', '9999999999999', '32760214049409999', 'Jakarta', 'S1 Ekonomi', 'user7-128x128.jpg'),
-('11190003', 'Ihsan', 'Bagus', 5, 2, 'adrian@gmail.com', '089653834333', '2020-12-07 16:30:13', 1, '002', '096501011604333', 'Adrian', '0001454326333', '0001454327333', '9999999999333', '32760214049403333', 'Bogor', 'D3 Akutansi', 'user8-128x128.jpg'),
-('11190004', 'Abdur', 'Rozak', 4, 2, 'rozak@gmail.com', '089653831444', '2020-12-21 14:26:58', 1, '002', '096501011604444', 'Abdur Rozak', '0001454326444', '0001454327444', '9999999999444', '32760214049409444', 'Bekasi', 'D3 Akutansi', 'user2-160x160.jpg'),
-('11190587', 'Ardi', 'Nurdin', 3, 1, 'ardinurdin89@gmail.com', '089653834136', '2020-12-06 07:21:49', 1, '002', '096501011604534', 'Ardi Nurdin', '0001454326918', '0001454327018', '9999999999888', '3276021404940001', 'Depok', 'S1 Sistem Informasi', 'user6-128x128.jpg');
+INSERT INTO `employe` (`nip`, `first_name`, `last_name`, `division`, `position`, `right_to_leave`, `email`, `no_telp`, `join_date`, `status`, `bank_code`, `bank_no`, `bank_account`, `bpjs_ks`, `bpjs_tk`, `insurance`, `ktp`, `address`, `education`, `foto`) VALUES
+('11190002', 'Ahmad', 'Nurjati', 4, 2, '2', 'nurjati@gmail.com', '089653834999', '2020-12-06 07:26:22', 1, '002', '096501011604999', 'Nurjati', '0001454326999', '0001454327999', '9999999999999', '32760214049409999', 'Jakarta', 'S1 Ekonomi', 'user7-128x128.jpg'),
+('11190003', 'Ihsan', 'Bagus', 5, 1, '12', 'bagus@gmail.com', '089653834333', '2020-12-07 16:30:13', 1, '002', '096501011604333', 'Bagus', '0001454326333', '0001454327333', '9999999999333', '32760214049403333', 'Bogor', 'D3 Akutansi', 'user8-128x128.jpg'),
+('11190004', 'Abdur', 'Rozak', 4, 1, '12', 'rozak@gmail.com', '089653831444', '2020-12-21 14:26:58', 1, '002', '096501011604444', 'Abdur Rozak', '0001454326444', '0001454327444', '9999999999444', '32760214049409444', 'Bekasi', 'D3 Akutansi', 'user2-160x160.jpg'),
+('11190005', 'Andy', 'Basuki', 3, 3, '12', 'andy@gmail.com', '089653834111', '2021-01-06 13:12:52', 1, '002', '096501011604111', 'Andy Basuki', '0001454326111', '0001454327111', '9999999999111', '32760214049409111', 'Pasar Minggu - Jakarta Selatan', 'S1 Hukum', 'avatar04.png'),
+('11190587', 'Ardi', 'Nurdin', 3, 3, '12', 'ardinurdin89@gmail.com', '089653834136', '2020-12-06 07:21:49', 1, '002', '096501011604534', 'Ardi Nurdin', '0001454326918', '0001454327018', '9999999999888', '3276021404940001', 'Depok', 'S1 Sistem Informasi', 'user6-128x128.jpg');
 
 -- --------------------------------------------------------
 
@@ -340,9 +348,16 @@ CREATE TABLE `memo` (
   `title` varchar(20) DEFAULT NULL,
   `body` text DEFAULT NULL,
   `attachment` varchar(20) DEFAULT NULL,
-  `date` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `memo`
+--
+
+INSERT INTO `memo` (`id`, `sender`, `receiver`, `title`, `body`, `attachment`, `created_at`) VALUES
+(2, '11190004', '11190002', 'Judul', 'isiiii', 'photo1.png', '2021-01-11 14:29:32'),
+(3, '11190002', '11190004', 'Judul  juga', 'isiii juga', NULL, '2021-01-11 15:06:15');
 
 -- --------------------------------------------------------
 
@@ -364,6 +379,32 @@ CREATE TABLE `news` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `overtime_submission`
+--
+
+CREATE TABLE `overtime_submission` (
+  `id_sub_ot` int(11) NOT NULL,
+  `user` varchar(20) DEFAULT NULL,
+  `approver` varchar(20) DEFAULT NULL,
+  `submission_date` timestamp NULL DEFAULT NULL,
+  `approve_date` timestamp NULL DEFAULT NULL,
+  `implementation_date` timestamp NULL DEFAULT NULL,
+  `user_desc` varchar(50) DEFAULT NULL,
+  `approver_desc` varchar(50) DEFAULT NULL,
+  `status_sub_ot` varchar(2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `overtime_submission`
+--
+
+INSERT INTO `overtime_submission` (`id_sub_ot`, `user`, `approver`, `submission_date`, `approve_date`, `implementation_date`, `user_desc`, `approver_desc`, `status_sub_ot`) VALUES
+(6, '11190002', '11190004', '2021-01-11 17:00:00', '2021-01-11 17:00:00', '2021-01-11 17:00:00', 'izin lembur bosku', ' bole', 'Y'),
+(7, '11190002', '11190004', '2021-01-11 17:00:00', NULL, '2021-01-12 17:00:00', 'lembur dong', NULL, 'P');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `position`
 --
 
@@ -381,19 +422,7 @@ CREATE TABLE `position` (
 INSERT INTO `position` (`id`, `position_name`, `position_desc`, `level`) VALUES
 (1, 'Kepala Divisi', 'Bertanggung jawab atas proses bisnis divisi', 2),
 (2, 'Wakil Kepala Divisi', 'Bertanggung jawab dalam membantu kepala divisi', 3),
-(3, 'Human Resource', 'Bertanggung jawab dalam approve kepala divisi', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `submission`
---
-
-CREATE TABLE `submission` (
-  `id` int(11) NOT NULL,
-  `submission_name` varchar(20) DEFAULT NULL,
-  `submission_desc` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(3, 'HR', 'Bertanggung jawab dalam approve kepala divisi', 1);
 
 -- --------------------------------------------------------
 
@@ -453,7 +482,8 @@ INSERT INTO `user` (`id`, `nip`, `password`, `last_login`, `role`, `created_at`,
 (3, '11190587', '12345', NULL, NULL, '2020-12-06 07:21:49', '2021-01-02 04:50:25', NULL, 'Y'),
 (4, '11190002', '12345', NULL, NULL, '2020-12-06 07:26:22', '2020-12-06 07:51:23', NULL, 'N'),
 (6, '11190003', '12345', NULL, NULL, '2020-12-07 16:30:13', NULL, NULL, 'N'),
-(7, '11190004', '12345', NULL, NULL, '2020-12-21 14:26:58', NULL, NULL, 'N');
+(7, '11190004', '12345', NULL, NULL, '2020-12-21 14:26:58', NULL, NULL, 'N'),
+(8, '11190005', '12345', NULL, NULL, '2021-01-06 13:12:52', NULL, NULL, 'N');
 
 --
 -- Indexes for dumped tables
@@ -482,7 +512,7 @@ ALTER TABLE `calendar`
 -- Indexes for table `disc_submission`
 --
 ALTER TABLE `disc_submission`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_sub`),
   ADD KEY `fk_disc_submission_employe_1` (`user`),
   ADD KEY `fk_disc_submission_employe_2` (`approver`);
 
@@ -524,15 +554,15 @@ ALTER TABLE `news`
   ADD KEY `fk_news_employe_1` (`created_by`);
 
 --
+-- Indexes for table `overtime_submission`
+--
+ALTER TABLE `overtime_submission`
+  ADD PRIMARY KEY (`id_sub_ot`);
+
+--
 -- Indexes for table `position`
 --
 ALTER TABLE `position`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `submission`
---
-ALTER TABLE `submission`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -562,7 +592,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `calendar`
@@ -574,13 +604,13 @@ ALTER TABLE `calendar`
 -- AUTO_INCREMENT for table `disc_submission`
 --
 ALTER TABLE `disc_submission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_sub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `division`
 --
 ALTER TABLE `division`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `employe_status`
@@ -592,7 +622,7 @@ ALTER TABLE `employe_status`
 -- AUTO_INCREMENT for table `memo`
 --
 ALTER TABLE `memo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -601,16 +631,16 @@ ALTER TABLE `news`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `overtime_submission`
+--
+ALTER TABLE `overtime_submission`
+  MODIFY `id_sub_ot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `position`
 --
 ALTER TABLE `position`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `submission`
---
-ALTER TABLE `submission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `subsidy`
@@ -628,7 +658,7 @@ ALTER TABLE `time`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

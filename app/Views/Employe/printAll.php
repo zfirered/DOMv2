@@ -57,8 +57,9 @@
     <section>
     <div class="header">
         <p1>Nama Perusahaan</p1> <br>
-        <p3>Address:..... Telp:..... Email:...... Fax:....</p3> <br><br>
-        <p2>Data Position Report</p2> <br>
+        <p3>Address:..... Phone:..... Email:...... Fax:....</p3> <br><br>
+        <p2>Data Employe Report</p2> <br>
+        <p4><?= $divisi->division_name; ?> Division</p4><br>
         <p4><?= $bulan; ?> <?= $tahun; ?></p4>
         </div>
         <hr>
@@ -69,9 +70,14 @@
                                             <tr>
   
                                                 <th>#</th>
-                                                <th>Name Position</th>
-                                                <th>Describe</th>
-                                                <th>Level</th>
+                                                <th>NIP</th>
+                                                <th>Name</th>
+                                                <th>Position</th>
+                                                <th>Email</th>
+                                                <th>No.Telp</th>
+                                                <th>Address</th>
+                                                <th>Education</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -82,9 +88,13 @@
                                                      foreach($data as $row):?>
                                             <tr>
                                                 <td><?= $i++ ?>.</td>
+                                                <td><?= $row['nip'];?></td>
+                                                <td><?= $row['first_name'];?> <?= $row['last_name'];?></td>
                                                 <td><?= $row['position_name'];?></td>
-                                                <td><?= $row['position_desc'];?></td>
-                                                <td><?= $row['level'];?></td>
+                                                <td><?= $row['email'];?></td>
+                                                <td><?= $row['no_telp'];?></td>
+                                                <td><?= $row['address'];?></td>
+                                                <td><?= $row['education'];?></td>
 
                                             </tr>
                                             <?php endforeach; ?>

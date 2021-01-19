@@ -32,8 +32,50 @@
                             <!-- CARD DATA PEGAWAI -->
                             <div class="card">
                                 <div class="card-header">
-                                <a href="/employe/create" class="btn btn-sm btn-info float-left">Add New</a>
+                                <a href="/employe/create" class="btn btn-sm btn-info float-left">Add New</a> 
+                                <div class="header-search">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                                                        Download Pdf
+                                                    </button>
                                 </div>
+                                </div>
+                                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="staticBackdropLabel">Download Pdf</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body" style="white-space:normal">
+                                                                 <div class="body-detail-user">
+
+                                                                 <form class="form-horizontal" action="/employe/htmlToPDF" method="post" >
+                                                                   <table class="tabel-detail-user">
+                                                                             <tr>
+                                                                             <th>Division</th>
+                                                                             <td> <select class="form-control" name="div" required>
+                                                                             <option value="">- Choose Division -</option>
+                                                                             <?php foreach($data2 as $row): ?>
+                                                                                <option value="<?= $row['id']; ?>"><?= $row['division_name']; ?></option>
+                                                                            <?php endforeach; ?>
+                                                                             </select>
+                                                                            </td>
+                                                                         </tr>
+                                                                     </table>
+
+                                                                     </div>
+                                                                 </div>
+                                                                <div class="modal-footer">
+                                                              
+                                                                <button type="submit" class="btn btn-primary">Download</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></a>
+                                                             </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                 <div class="card-body">
                                     <!-- TABLE DATA PEGAWAI -->
                                     <table class="table table-hover text-nowrap" id="myTable">
@@ -143,13 +185,7 @@
                                              <input type="text" class="form-control" value="<?= $row['insurance'];?>" readonly>
                                               </div>
                                                  </div> 
-                                                 <div class="col-sm-6">
-                                             <!-- text input -->
-                                             <div class="form-group">
-                                             <label>Insurance</label>
-                                             <input type="text" class="form-control" value="<?= $row['insurance'];?>" readonly>
-                                              </div>
-                                                 </div> 
+                                                 
                                                  <div class="col-sm-6">
                                              <!-- text input -->
                                              <div class="form-group">
@@ -318,13 +354,7 @@
                                              <input type="text" class="form-control" value="<?= $row['insurance'];?>" readonly>
                                               </div>
                                                  </div> 
-                                                 <div class="col-sm-6">
-                                             <!-- text input -->
-                                             <div class="form-group">
-                                             <label>Insurance</label>
-                                             <input type="text" class="form-control" value="<?= $row['insurance'];?>" readonly>
-                                              </div>
-                                                 </div> 
+                                                 
                                                  <div class="col-sm-6">
                                              <!-- text input -->
                                              <div class="form-group">

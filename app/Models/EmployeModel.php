@@ -25,6 +25,15 @@ class EmployeModel extends Model
     }
 }
 
+public function getDataCount()
+    {
+       
+        return $this->db->table('employe')
+        ->orderby('nip','DESC')
+        ->get()->getResultArray();
+
+}
+
 public function getDataLatest()
     {
        
@@ -39,6 +48,17 @@ public function getDataLatest()
        
 
 }
+
+public function getLastNumber($now)
+    {
+       
+        return $this->db->table('employe')
+        ->selectMax('nip')
+        ->like('nip', $now)
+        ->get()->getRow();
+
+}
+
     public function saveEmploye($data)
     {
         $query = $this->db->table($this->table)->insert($data);
@@ -69,6 +89,17 @@ public function getDataLatest()
         ->get()->getResultArray();
         }
 
+    }
+
+    public function getDataPrint($div){
+            return $this->db->table('employe')
+            ->join('division','division.id=employe.division')
+            ->join('position','position.id=employe.position')
+            ->join('employe_status','employe_status.id=employe.status')
+            ->join('bank_account','bank_account.bank_code=employe.bank_code')
+            ->where('employe.division', $div)
+            ->orderby('employe.join_date','DESC')
+            ->get()->getResultArray();
     }
 
 }
