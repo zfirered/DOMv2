@@ -1,0 +1,198 @@
+<?= $this->extend('layout/template'); ?>
+
+<?= $this->section('content'); ?>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Announcement</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active">Announcement</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col md-6">
+                            <!-- CARD DATA PEGAWAI -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <a href="/announcement/create" class="btn btn-sm btn-info float-left">Add New</a>
+                                </div>
+                                <div class="card-body">
+                                    <!-- TABLE DATA PEGAWAI -->
+                                    <table class="table table-hover text-nowrap" id="myTable">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Thumbnail</th>
+                                                <th scope="col">Title</th>
+                                                <th scope="col">Body</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $i = 1;
+                                            $a = 1;
+                                            $b = 1;
+                                            foreach ($data as $row) : ?>
+                                                <tr>
+                                                    <th scope=><?= $i++ ?>.</th>
+                                                    <td>
+                                                        <img src="<?= base_url() ?>/img/<?= $row['thumbnail']; ?>" alt="" width="50px" height="50px">
+                                                    </td>
+                                                    <td><?= $row['title']; ?>
+                                                    <td><?= $row['body']; ?></td>
+                                                    <td>
+
+                                                        <!-- Button trigger modal -->
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop<?= $a++ ?>">
+                                                            Detail
+                                                        </button>
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="staticBackdrop<?= $b++ ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered " style="max-width:50%">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="staticBackdropLabel">Detail Data</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <!-- isi detail -->
+                                                                    <div class="container">
+                                                                        <div class="card-body">
+                                                                            <div class="card-head">
+                                                                                <div class="card card-widget widget-user">
+                                                                                    <div class="widget-user-head-mod bg-info-mod">
+                                                                                        <h5 class="widget-user-desc"><?= $row['title']; ?></h4>
+                                                                                    </div>
+                                                                                    <div class="widget-user-foto">
+                                                                                        <img class="img-user" src="<?= base_url() ?>/img/<?= $row['thumbnail']; ?>" alt="">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+
+                                                                                <div class="col-sm-6">
+                                                                                    <!-- text input -->
+                                                                                    <div class="form-group">
+                                                                                        <label>Title</label>
+                                                                                        <input type="text" class="form-control" value="<?= $row['title']; ?>" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-6">
+                                                                                    <!-- text input -->
+                                                                                    <div class="form-group">
+                                                                                        <label>Body</label>
+                                                                                        <input type="text" class="form-control" value="<?= $row['body']; ?>" readonly>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <a href="announcement/edit/<?= $row['id']; ?>" class="btn btn-primary">Edit</a>
+                                                                        <a href="announcement/delete/<?= $row['id']; ?>" class="btn btn-danger">Delete</a>
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.Modal -->
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                    <!-- /.TABLE DATA PEGAWAI -->
+                                </div>
+                                <div class="card-footer clearfix">
+                                    <!-- /.ISI FOOTER TABEL -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- USERS LIST -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Latest Announcement</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body p-0">
+                                    <ul class="users-list clearfix">
+                                        <?php
+                                        foreach ($latest as $row) : ?>
+                                            <li>
+                                                <img src="<?= base_url() ?>/img/<?= $row['thumbnail']; ?>" alt="User Image">
+                                                <a href=# class="users-list-name" data-toggle="modal" data-target="#staticBackdrop<?= $a++ ?>"><?= $row['title']; ?></a>
+                                            </li>
+                                            <!-- /.detail latest -->
+                                            <div class="modal fade" id="staticBackdrop<?= $b++ ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered " style="max-width:50%">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">Detail Data</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <!-- isi detail -->
+                                                        <div class="container">
+                                                            <div class="card-body">
+                                                                <div class="card-head">
+                                                                    <div class="card card-widget widget-user">
+                                                                        <div class="widget-user-head-mod bg-info-mod">
+                                                                            <h5 class="widget-user-desc"><?= $row['title']; ?></h5>
+                                                                        </div>
+                                                                        <div class="widget-user-foto">
+                                                                            <img class="img-user" src="<?= base_url() ?>/img/<?= $row['thumbnail']; ?>" alt="">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <h5><?= $row['body']; ?></h5>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        <?php endforeach; ?>
+                                    </ul>
+                                    <!-- /.users-list -->
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!--/.card -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<?= $this->endSection('content'); ?>

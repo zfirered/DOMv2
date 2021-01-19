@@ -1,8 +1,10 @@
-<?php namespace App\Controllers;
- 
+<?php
+
+namespace App\Controllers;
+
 use CodeIgniter\Controller;
 use App\Models\BankAccountModel;
- 
+
 class BankAccount extends Controller
 {
     public function __construct()
@@ -14,8 +16,8 @@ class BankAccount extends Controller
     {
         $model = new BankAccountModel();
         $data['data'] = $model->getData();
-        $data['title']= 'Home | Master Bank Account';
-        echo view('/bankAccount/index',$data);
+        $data['title'] = 'Home | Master Bank Account';
+        echo view('/bankAccount/index', $data);
     }
 
     function htmlToPDF(){
@@ -35,11 +37,10 @@ class BankAccount extends Controller
 
     public function create()
     {
-        $data['title']= 'Home | Master Bank Account';
-        echo view('/bankAccount/create',$data);
-        
+        $data['title'] = 'Home | Master Bank Account';
+        echo view('/bankAccount/create', $data);
     }
- 
+
     public function save()
     {
         $model = new BankAccountModel();
@@ -55,8 +56,8 @@ class BankAccount extends Controller
     {
         $model = new BankAccountModel();
         $data['data'] = $model->getData($id)->getRow();
-        $data['title']= 'Home | Master Bank Account';
-        echo view('/bankAccount/edit',$data);
+        $data['title'] = 'Home | Master Bank Account';
+        echo view('/bankAccount/edit', $data);
     }
 
     public function update()
@@ -78,4 +79,3 @@ class BankAccount extends Controller
         return redirect()->to('/bankAccount');
     }
 }
- 

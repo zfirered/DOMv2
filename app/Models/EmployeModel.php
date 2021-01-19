@@ -1,29 +1,32 @@
-<?php namespace App\Models;
+<?php
+
+namespace App\Models;
+
 use CodeIgniter\Model;
- 
+
 class EmployeModel extends Model
 {
     protected $table = 'employe';
-     
+
     public function getData($id = false)
     {
-        if($id === false){
+        if ($id === false) {
             return $this->db->table('employe')
-            ->join('division','division.id=employe.division')
-            ->join('position','position.id=employe.position')
-            ->join('employe_status','employe_status.id=employe.status')
-            ->join('bank_account','bank_account.bank_code=employe.bank_code')
-            ->orderby('employe.join_date','DESC')
-            ->get()->getResultArray();
-        }else{
+                ->join('division', 'division.id=employe.division')
+                ->join('position', 'position.id=employe.position')
+                ->join('employe_status', 'employe_status.id=employe.status')
+                ->join('bank_account', 'bank_account.bank_code=employe.bank_code')
+                ->orderby('employe.join_date', 'DESC')
+                ->get()->getResultArray();
+        } else {
             return $this->db->table('employe')
-            ->join('division','division.id=employe.division')
-            ->join('position','position.id=employe.position')
-            ->join('employe_status','employe_status.id=employe.status')
-            ->join('bank_account','bank_account.bank_code=employe.bank_code')
-            ->getWhere(['employe.nip' => $id]);
+                ->join('division', 'division.id=employe.division')
+                ->join('position', 'position.id=employe.position')
+                ->join('employe_status', 'employe_status.id=employe.status')
+                ->join('bank_account', 'bank_account.bank_code=employe.bank_code')
+                ->getWhere(['employe.nip' => $id]);
+        }
     }
-}
 
 public function getDataCount()
     {
@@ -36,16 +39,15 @@ public function getDataCount()
 
 public function getDataLatest()
     {
-       
         return $this->db->table('employe')
-        ->join('division','division.id=employe.division')
-        ->join('position','position.id=employe.position')
-        ->join('employe_status','employe_status.id=employe.status')
-        ->join('bank_account','bank_account.bank_code=employe.bank_code')
-        ->orderby('employe.join_date','DESC')
-        ->limit(8)
-        ->get()->getResultArray();
-       
+            ->join('division', 'division.id=employe.division')
+            ->join('position', 'position.id=employe.position')
+            ->join('employe_status', 'employe_status.id=employe.status')
+            ->join('bank_account', 'bank_account.bank_code=employe.bank_code')
+            ->orderby('employe.join_date', 'DESC')
+            ->limit(8)
+            ->get()->getResultArray();
+    
 
 }
 
@@ -73,7 +75,7 @@ public function getLastNumber($now)
     {
         $query = $this->db->table($this->table)->delete(array('nip' => $id));
         return $query;
-    } 
+    }
 
     public function cari($div= false)
     {
@@ -101,5 +103,4 @@ public function getLastNumber($now)
             ->orderby('employe.join_date','DESC')
             ->get()->getResultArray();
     }
-
 }

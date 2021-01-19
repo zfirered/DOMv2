@@ -1,5 +1,7 @@
-<?php namespace App\Controllers;
- 
+<?php
+
+namespace App\Controllers;
+
 use CodeIgniter\Controller;
 use App\Models\EmployeModel;
 use App\Models\DivisiModel;
@@ -7,7 +9,7 @@ use App\Models\PositionModel;
 use App\Models\EmployestatusModel;
 use App\Models\BankAccountModel;
 use App\Models\UsersModel;
- 
+
 class Employe extends Controller
 {
     public function __construct(){
@@ -22,8 +24,8 @@ class Employe extends Controller
         $data['data'] = $model->getData();
         $data['data2'] = $model2->getData();
         $data['latest'] = $model->getDataLatest();
-        $data['title']= 'Home | Data Employe';
-        echo view('/employe/index',$data);
+        $data['title'] = 'Home | Data Employe';
+        echo view('/employe/index', $data);
     }
 
     function htmlToPDF(){
@@ -68,11 +70,10 @@ class Employe extends Controller
         $data['data2'] = $model2->getData();
         $data['data3'] = $model3->getData();
         $data['data4'] = $model4->getData();
-        $data['title']= 'Home | Data Employe';
-        echo view('/employe/create',$data);
-        
+        $data['title'] = 'Home | Data Employe';
+        echo view('/employe/create', $data);
     }
- 
+
     public function save()
     {
         if($this->request->getPost('insurance')==null){
@@ -217,7 +218,7 @@ class Employe extends Controller
 
         $model = new EmployeModel();
         $model2 = new UsersModel();
-
+      
         $cek_img = $this->request->getFile('foto');
         $name= $this->request->getPost('nip')."-profil.jpg";
         
@@ -230,7 +231,9 @@ class Employe extends Controller
                 $cek_img->move(ROOTPATH.'public/img', $name);
                 $file= $name;
 
-            }
+            $cek_img->move(ROOTPATH . 'public/img');
+            $file = ['gambar' => $cek_img->getName()];
+        }
 
         $data = array(
             'nip'  => $this->request->getPost('nip'),
@@ -257,7 +260,7 @@ class Employe extends Controller
 
         $data2 = array(
             'nip'  => $this->request->getPost('nip'),
-            'password'  => "12345", 
+            'password'  => "12345",
             'created_at'  => date('Y-m-d H:i:s'),
             'allow'  => "N",
         );
@@ -273,19 +276,19 @@ class Employe extends Controller
         $data['validation']= \Config\Services::validation();
 
         $model = new EmployeModel();
-        $model1= new DivisiModel();
-        $model2= new PositionModel();
-        $model3= new EmployestatusModel();
-        $model4= new BankAccountModel();
-       
-        $data['data'] = $model->getData($id)->getRow(); 
+        $model1 = new DivisiModel();
+        $model2 = new PositionModel();
+        $model3 = new EmployestatusModel();
+        $model4 = new BankAccountModel();
+
+        $data['data'] = $model->getData($id)->getRow();
         $data['data1'] = $model1->getData();
         $data['data2'] = $model2->getData();
         $data['data3'] = $model3->getData();
         $data['data4'] = $model4->getData();
-       
-        $data['title']= 'Home | Data Employe';
-        echo view('/employe/edit',$data);
+
+        $data['title'] = 'Home | Data Employe';
+        echo view('/employe/edit', $data);
     }
 
     public function update()
@@ -440,16 +443,15 @@ class Employe extends Controller
 
             if($cek_img == ""){
 
-                $file = $img_old;
+        if ($cek_img == "") {
 
-            } else {
+            $file = $img_old;
+        } else {
                
                 unlink('../public/img/'.$img_old);
                 $cek_img->move(ROOTPATH.'public/img',$name);
                 $file= $name;
-
-            }
-            
+        }
 
         $id = $this->request->getPost('nip');
         $data = array(
@@ -486,4 +488,3 @@ class Employe extends Controller
         return redirect()->to('/employe');
     }
 } 
- 
