@@ -5,13 +5,32 @@ use App\Models\EmployestatusModel;
  
 class Employestatus extends Controller
 {
+    public function __construct(){
+        helper('all');
+    }
+
     public function index()
     {
         $model = new EmployestatusModel();
+
         $data['data'] = $model->getData();
         $data['title']= 'Home | Master Employe Status';
         echo view('/employestatus/index',$data);
     }
+
+    function htmlToPDF(){
+
+        $model = new EmployestatusModel();
+        $data['data'] = $model->getData();
+        $data['bulan'] = month(date('m'));
+        $data['tahun'] = date('Y');
+
+        $dompdf = new \Dompdf\Dompdf(); 
+        $dompdf->loadHtml(view('/employestatus/printAll',$data));
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream();
+    } 
 
     public function create()
     {

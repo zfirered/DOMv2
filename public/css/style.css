@@ -64,6 +64,8 @@
   border-collapse: inherit;
   text-align: center;
   font-family: sans-serif;
+
+  width:50% ;
 }
 
 .td_name {
@@ -76,17 +78,22 @@
   font-style: italic;
 }
 
-.td_in {
-  color: #343a40;
+.td_in{
+  color: #030303;
   background-color: #f1f1f1;
 }
 
-.td_out {
-  color: #343a40;
+.td_out{
+  color: #080808;
   background-color: #f1f1f1;
 }
 
-.td_red {
+.td_in_late{
+  color: #ffffff;
+  background-color: #db3545;
+}
+
+.td_red{
   color: white;
   background-color: #db3545;
 }
@@ -94,4 +101,19 @@
 .td_blue {
   color: white;
   background-color: #343a40;
+}
+
+.td_permit{
+  color: white;
+  background-color: lawngreen;
+}
+
+.td_select_hour{
+  display: flex;
+  
+}
+
+.header-search{
+  display: inline-flex;
+  float: right;
 }

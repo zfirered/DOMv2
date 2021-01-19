@@ -28,9 +28,17 @@ class EmployeModel extends Model
         }
     }
 
-    public function getDataLatest()
+public function getDataCount()
     {
+       
+        return $this->db->table('employe')
+        ->orderby('nip','DESC')
+        ->get()->getResultArray();
 
+}
+
+public function getDataLatest()
+    {
         return $this->db->table('employe')
             ->join('division', 'division.id=employe.division')
             ->join('position', 'position.id=employe.position')
@@ -39,7 +47,20 @@ class EmployeModel extends Model
             ->orderby('employe.join_date', 'DESC')
             ->limit(8)
             ->get()->getResultArray();
-    }
+    
+
+}
+
+public function getLastNumber($now)
+    {
+       
+        return $this->db->table('employe')
+        ->selectMax('nip')
+        ->like('nip', $now)
+        ->get()->getRow();
+
+}
+
     public function saveEmploye($data)
     {
         $query = $this->db->table($this->table)->insert($data);
@@ -56,10 +77,30 @@ class EmployeModel extends Model
         return $query;
     }
 
-    public function cari()
+    public function cari($div= false)
     {
+        if($div === false){
         return $this->db->table('employe')
-            ->orderby('nip', 'DESC')
+        ->orderby('employe.nip','DESC')
+        ->get()->getResultArray();
+
+        }else{
+        return $this->db->table('employe')
+        ->where('employe.division', $div)
+        ->orderby('employe.nip','DESC')
+        ->get()->getResultArray();
+        }
+
+    }
+
+    public function getDataPrint($div){
+            return $this->db->table('employe')
+            ->join('division','division.id=employe.division')
+            ->join('position','position.id=employe.position')
+            ->join('employe_status','employe_status.id=employe.status')
+            ->join('bank_account','bank_account.bank_code=employe.bank_code')
+            ->where('employe.division', $div)
+            ->orderby('employe.join_date','DESC')
             ->get()->getResultArray();
     }
 }

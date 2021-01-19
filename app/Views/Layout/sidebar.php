@@ -14,7 +14,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="/" class="nav-link <?php if ($title == 'Home') {
+                    <a href="/" class="nav-link <?php if ($title == 'Dashboard') {
                                                     print 'active';
                                                 } ?>">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -121,13 +121,133 @@
                         <p>About Us</p>
                     </a>
                 </li>
+
                 <li class="nav-header">MENU</li>
                 <li class="nav-item">
                     <a href="/login/logout" class="nav-link">
                         <i class="fas fa-sign-out-alt nav-icon"></i>
                         <p>LOGOUT</p>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin" class="nav-link <?php if ($title == 'Home | Data Administrator') {
+                                                            print 'active';
+                                                        } ?>">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Data Administrator</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Simple Link
+                            <span class="right badge badge-danger">New</span>
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/userSubmission" class="nav-link <?php if ($title == 'Home | User Submission') {
+                                                                    print 'active';
+                                                                } ?>">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>User Submission</p>
+
+                    </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/userSubmissionOvertime" class="nav-link <?php if ($title == 'Home | User Submission Overtime') {
+                                                                                print 'active';
+                                                                            } ?>">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>User Submission Overtime</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/userAttendance" class="nav-link <?php if ($title == 'Home | User Attendance') {
+                                                                        print 'active';
+                                                                    } ?>">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>User Attendance</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/userAbsence" class="nav-link <?php if ($title == 'Home | User Absence') {
+                                                                    print 'active';
+                                                                } ?>">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>User Absence</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/userMemo" class="nav-link <?php if ($title == 'Home | Memo') {
+                                                                print 'active';
+                                                            } ?>">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Memo</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/PdfController" class="nav-link <?php if ($title == 'Home | Laporan') {
+                                                                        print 'active';
+                                                                    } ?>">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Laporan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/login/logout" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Log Out</p>
+                            =======
+                    <li class="nav-item">
+                        <a href="/userSubmission" class="nav-link <?php if ($title == 'Home | User Submission') {
+                                                                        print 'active';
+                                                                    } ?>">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>User Submission</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/userSubmissionOvertime" class="nav-link <?php if ($title == 'Home | User Submission Overtime') {
+                                                                                print 'active';
+                                                                            } ?>">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>User Submission Overtime</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/userAttendance" class="nav-link <?php if ($title == 'Home | User Attendance') {
+                                                                        print 'active';
+                                                                    } ?>">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>User Attendance</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/userAbsence" class="nav-link <?php if ($title == 'Home | User Absence') {
+                                                                    print 'active';
+                                                                } ?>">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>User Absence</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/userMemo" class="nav-link <?php if ($title == 'Home | Memo') {
+                                                                print 'active';
+                                                            } ?>">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Memo</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/PdfController" class="nav-link <?php if ($title == 'Home | Laporan') {
+                                                                        print 'active';
+                                                                    } ?>">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Laporan</p>
+                            >>>>>>> b94fe95460567d48bd669da9e7cf295e3a9c179c
+                        </a>
+                    </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
