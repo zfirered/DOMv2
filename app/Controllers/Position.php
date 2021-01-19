@@ -125,13 +125,7 @@ class Position extends Controller
                         'max_length' => 'Maksimal 20 karakter'
                 ]
                 ],
-                'insurance' => [
-                    'rules' => $rule_insurance,
-                    'errors' => [
-                        'numeric' => 'Harus angka',
-                        'max_length' => 'Maksimal 20 karakter'
-                ]
-                ],
+               
                 'nik' => [
                     'rules' => 'required|numeric|max_length[20]',
                     'errors' => [
