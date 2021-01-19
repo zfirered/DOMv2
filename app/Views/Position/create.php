@@ -39,10 +39,21 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <!-- text input -->
-                                        <div class="form-group">
+                                        <div class="form-group"> 
                                             <label>Position Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="pos_nm" required>
+                                            <input type="text" class="form-control" placeholder="Enter ..." name="pos_nm">
                                         </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Position Level</label>
+                                            <select class="form-control" name="level" >
+                        <option value="" disabled selected>- Choose Level -</option>
+                        <?php for($i = 1; $i <= 3; $i++): ?>
+                            <option value="<?= $i ?>"><?= $i; ?></option>
+                        <?php endfor; ?>
+                    </select>                                        
+                                 </div>
                                     </div>
                                     <div class="col-sm-6">
                                     <div class="form-group">

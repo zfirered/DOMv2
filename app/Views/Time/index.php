@@ -34,13 +34,72 @@
                             <!-- CARD DATA PEGAWAI -->
                             <div class="card">
                                 <div class="card-header">
-                                <a href="/divisi/create" class="btn btn-sm btn-info float-left">Add New</a>
                                 </div>
                                 <div class="card-body" >
                                     <!-- TABLE DATA PEGAWAI -->
                                     
+                    <table class="table table-hover text-nowrap">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">Describe Time</th>
+                                                <th scope="col">Time</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                        <td>In</td>
+                                        <form action="time/update" method="post">
 
-                                </div>
+                                        <td class="td_select_hour"> 
+                        <input type="text" name="id" value="<?= $timeIn->id_time; ?>" hidden>
+                        <select class="form-control" name="hour" style="width:120px">
+                        <option value="" disabled selected>- Hour -</option>
+                        <?php for($i = 00; $i <= 23; $i++): ?>
+                            <option value="<?= $i ?>" <?php $arr=$timeIn->start; $h=explode(":", $arr); ?> <?= ($i == $h[0]) ? 'selected' : '' ?>><?= zero($i); ?></option>
+                        <?php endfor; ?>
+                    </select>
+                    &nbsp;&nbsp;:&nbsp;&nbsp;
+                    <select class="form-control" name="minute" style="width:130px">
+                        <option value="" disabled selected>- Minute -</option>
+                        <?php for($i = 00; $i <= 59; $i++): ?>
+                            <option value="<?= $i ?>" <?php $arr=$timeIn->start; $h=explode(":", $arr); ?> <?= ($i == $h[1]) ? 'selected' : '' ?>><?= zero($i); ?></option>
+                        <?php endfor; ?>
+                    </select> </td>
+                                        <td>
+                                        <button type="submit" class="btn btn-info">Update</button></td>
+                                        </tr>
+                                        </form>
+
+                                        <tr>
+                                        <td>Out</td>
+
+                                        <form action="time/update" method="post">
+                                        <td class="td_select_hour"> 
+                                        <input type="text" name="id" value="<?= $timeOut->id_time; ?>" hidden>
+                                        <select class="form-control" name="hour" style="width:120px">
+                        <option value="" disabled selected>- Hour -</option>
+                        <?php for($i = 00; $i <= 23; $i++): ?>
+                            <option value="<?= $i ?>" <?php $arr=$timeOut->start; $h=explode(":", $arr); ?> <?= ($i == $h[0]) ? 'selected' : '' ?>><?= zero($i); ?></option>
+                        <?php endfor; ?>
+                    </select> 
+                    &nbsp;&nbsp;:&nbsp;&nbsp;
+                    <select class="form-control" name="minute" style="width:130px">
+                        <option value="" disabled selected>- Minute -</option>
+                        <?php for($i = 00; $i <= 59; $i++): ?>
+                            <option value="<?= $i ?>" <?php $arr=$timeOut->start; $h=explode(":", $arr); ?> <?= ($i == $h[1]) ? 'selected' : '' ?>><?= zero($i); ?></option>
+                        <?php endfor; ?>
+                    </select> </td>
+                                        <td>
+                                     <button type="submit" class="btn btn-info">Update</button>
+                                                                        </td>
+                                        </tr>
+                                        </form>
+
+                                        </tbody>
+                                        </table>
+
+                                </div> 
                                 <div class="card-footer clearfix">
                     
                                 </div>
@@ -56,4 +115,4 @@
 
 
 
-<?= $this->endSection('content'); ?>
+<?= $this->endSection('content'); ?> 
