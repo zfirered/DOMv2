@@ -48,14 +48,20 @@
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>First Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="first_nm" value="<?= $data->first_name; ?>" required>
+                                            <input type="text" class="form-control <?= ($validation->hasError('first_nm')) ? 'is-invalid' : '' ?>" placeholder="Enter ..." name="first_nm" value="<?= (old('first_nm')==FALSE) ? $data->first_name : old('first_nm') ?>">
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('first_nm'); ?>
+                                            </div>
                                         </div>
                                     </div> 
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>Last Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="last_nm" value="<?= $data->last_name; ?>" required>
+                                            <input type="text" class="form-control <?= ($validation->hasError('last_nm')) ? 'is-invalid' : '' ?>" placeholder="Enter ..." name="last_nm" value="<?= (old('last_name')==FALSE) ? $data->last_name : old('last_name') ?>">
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('last_nm'); ?>
+                                            </div>
                                         </div>
                                     </div> 
                                     <div class="col-sm-6">
@@ -69,7 +75,7 @@
 
                                          <?php endforeach; ?>
                                                  </select>
-                                     </div>
+                                               </div>
                                      <div class="col-sm-6">
                                         <label >Position</label>
                                          <select class="form-control" name="pos" required>
@@ -81,7 +87,7 @@
 
                                          <?php endforeach; ?>
                                                  </select>
-                                     </div>
+                                        </div>
                                      
                                      <div class="col-sm-6">
                                      <div class="form-group">
@@ -103,7 +109,10 @@
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>Right to Leave</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="right_leave" value="<?= $data->right_to_leave; ?>" required>
+                                            <input type="text" class="form-control <?= ($validation->hasError('right_leave')) ? 'is-invalid' : '' ?>" placeholder="Enter ..." name="right_leave" value="<?= (old('right_leave')==FALSE) ? $data->right_to_leave : old('right_leave') ?>">
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('right_leave'); ?>
+                                            </div>   
                                         </div>
                                     </div> 
                                 </div>
@@ -120,7 +129,7 @@
                                      
                                        <div class="col-sm-6">
                                         <label >Bank Rekening</label>
-                                         <select class="form-control" name="bank_cd" required>
+                                         <select class="form-control" name="bank_cd">
                                          <option value="<?= $data->bank_code; ?>" ><?= $data->bank_name; ?></option>
                     
                                      <?php 
@@ -134,35 +143,50 @@
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>Rekening Number</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="no_rek" value="<?= $data->bank_no; ?>" required>
+                                            <input type="text" class="form-control <?= ($validation->hasError('no_rek')) ? 'is-invalid' : '' ?>" placeholder="Enter ..." name="no_rek" value="<?= (old('no_rek')==FALSE) ? $data->bank_no : old('no_rek') ?>">
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('no_rek'); ?>
+                                            </div>  
                                         </div>
                                     </div>   
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>Name of Rekening</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="an_rek" value="<?= $data->bank_account; ?>" required>
+                                            <input type="text" class="form-control <?= ($validation->hasError('an_rek')) ? 'is-invalid' : '' ?>" placeholder="Enter ..." name="an_rek" value="<?= (old('an_rek')==FALSE) ? $data->bank_account : old('an_rek') ?>">
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('an_rek'); ?>
+                                            </div>  
                                         </div>
                                     </div>   
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>BPJS Kesehatan</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="bpjs_ks" value="<?= $data->bpjs_ks; ?>" required>
+                                            <input type="text" class="form-control <?= ($validation->hasError('bpjs_ks')) ? 'is-invalid' : '' ?>" placeholder="Enter ..." name="bpjs_ks" value="<?= (old('bpjs_ks')==FALSE) ? $data->bpjs_ks : old('bpjs_ks') ?>">
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('bpjs_ks'); ?>
+                                            </div> 
                                         </div>
                                     </div>   
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>BPJS Ketenagakerjaan</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="bpjs_tk" value="<?= $data->bpjs_tk; ?>" required>
+                                            <input type="text" class="form-control <?= ($validation->hasError('bpjs_tk')) ? 'is-invalid' : '' ?>" placeholder="Enter ..." name="bpjs_tk" value="<?= (old('bpjs_tk')==FALSE) ? $data->bpjs_tk : old('bpjs_tk') ?>">
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('bpjs_tk'); ?>
+                                            </div> 
                                         </div>
                                     </div>  
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>Insurance</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="insurance" value="<?= $data->insurance; ?>">
+                                            <input type="text" class="form-control <?= ($validation->hasError('insurance')) ? 'is-invalid' : '' ?>" placeholder="Enter ..." name="insurance" value="<?= (old('insurance')==FALSE) ? $data->insurance : old('insurance') ?>">
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('insurance'); ?>
+                                            </div> 
                                         </div>
                                     </div> 
                               </div> 
@@ -181,35 +205,50 @@
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>NIK KTP</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="nik" value="<?= $data->ktp; ?>" required>
+                                            <input type="text" class="form-control <?= ($validation->hasError('nik')) ? 'is-invalid' : '' ?>" placeholder="Enter ..." name="nik" value="<?= (old('ktp')==FALSE) ? $data->ktp : old('ktp') ?>">
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('nik'); ?>
+                                            </div> 
                                         </div>
                                     </div> 
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>Last Education</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="last_edu" value="<?= $data->education; ?>" required>
+                                            <input type="text" class="form-control <?= ($validation->hasError('last_edu')) ? 'is-invalid' : '' ?>" placeholder="Enter ..." name="last_edu" value="<?= (old('last_edu')==FALSE) ? $data->education : old('last_edu') ?>" >
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('last_edu'); ?>
+                                            </div> 
                                         </div>
                                     </div>   
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>Phone Number</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="no_telp" value="<?= $data->no_telp; ?>" required>
+                                            <input type="text" class="form-control <?= ($validation->hasError('no_telp')) ? 'is-invalid' : '' ?>" placeholder="Enter ..." name="no_telp" value="<?= (old('no_telp')==FALSE) ? $data->no_telp : old('no_telp') ?>" >
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('no_telp'); ?>
+                                            </div> 
                                         </div>
                                     </div>  
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>Email Adress</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="email" value="<?= $data->email; ?>" required>
+                                            <input type="text" class="form-control <?= ($validation->hasError('email')) ? 'is-invalid' : '' ?>" placeholder="Enter ..." name="email" value="<?= (old('email')==FALSE) ? $data->email : old('email') ?>" required>
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('email'); ?>
+                                            </div> 
                                         </div>
                                     </div> 
                                     <div class="col-sm-6">
                                         <!-- textarea -->
                                         <div class="form-group">
                                             <label>Adress</label>
-                                            <textarea class="form-control" rows="11" placeholder="Enter ..." name="adress" required><?= $data->address; ?></textarea>
+                                            <textarea class="form-control <?= ($validation->hasError('adress')) ? 'is-invalid' : '' ?>" rows="11" placeholder="Enter ..." name="adress" ><?= (old('adress')==FALSE) ? $data->address : old('adress') ?></textarea>
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('adress'); ?>
+                                            </div> 
                                         </div>
                                     </div>           
 

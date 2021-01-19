@@ -266,8 +266,9 @@
 
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label>Foto*</label>
+                                            <label>Foto</label> 
                                             <div class="custom-file">
+
                                                 <input type="file" class="<?= ($validation->hasError('foto')) ? 'is-invalid' : '' ?>" id="file" name="foto" accept="image/*">
                                             <div class="invalid-feedback">
                                             <?= $validation->getError('foto'); ?>

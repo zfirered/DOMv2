@@ -36,6 +36,9 @@ class Position extends Controller
 
     public function create()
     {
+        session();
+        $data['validation']= \Config\Services::validation();
+
         $data['title']= 'Home | Master Position';
         echo view('/position/create',$data);
         
@@ -43,6 +46,137 @@ class Position extends Controller
  
     public function save()
     {
+        if(!$this->validate([
+            'pos_nm' => [
+                'rules' => 'required|max_length[20]|is_unique[position.position_name]',
+                'errors' => [
+                    'required' => 'Harus diisi',
+                    'max_length' => 'Maksimal 20 karakter',
+                    'is_unique' => 'Nama posisi sudah ada'
+                ]
+                ],
+                'level' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Harus diisi'
+                ]
+                ],
+                'div' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Harus Pilih'
+                ]
+                ],
+                'pos' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Harus Pilih'
+                ]
+                ],
+                'stat' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Harus Pilih'
+                ]
+                ],
+                'right_leave' => [
+                    'rules' => 'required|numeric|max_length[2]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'numeric' => 'Harus angka',
+                        'max_length' => 'Maksimal 2 karakter'
+                ]
+                ],
+                'bank_cd' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Harus Pilih'
+                ]
+                ],
+                'no_rek' => [
+                    'rules' => 'required|numeric|max_length[20]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'numeric' => 'Harus angka',
+                        'max_length' => 'Maksimal 20 karakter'
+                ]
+                ],
+                'an_rek' => [
+                    'rules' => 'required|alpha_space|max_length[20]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'alpha_space' => 'Harus huruf',
+                        'max_length' => 'Maksimal 20 karakter'
+                ]
+                ],
+                'bpjs_ks' => [
+                    'rules' => 'required|numeric|max_length[20]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'numeric' => 'Harus angka',
+                        'max_length' => 'Maksimal 20 karakter'
+                ]
+                ],
+                'bpjs_tk' => [
+                    'rules' => 'required|numeric|max_length[20]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'numeric' => 'Harus angka',
+                        'max_length' => 'Maksimal 20 karakter'
+                ]
+                ],
+                'insurance' => [
+                    'rules' => $rule_insurance,
+                    'errors' => [
+                        'numeric' => 'Harus angka',
+                        'max_length' => 'Maksimal 20 karakter'
+                ]
+                ],
+                'nik' => [
+                    'rules' => 'required|numeric|max_length[20]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'numeric' => 'Harus angka',
+                        'max_length' => 'Maksimal 20 karakter'
+                ]
+                ],
+                'last_edu' => [
+                    'rules' => 'required|max_length[20]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'max_length' => 'Maksimal 20 karakter'
+                ]
+                ],
+                'no_telp' => [
+                    'rules' => 'required|numeric|max_length[15]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'numeric' => 'Harus angka',
+                        'max_length' => 'Maksimal 15 karakter'
+                ]
+                ],
+                'email' => [
+                    'rules' => 'required|valid_email|max_length[50]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'valid_email' => 'Email tidak valid',
+                        'max_length' => 'Maksimal 50 karakter'
+                ]
+                ],
+                'adress' => [
+                    'rules' => 'required|max_length[100]',
+                    'errors' => [
+                        'required' => 'Harus diisi',
+                        'max_length' => 'Maksimal 100 karakter'
+                ]
+                ], 
+                
+           
+        ])){ 
+     $validation= \Config\Services::validation();
+     return redirect()->to('/position/create')->withInput()->with('validation',$validation);
+        }
+
         $model = new PositionModel();
         $data = array(
             'position_name'  => $this->request->getPost('pos_nm'),

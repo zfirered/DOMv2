@@ -37,7 +37,7 @@ class UserAttendance extends BaseController
 
         $now= "$tahun-$bulan-01";
 
-        $id="11190002";
+        $id="202101160001";
         $data['id']= $id;
         $data['bulan']= $bulan;
         $data['tahun']= $tahun;
