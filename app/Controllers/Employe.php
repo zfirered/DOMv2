@@ -475,15 +475,5 @@ class Employe extends Controller
         $model->updateEmploye($data, $id);
         return redirect()->to('/employe');
     }
-
-    public function delete($id)
-    {
-        $model = new EmployeModel();
-        
-        $data = $model->getData($id)->getRow(); 
-        unlink('../public/img/'.$data->foto);
-        $model->deleteEmploye($id);
-        return redirect()->to('/employe');
-    }
 } 
  

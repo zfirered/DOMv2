@@ -41,13 +41,19 @@
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>Status Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="stat_nm" required>
+                                            <input type="text" class="form-control <?= ($validation->hasError('stat_nm')) ? 'is-invalid' : '' ?>" value="<?= old('stat_nm'); ?>" placeholder="Enter ..." name="stat_nm">
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('stat_nm'); ?>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                     <div class="form-group">
                                             <label>Describe</label>
-                                            <textarea class="form-control" rows="5" placeholder="Enter ..." type="text" name="stat_desc" required></textarea>
+                                            <textarea class="form-control <?= ($validation->hasError('stat_desc')) ? 'is-invalid' : '' ?>" rows="5" placeholder="Enter ..." type="text" name="stat_desc" ><?= old('stat_desc'); ?></textarea>
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('stat_desc'); ?>
+                                            </div>
                                             </div>
                                     </div>
                                 </div>

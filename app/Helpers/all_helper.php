@@ -126,7 +126,7 @@ function hari($d = 0)
 
 function tgl_hari($tgl)
 {    
-    $bulan = bulan(date('m', strtotime($tgl)));
+    $bulan = month(date('m', strtotime($tgl)));
     $hari = hari(date('l', strtotime($tgl)));
     return $hari . ', ' . date('d-', strtotime($tgl)) . $bulan . date('-Y', strtotime($tgl));
 }

@@ -58,114 +58,17 @@ class Position extends Controller
                 'level' => [
                     'rules' => 'required',
                     'errors' => [
-                        'required' => 'Harus diisi'
-                ]
-                ],
-                'div' => [
-                    'rules' => 'required',
-                    'errors' => [
                         'required' => 'Harus Pilih'
                 ]
                 ],
-                'pos' => [
-                    'rules' => 'required',
-                    'errors' => [
-                        'required' => 'Harus Pilih'
-                ]
-                ],
-                'stat' => [
-                    'rules' => 'required',
-                    'errors' => [
-                        'required' => 'Harus Pilih'
-                ]
-                ],
-                'right_leave' => [
-                    'rules' => 'required|numeric|max_length[2]',
-                    'errors' => [
-                        'required' => 'Harus diisi',
-                        'numeric' => 'Harus angka',
-                        'max_length' => 'Maksimal 2 karakter'
-                ]
-                ],
-                'bank_cd' => [
-                    'rules' => 'required',
-                    'errors' => [
-                        'required' => 'Harus Pilih'
-                ]
-                ],
-                'no_rek' => [
-                    'rules' => 'required|numeric|max_length[20]',
-                    'errors' => [
-                        'required' => 'Harus diisi',
-                        'numeric' => 'Harus angka',
-                        'max_length' => 'Maksimal 20 karakter'
-                ]
-                ],
-                'an_rek' => [
-                    'rules' => 'required|alpha_space|max_length[20]',
-                    'errors' => [
-                        'required' => 'Harus diisi',
-                        'alpha_space' => 'Harus huruf',
-                        'max_length' => 'Maksimal 20 karakter'
-                ]
-                ],
-                'bpjs_ks' => [
-                    'rules' => 'required|numeric|max_length[20]',
-                    'errors' => [
-                        'required' => 'Harus diisi',
-                        'numeric' => 'Harus angka',
-                        'max_length' => 'Maksimal 20 karakter'
-                ]
-                ],
-                'bpjs_tk' => [
-                    'rules' => 'required|numeric|max_length[20]',
-                    'errors' => [
-                        'required' => 'Harus diisi',
-                        'numeric' => 'Harus angka',
-                        'max_length' => 'Maksimal 20 karakter'
-                ]
-                ],
-               
-                'nik' => [
-                    'rules' => 'required|numeric|max_length[20]',
-                    'errors' => [
-                        'required' => 'Harus diisi',
-                        'numeric' => 'Harus angka',
-                        'max_length' => 'Maksimal 20 karakter'
-                ]
-                ],
-                'last_edu' => [
-                    'rules' => 'required|max_length[20]',
-                    'errors' => [
-                        'required' => 'Harus diisi',
-                        'max_length' => 'Maksimal 20 karakter'
-                ]
-                ],
-                'no_telp' => [
-                    'rules' => 'required|numeric|max_length[15]',
-                    'errors' => [
-                        'required' => 'Harus diisi',
-                        'numeric' => 'Harus angka',
-                        'max_length' => 'Maksimal 15 karakter'
-                ]
-                ],
-                'email' => [
-                    'rules' => 'required|valid_email|max_length[50]',
-                    'errors' => [
-                        'required' => 'Harus diisi',
-                        'valid_email' => 'Email tidak valid',
-                        'max_length' => 'Maksimal 50 karakter'
-                ]
-                ],
-                'adress' => [
+                'pos_desc' => [
                     'rules' => 'required|max_length[100]',
                     'errors' => [
-                        'required' => 'Harus diisi',
+                        'required' => 'Harus Diisi',
                         'max_length' => 'Maksimal 100 karakter'
                 ]
-                ], 
-                
-           
+                ],
+                           
         ])){ 
      $validation= \Config\Services::validation();
      return redirect()->to('/position/create')->withInput()->with('validation',$validation);
@@ -184,6 +87,9 @@ class Position extends Controller
     public function edit($id)
     {
         $model = new PositionModel();
+        session();
+        $data['validation']= \Config\Services::validation();
+
         $data['data'] = $model->getData($id)->getRow();
         $data['title']= 'Home | Master Position';
         echo view('/position/edit',$data);
@@ -191,6 +97,42 @@ class Position extends Controller
 
     public function update()
     {
+        $id = $this->request->getPost('id');
+
+        if($this->request->getPost('pos_nm_old') == $this->request->getPost('pos_nm')){
+            $rule= 'required|max_length[20]';
+        }else{
+            $rule= 'required|is_unique[position.position_name]|max_length[20]';
+        }
+
+        if(!$this->validate([
+            'pos_nm' => [
+                'rules' => $rule,
+                'errors' => [
+                    'required' => 'Harus diisi',
+                    'max_length' => 'Maksimal 20 karakter',
+                    'is_unique' => 'Nama posisi sudah ada'
+                ]
+                ],
+                'level' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Harus Pilih'
+                ]
+                ],
+                'pos_desc' => [
+                    'rules' => 'required|max_length[100]',
+                    'errors' => [
+                        'required' => 'Harus Diisi',
+                        'max_length' => 'Maksimal 100 karakter'
+                ]
+                ],
+                           
+        ])){ 
+     $validation= \Config\Services::validation();
+     return redirect()->to('/position/edit/'.$id)->withInput()->with('validation',$validation);
+        }
+
         $model = new PositionModel();
         $id = $this->request->getPost('id');
         $data = array(

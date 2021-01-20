@@ -79,11 +79,15 @@ public function getLastNumber($now)
     {
         if($div === false){
         return $this->db->table('employe')
+        ->join('user','user.nip=employe.nip')
+        ->where('user.allow', 'Y')
         ->orderby('employe.nip','DESC')
         ->get()->getResultArray();
 
         }else{
         return $this->db->table('employe')
+        ->join('user','user.nip=employe.nip')
+        ->where('user.allow', 'Y')
         ->where('employe.division', $div)
         ->orderby('employe.nip','DESC')
         ->get()->getResultArray();

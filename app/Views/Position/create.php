@@ -41,24 +41,33 @@
                                         <!-- text input -->
                                         <div class="form-group"> 
                                             <label>Position Name</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="pos_nm">
+                                            <input type="text" class="form-control <?= ($validation->hasError('pos_nm')) ? 'is-invalid' : '' ?>" value="<?= old('pos_nm'); ?>" placeholder="Enter ..." name="pos_nm">
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('pos_nm'); ?>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Position Level</label>
-                                            <select class="form-control" name="level" >
+                                            <select class="form-control <?= ($validation->hasError('level')) ? 'is-invalid' : '' ?>" name="level" >
                         <option value="" disabled selected>- Choose Level -</option>
                         <?php for($i = 1; $i <= 3; $i++): ?>
-                            <option value="<?= $i ?>"><?= $i; ?></option>
+                            <option value="<?= $i ?>" <?= (old('level')== $i) ? 'selected' : '' ?>><?= $i; ?></option>
                         <?php endfor; ?>
-                    </select>                                        
+                    </select>           
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('level'); ?>
+                                            </div>                             
                                  </div>
                                     </div>
                                     <div class="col-sm-6">
                                     <div class="form-group">
                                             <label>Describe</label>
-                                            <textarea class="form-control" rows="5" placeholder="Enter ..." type="text" name="pos_desc" required></textarea>
+                                            <textarea class="form-control <?= ($validation->hasError('pos_desc')) ? 'is-invalid' : '' ?>"  rows="5" placeholder="Enter ..." type="text" name="pos_desc"><?= old('pos_desc'); ?></textarea>
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('pos_desc'); ?>
+                                            </div>
                                             </div>
                                     </div>
                                 </div>

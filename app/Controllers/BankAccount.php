@@ -35,6 +35,9 @@ class BankAccount extends Controller
 
     public function create()
     {
+        session();
+        $data['validation']= \Config\Services::validation();
+
         $data['title']= 'Home | Master Bank Account';
         echo view('/bankAccount/create',$data);
         
@@ -42,6 +45,29 @@ class BankAccount extends Controller
  
     public function save()
     {
+        if(!$this->validate([
+            'bank_cd' => [
+                'rules' => 'required|max_length[10]|is_unique[bank_account.bank_code]',
+                'errors' => [
+                    'required' => 'Harus diisi',
+                    'max_length' => 'Maksimal 10 karakter',
+                    'is_unique' => 'Bank Code sudah ada'
+                ]
+                ],
+                'bank_nm' => [
+                    'rules' => 'required|max_length[20]|is_unique[bank_account.bank_name]',
+                    'errors' => [
+                        'required' => 'Harus Diisi',
+                        'max_length' => 'Maksimal 20 karakter',
+                        'is_unique' => 'Bank Name sudah ada'
+                ]
+                ],
+                           
+        ])){ 
+     $validation= \Config\Services::validation();
+     return redirect()->to('/bankAccount/create')->withInput()->with('validation',$validation);
+        }
+
         $model = new BankAccountModel();
         $data = array(
             'bank_code'  => $this->request->getPost('bank_cd'),
@@ -53,6 +79,9 @@ class BankAccount extends Controller
 
     public function edit($id)
     {
+        session();
+        $data['validation']= \Config\Services::validation();
+
         $model = new BankAccountModel();
         $data['data'] = $model->getData($id)->getRow();
         $data['title']= 'Home | Master Bank Account';
@@ -61,6 +90,29 @@ class BankAccount extends Controller
 
     public function update()
     {
+        $id = $this->request->getPost('bank_cd');
+        
+        if($this->request->getPost('bank_nm_old') == $this->request->getPost('bank_nm')){
+            $rule= 'required|max_length[20]';
+        }else{
+            $rule= 'required|is_unique[bank_account.bank_name]|max_length[20]';
+        }
+
+        if(!$this->validate([
+                'bank_nm' => [
+                    'rules' => $rule,
+                    'errors' => [
+                        'required' => 'Harus Diisi',
+                        'max_length' => 'Maksimal 20 karakter',
+                        'is_unique' => 'Bank Name sudah ada'
+                ]
+                ],
+                           
+        ])){ 
+     $validation= \Config\Services::validation();
+     return redirect()->to('/bankAccount/edit/'.$id)->withInput()->with('validation',$validation);
+        }
+
         $model = new BankAccountModel();
         $id = $this->request->getPost('bank_cd');
         $data = array(

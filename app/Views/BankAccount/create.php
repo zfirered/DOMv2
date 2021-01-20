@@ -41,13 +41,19 @@
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>Bank Code</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="bank_cd" required>
+                                            <input type="text" class="form-control <?= ($validation->hasError('bank_cd')) ? 'is-invalid' : '' ?>" value="<?= old('bank_cd'); ?>" placeholder="Enter ..." name="bank_cd">
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('bank_cd'); ?>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                     <div class="form-group">
                                             <label>Bank Name</label>
-                                            <textarea class="form-control" rows="5" placeholder="Enter ..." type="text" name="bank_nm" required></textarea>
+                                            <textarea class="form-control <?= ($validation->hasError('bank_nm')) ? 'is-invalid' : '' ?>" rows="5" placeholder="Enter ..." type="text" name="bank_nm" ><?= old('bank_nm'); ?></textarea>
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('bank_nm'); ?>
+                                            </div>
                                             </div>
                                     </div>
                                 </div>
