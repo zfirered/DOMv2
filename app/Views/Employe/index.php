@@ -244,7 +244,8 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <!-- /.Modal -->
+                                                        </div>
+                                                        <!-- /.Modal -->
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -353,13 +354,7 @@
                                                                             <input type="text" class="form-control" value="<?= $row['insurance']; ?>" readonly>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-sm-6">
-                                                                        <!-- text input -->
-                                                                        <div class="form-group">
-                                                                            <label>Insurance</label>
-                                                                            <input type="text" class="form-control" value="<?= $row['insurance']; ?>" readonly>
-                                                                        </div>
-                                                                    </div>
+
                                                                     <div class="col-sm-6">
                                                                         <!-- text input -->
                                                                         <div class="form-group">
@@ -391,138 +386,32 @@
                                                                     <div class="col-sm-6">
                                                                         <!-- text input -->
                                                                         <div class="form-group">
+                                                                            <label>Right to Leave</label>
+                                                                            <input type="text" class="form-control" value="<?= $row['right_to_leave']; ?>" readonly>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <!-- text input -->
+                                                                        <div class="form-group">
                                                                             <label>Address</label>
                                                                             <textarea class="form-control" cols="5" rows="5" readonly><?= $row['address']; ?></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-                                                                <!-- isi detail -->
-                                                                <div class="container">
-                                                                    <div class="card-body">
-                                                                        <div class="card-head">
-                                                                            <div class="card card-widget widget-user">
-                                                                                <div class="widget-user-head-mod bg-info-mod">
-                                                                                    <h3 class="widget-user-username"><?= $row['nip']; ?></h3>
-                                                                                    <h5 class="widget-user-desc"><?= $row['first_name']; ?> <?= $row['last_name']; ?></h4>
-                                                                                </div>
-                                                                                <div class="widget-user-foto">
-                                                                                    <img class="img-user" src="<?= base_url() ?>/img/<?= $row['foto']; ?>" alt="">
-
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-
-                                                                            <div class="col-sm-6">
-                                                                                <!-- text input -->
-                                                                                <div class="form-group">
-                                                                                    <label>Division</label>
-                                                                                    <input type="text" class="form-control" value="<?= $row['division_name']; ?>" readonly>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <!-- text input -->
-                                                                                <div class="form-group">
-                                                                                    <label>Position</label>
-                                                                                    <input type="text" class="form-control" value="<?= $row['position_name']; ?>" readonly>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <!-- text input -->
-                                                                                <div class="form-group">
-                                                                                    <label>Status</label>
-                                                                                    <input type="text" class="form-control" value="<?= $row['status_name']; ?>" readonly>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-sm-6">
-                                                                                <!-- text input -->
-                                                                                <div class="form-group">
-                                                                                    <label>Bank Rekening</label>
-                                                                                    <input type="text" class="form-control" value="<?= $row['bank_name']; ?> - <?= $row['bank_no']; ?> An. <?= $row['bank_account']; ?>" readonly>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <!-- text input -->
-                                                                                <div class="form-group">
-                                                                                    <label>BPJS Kesehatan</label>
-                                                                                    <input type="text" class="form-control" value="<?= $row['bpjs_ks']; ?>" readonly>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <!-- text input -->
-                                                                                <div class="form-group">
-                                                                                    <label>BPJS Ketenagakerjaan</label>
-                                                                                    <input type="text" class="form-control" value="<?= $row['bpjs_tk']; ?>" readonly>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <!-- text input -->
-                                                                                <div class="form-group">
-                                                                                    <label>Insurance</label>
-                                                                                    <input type="text" class="form-control" value="<?= $row['insurance']; ?>" readonly>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-sm-6">
-                                                                                <!-- text input -->
-                                                                                <div class="form-group">
-                                                                                    <label>NIK KTP</label>
-                                                                                    <input type="text" class="form-control" value="<?= $row['ktp']; ?>" readonly>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <!-- text input -->
-                                                                                <div class="form-group">
-                                                                                    <label>Phone Number</label>
-                                                                                    <input type="text" class="form-control" value="<?= $row['no_telp']; ?>" readonly>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <!-- text input -->
-                                                                                <div class="form-group">
-                                                                                    <label>Email Address</label>
-                                                                                    <input type="text" class="form-control" value="<?= $row['email']; ?>" readonly>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <!-- text input -->
-                                                                                <div class="form-group">
-                                                                                    <label>Last Education</label>
-                                                                                    <input type="text" class="form-control" value="<?= $row['education']; ?>" readonly>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <!-- text input -->
-                                                                                <div class="form-group">
-                                                                                    <label>Right to Leave</label>
-                                                                                    <input type="text" class="form-control" value="<?= $row['right_to_leave']; ?>" readonly>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <!-- text input -->
-                                                                                <div class="form-group">
-                                                                                    <label>Address</label>
-                                                                                    <textarea class="form-control" cols="5" rows="5" readonly><?= $row['address']; ?></textarea>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <div class="modal-footer-info">
-                                                                        <span class="users-list-name">Join Date: <?= date('d F Y', strtotime($row['join_date'])); ?></span>
-
-                                                                    </div>
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></a>
-                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                        <div class="modal-footer">
+                                                            <div class="modal-footer-info">
+                                                                <span class="users-list-name">Join Date: <?= date('d F Y', strtotime($row['join_date'])); ?></span>
 
-                                                <?php endforeach; ?>
+                                                            </div>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        <?php endforeach; ?>
                                     </ul>
                                     <!-- /.users-list -->
                                 </div>

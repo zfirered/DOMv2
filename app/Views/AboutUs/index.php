@@ -38,13 +38,13 @@
                                 </div>
                                 <div class="card-body">
                                     <!-- TABLE DATA PEGAWAI -->
-                                    <img src="img/<?= $data['logo']; ?>" alt="" class=logo>
+                                    <img src="img-about_us/<?= $data['logo']; ?>" alt="" class=logo>
                                     <br>
                                     <br>
                                     <h4>
                                         <i class="fas fa-globe"></i> <?= $data['naper']; ?>
                                     </h4>
-                                    <i class="fas fa-address-card"></i> Alamat Kantor: <?= $data['alamatkantor']; ?>
+                                    <i class="fas fa-address-card"></i> Alamat Kantor: <?= $data['alamatKantor']; ?>
                                     <br>
                                     <i class="fas fa-phone"></i> Nomor Telepon: <?= $data['notelp']; ?>
                                     <br>

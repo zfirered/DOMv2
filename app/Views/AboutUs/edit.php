@@ -80,7 +80,7 @@
                                                     <!-- textarea -->
                                                     <div class="form-group">
                                                         <label>Alamat Kantor</label>
-                                                        <input type="text" class="form-control" placeholder="Enter ..." name="alamatkantor" value="<?= $data['alamatkantor']; ?>" required></textarea>
+                                                        <input type="text" class="form-control" placeholder="Enter ..." name="alamatkantor" value="<?= $data['alamatKantor']; ?>" required></textarea>
                                                     </div>
                                                 </div>
 
@@ -95,7 +95,7 @@
                                                     <div class="row">
 
                                                         <div class="col-sm-8">
-                                                            <img src="/img/<?= ($data['logo']) ? $data['logo'] : 'placeholder.jpg'; ?>" alt="" id="gambar" width="350px" height="220px">
+                                                            <img src="/img-about_us/<?= ($data['logo']) ? $data['logo'] : 'placeholder.jpg'; ?>" alt="" id="gambar" width="350px" height="220px">
                                                         </div>
                                                     </div>
                                                 </div>

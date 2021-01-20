@@ -45,10 +45,10 @@ class aboutus extends Controller
         } else {
 
             if ($dataLama['logo'] != $default_img) {
-                unlink('img/' . $dataLama['logo']);
+                unlink('img-about_us/' . $dataLama['logo']);
             }
 
-            $cek_img->move(ROOTPATH . 'public/img');
+            $cek_img->move(ROOTPATH . 'public/img-about_us');
             $file = ['gambar' => $cek_img->getName()];
         }
 

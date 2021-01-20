@@ -34,7 +34,7 @@ class Announcement extends Controller
             $file = $default_img;
         } else {
 
-            $cek_img->move(ROOTPATH . 'public/img');
+            $cek_img->move(ROOTPATH . 'public/img-announcement');
             $file = ['gambar' => $cek_img->getName()];
         }
 
@@ -42,6 +42,8 @@ class Announcement extends Controller
             'title'  => $this->request->getPost('title'),
             'body'  => $this->request->getPost('body'),
             'thumbnail'  => $file,
+            'created_at'  => date('Y-m-d H:i:s'),
+
         );
         $model->saveAnnouncement($data);
         return redirect()->to('/announcement');
@@ -67,15 +69,18 @@ class Announcement extends Controller
             $file = $img_old;
         } else {
 
-            $cek_img->move(ROOTPATH . 'public/img');
+            $cek_img->move(ROOTPATH . 'public/img-announcement');
             $file = ['gambar' => $cek_img->getName()];
-            unlink('../public/img/' . $img_old);
+            unlink('../public/img-announcement/' . $img_old);
         }
 
         $id = $this->request->getPost('id');
         $data = array(
             'title'  => $this->request->getPost('title'),
             'body'  => $this->request->getPost('body'),
+            'thumbnail'  => $file,
+            'updated_at'  => date('Y-m-d H:i:s'),
+
         );
         $model->updateAnnouncement($data, $id);
         return redirect()->to('/announcement');
@@ -84,6 +89,10 @@ class Announcement extends Controller
     public function delete($id)
     {
         $model = new AnnouncementModel();
+
+        $data = $model->getData($id)->getRow();
+        unlink('../public/img-announcement/' . $data->thumbnail);
+
         $model->deleteAnnouncement($id);
         return redirect()->to('/announcement');
     }

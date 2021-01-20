@@ -9,6 +9,8 @@ use App\Models\PositionModel;
 use App\Models\EmployestatusModel;
 use App\Models\BankAccountModel;
 use App\Models\UsersModel;
+use App\Models\AboutUsModel;
+
 
 class Employe extends Controller
 {
@@ -34,11 +36,14 @@ class Employe extends Controller
 
         $model = new EmployeModel();
         $model2 = new DivisiModel();
+        $model3 = new AboutUsModel();
+
         $div = $this->request->getPost('div');
         $id = $this->request->getPost('div');
 
         $data['data'] = $model->getDataPrint($div);
         $data['divisi'] = $model2->getData($id)->getRow();
+        $data['about_us'] = $model3->getAboutUs();
         $data['bulan'] = month(date('m'));
         $data['tahun'] = date('Y');
 
@@ -232,9 +237,6 @@ class Employe extends Controller
 
             $cek_img->move(ROOTPATH . 'public/img', $name);
             $file = $name;
-
-            $cek_img->move(ROOTPATH . 'public/img');
-            $file = ['gambar' => $cek_img->getName()];
         }
 
         $data = array(
@@ -443,7 +445,6 @@ class Employe extends Controller
         $cek_img = $this->request->getFile('foto');
         $name = $this->request->getPost('nip') . "-profil.jpg";
 
-
         if ($cek_img == "") {
 
             $file = $img_old;
@@ -453,6 +454,7 @@ class Employe extends Controller
             $cek_img->move(ROOTPATH . 'public/img', $name);
             $file = $name;
         }
+
 
         $id = $this->request->getPost('nip');
         $data = array(

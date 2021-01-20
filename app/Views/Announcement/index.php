@@ -55,7 +55,7 @@
                                                 <tr>
                                                     <th scope=><?= $i++ ?>.</th>
                                                     <td>
-                                                        <img src="<?= base_url() ?>/img/<?= $row['thumbnail']; ?>" alt="" width="50px" height="50px">
+                                                        <img src="<?= base_url() ?>/img-announcement/<?= $row['thumbnail']; ?>" alt="" width="50px" height="50px">
                                                     </td>
                                                     <td><?= $row['title']; ?>
                                                     <td><?= $row['body']; ?></td>
@@ -86,7 +86,7 @@
                                                                                         <h5 class="widget-user-desc"><?= $row['title']; ?></h4>
                                                                                     </div>
                                                                                     <div class="widget-user-foto">
-                                                                                        <img class="img-user" src="<?= base_url() ?>/img/<?= $row['thumbnail']; ?>" alt="">
+                                                                                        <img class="img-user" src="<?= base_url() ?>/img-announcement/<?= $row['thumbnail']; ?>" alt="">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -142,7 +142,7 @@
                                         <?php
                                         foreach ($latest as $row) : ?>
                                             <li>
-                                                <img src="<?= base_url() ?>/img/<?= $row['thumbnail']; ?>" alt="User Image">
+                                                <img src="<?= base_url() ?>/img-announcement/<?= $row['thumbnail']; ?>" alt="User Image">
                                                 <a href=# class="users-list-name" data-toggle="modal" data-target="#staticBackdrop<?= $a++ ?>"><?= $row['title']; ?></a>
                                             </li>
                                             <!-- /.detail latest -->
@@ -165,7 +165,7 @@
                                                                             <h5 class="widget-user-desc"><?= $row['title']; ?></h5>
                                                                         </div>
                                                                         <div class="widget-user-foto">
-                                                                            <img class="img-user" src="<?= base_url() ?>/img/<?= $row['thumbnail']; ?>" alt="">
+                                                                            <img class="img-user" src="<?= base_url() ?>/img-announcement/<?= $row['thumbnail']; ?>" alt="">
                                                                         </div>
                                                                     </div>
                                                                 </div>

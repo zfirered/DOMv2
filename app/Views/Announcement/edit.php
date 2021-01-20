@@ -58,7 +58,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-8">
-                                                    <img src="<?= base_url() ?>/img/<?= $data->thumbnail; ?>" alt="" id="gambar" width="350px" height="220px">
+                                                    <img src="<?= base_url() ?>/img-announcement/<?= $data->thumbnail; ?>" alt="" id="gambar" width="350px" height="220px">
                                                 </div>
                                             </div>
                                         </div>
