@@ -40,15 +40,6 @@ class UserAttendance extends BaseController
 
         $now = "$tahun-$bulan-01";
 
-<<<<<<< HEAD
-        $id="202101160001";
-        $data['id']= $id;
-        $data['bulan']= $bulan;
-        $data['tahun']= $tahun;
-        $data['hari']= date_now($now);
-        $data['all_bulan']= month();
-        $data['absen']= $model->get_absen($id, $bulan, $tahun);
-=======
         $id = session()->get('nip');
         $data['id'] = $id;
         $data['bulan'] = $bulan;
@@ -56,7 +47,6 @@ class UserAttendance extends BaseController
         $data['hari'] = date_now($now);
         $data['all_bulan'] = month();
         $data['absen'] = $model->get_absen($id, $bulan, $tahun);
->>>>>>> b94fe95460567d48bd669da9e7cf295e3a9c179c
 
         return $data;
     }
