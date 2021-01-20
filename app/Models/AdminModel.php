@@ -1,17 +1,20 @@
-<?php namespace App\Models;
+<?php
+
+namespace App\Models;
+
 use CodeIgniter\Model;
- 
+
 class AdminModel extends Model
 {
     protected $table = 'admin';
-     
+
     public function getData($id = false)
     {
-        if($id === false){
+        if ($id === false) {
             return $this->findAll();
-        }else{
+        } else {
             return $this->getWhere(['id_admin' => $id]);
-        }   
+        }
     }
     public function saveAdmin($data)
     {
@@ -27,7 +30,5 @@ class AdminModel extends Model
     {
         $query = $this->db->table($this->table)->delete(array('id_admin' => $id));
         return $query;
-    } 
-
- 
+    }
 }

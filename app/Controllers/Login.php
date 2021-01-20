@@ -2,9 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Models\EmployeModel;
 use CodeIgniter\Controller;
-use App\Models\UsersModel;
+use App\Models\AdminModel;
 
 class Login extends Controller
 {
@@ -17,24 +16,19 @@ class Login extends Controller
     public function auth()
     {
         $session = session();
-        $model = new UsersModel();
-        $nip = $this->request->getVar('nip');
-        $password = $this->request->getVar('password');
-        $data = $model->where('nip', $nip)->first();
-
-        $m_employe = new EmployeModel();
-        $employe = $m_employe->where('nip', $nip)->first();
+        $model = new AdminModel();
+        $username = $this->request->getVar('admin_name');
+        $password = $this->request->getVar('admin_password');
+        $data = $model->where('admin_name', $username)->first();
 
         if ($data) {
-            $pass = $data['password'];
+            $pass = $data['admin_password'];
             // $verify_pass = password_verify($password, $pass);
             $verify_pass = ($password == $pass) ? true : false;
             if ($verify_pass) {
                 $ses_data = [
-                    'id'   => $data['id'],
-                    'nama'  => $employe['first_name'] . " " . $employe['last_name'],
-                    'foto' => $employe['foto'],
-                    'nip'  => $data['nip'],
+                    'id_admin'   => $data['id_admin'],
+                    'admin_name'  => $data['admin_name'],
                     'logged_in'     => TRUE
                 ];
                 $session->set($ses_data);
@@ -44,7 +38,7 @@ class Login extends Controller
                 return redirect()->to('/login');
             }
         } else {
-            $session->setFlashdata('msg', 'Nip not Found');
+            $session->setFlashdata('msg', 'Username not Found');
             return redirect()->to('/login');
         }
     }
