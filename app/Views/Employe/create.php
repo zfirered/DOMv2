@@ -33,7 +33,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form class="form-horizontal" action="/employe/save" method="post" accept-charset="utf-8" enctype="multipart/form-data" >
+                    <form class="form-horizontal" action="/employe/save" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="form">
                                 <div class="row">
@@ -43,7 +43,7 @@
                                             <label>NIP</label>
                                             <input type="text" class="form-control" placeholder="Enter ..." name="nip" value="<?= $nip; ?>" readonly>
                                         </div>
-                                    </div> 
+                                    </div>
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
@@ -53,7 +53,7 @@
                                             <?= $validation->getError('first_nm'); ?>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
@@ -63,7 +63,19 @@
                                             <?= $validation->getError('last_nm'); ?>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Division</label>
+                                        <select class="form-control" name="div" required>
+                                            <option value="">- Choose Division -</option>
+
+                                            <?php
+                                            foreach ($data as $row) : ?>
+                                                <option value="<?php echo $row['id']; ?>"> <?php echo $row['division_name']; ?> </option>
+
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                     <div class="col-sm-6">
                                         <label >Division*</label>
                                          <select class="form-control <?= ($validation->hasError('div')) ? 'is-invalid' : '' ?>" name="div">
@@ -126,12 +138,12 @@
                                     </div> 
                                 </div>
                             </div>
-                         </div>
-                    </div>
+                        </div>
+                </div>
                 <div class="card card-info">
                     <div class="card-header">
                         <h3 class="card-title">Data Account</h3>
-                    </div>      
+                    </div>
                     <div class="card-body">
                             <div class="form">
                                 <div class="row">          
@@ -208,8 +220,8 @@
 
                 <div class="card card-info">
                     <div class="card-header">
-                    <h3 class="card-title">Data Profil</h3>
-                    </div>      
+                        <h3 class="card-title">Data Profil</h3>
+                    </div>
                     <div class="card-body">
                             <div class="form">
                                 <div class="row"> 
@@ -282,30 +294,73 @@
                                         <img  src="<?= base_url() ?>/img/placeholder.jpg"  alt="" id="gambar"  width="350px" height="220px" >
                                     </div>
                                 </div>
+                                <div class="col-sm-6">
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Last Education</label>
+                                        <input type="text" class="form-control" placeholder="Enter ..." name="last_edu" required>
                                     </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <input type="text" class="form-control" placeholder="Enter ..." name="no_telp" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>Email Adress</label>
+                                        <input type="text" class="form-control" placeholder="Enter ..." name="email" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <!-- textarea -->
+                                    <div class="form-group">
+                                        <label>Adress</label>
+                                        <textarea class="form-control" rows="11" placeholder="Enter ..." name="adress" required></textarea>
+                                    </div>
+                                </div>
 
-                                    
-                                </div>
-                                </div>
-                                </div>
-                                
-                                
-                                <!-- /.card-body -->
-                                <div class="card-footer">
-                                <div class="float-right">
-                                <button type="submit" class="btn btn-info">Save</button>
-                                    <a href="/employe" type="submit" class="btn btn-danger">Back</a> 
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Foto</label>
+                                        <div class="custom-file">
+                                            <input type="file" id="file" name="foto" required>
+                                            <button id="pilih" type="" style="display: none;"></button>
+                                        </div>
                                     </div>
+                                    <div class="row">
+
+                                        <div class="col-sm-8">
+                                            <img src="<?= base_url() ?>/img/placeholder.jpg" alt="" id="gambar" width="350px" height="220px">
+                                        </div>
                                     </div>
-                                <!-- /.card-footer -->
+                                </div>
+
+
                             </div>
                         </div>
-                    </form>
+                    </div>
+
+
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <div class="float-right">
+                            <button type="submit" class="btn btn-info">Save</button>
+                            <a href="/employe" type="submit" class="btn btn-danger">Back</a>
+                        </div>
+                    </div>
+                    <!-- /.card-footer -->
                 </div>
-                <!-- /.card -->
             </div>
+            </form>
         </div>
+        <!-- /.card -->
     </div>
+</div>
+</div>
 </div>
 
 <?= $this->endSection(); ?>

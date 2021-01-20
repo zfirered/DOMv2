@@ -33,7 +33,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form class="form-horizontal" action="/employe/update" method="post" accept-charset="utf-8" enctype="multipart/form-data" >
+                    <form class="form-horizontal" action="/employe/update" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="form">
                                 <div class="row">
@@ -41,9 +41,9 @@
                                         <!-- text input -->
                                         <div class="form-group">
                                             <label>NIP</label>
-                                            <input type="text" class="form-control"  name="nip" value="<?= $data->nip; ?>" readonly>
+                                            <input type="text" class="form-control" name="nip" value="<?= $data->nip; ?>" readonly>
                                         </div>
-                                    </div> 
+                                    </div>
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
@@ -53,7 +53,7 @@
                                             <?= $validation->getError('first_nm'); ?>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                     <div class="col-sm-6">
                                         <!-- text input -->
                                         <div class="form-group">
@@ -63,7 +63,19 @@
                                             <?= $validation->getError('last_nm'); ?>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Division</label>
+                                        <select class="form-control" name="div" required>
+                                            <option value="<?= $data->division; ?>"><?= $data->division_name; ?></option>
+
+                                            <?php
+                                            foreach ($data1 as $row) : ?>
+                                                <option value="<?php echo $row['id']; ?>"> <?php echo $row['division_name']; ?> </option>
+
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                     <div class="col-sm-6">
                                         <label >Division</label>
                                          <select class="form-control" name="div" required>
@@ -117,12 +129,12 @@
                                     </div> 
                                 </div>
                             </div>
-                         </div>
-                    </div>
+                        </div>
+                </div>
                 <div class="card card-info">
                     <div class="card-header">
                         <h3 class="card-title">Data Account</h3>
-                    </div>      
+                    </div>
                     <div class="card-body">
                             <div class="form">
                                 <div class="row">          
@@ -196,8 +208,8 @@
 
                 <div class="card card-info">
                     <div class="card-header">
-                    <h3 class="card-title">Data Profil</h3>
-                    </div>      
+                        <h3 class="card-title">Data Profil</h3>
+                    </div>
                     <div class="card-body">
                             <div class="form">
                                 <div class="row"> 
@@ -250,49 +262,40 @@
                                             <?= $validation->getError('adress'); ?>
                                             </div> 
                                         </div>
-                                    </div>           
+                                    </div>
+                                    <div class="row">
 
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Foto</label>
-                                            <div class="custom-file">
-                                                <input type="file"  id="file" name="foto" >
-                                                <button id="pilih" type="" style="display: none;"></button>
-                                                <input type="text" name="foto_old" value="<?= $data->foto; ?>" hidden>
-                                           </div>
+                                        <div class="col-sm-8">
+                                            <img src="<?= base_url() ?>/img/<?= $data->foto; ?>" alt="" id="gambar" width="350px" height="220px">
                                         </div>
-                                        <div class="row"> 
-                                    
-                                    <div class="col-sm-8">
-                                        <img src="<?= base_url() ?>/img/<?= $data->foto; ?>"  alt="" id="gambar" width="350px" height="220px" >
                                     </div>
                                 </div>
-                                    </div>
 
-                                    </div></div>
-                                </div>
-                                
-                                
-                                <!-- /.card-body -->
-                                <div class="card-footer">
-                                <div class="modal-footer-info" >
-                                                       <span class="users-list-name">Join Date: <?= date('d F Y', strtotime($data->join_date)); ?></span>
-                                                              
-                                                              </div>
-                                <div class="float-right">
-                                <button type="submit" class="btn btn-info">Update</button>
-                                    <a href="/employe" type="submit" class="btn btn-danger">Back</a> 
-                                    </div>
-                                    </div>
-                                <!-- /.card-footer -->
                             </div>
                         </div>
-                    </form>
+                    </div>
+
+
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                        <div class="modal-footer-info">
+                            <span class="users-list-name">Join Date: <?= date('d F Y', strtotime($data->join_date)); ?></span>
+
+                        </div>
+                        <div class="float-right">
+                            <button type="submit" class="btn btn-info">Update</button>
+                            <a href="/employe" type="submit" class="btn btn-danger">Back</a>
+                        </div>
+                    </div>
+                    <!-- /.card-footer -->
                 </div>
-                <!-- /.card -->
             </div>
+            </form>
         </div>
+        <!-- /.card -->
     </div>
+</div>
+</div>
 </div>
 
 <?= $this->endSection(); ?>

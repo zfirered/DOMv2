@@ -51,22 +51,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php 
-                                                        $i=1;
-                                                        $a=1;
-                                                        $b=1;
-                                                     foreach($data as $row):?>
-                                            <tr>
-                                                <th scope=><?= $i++ ?>.</th>
-                                                <td><?= $row['position_name'];?></td>
-                                                <td><?= $row['position_desc'];?></td>
-                                                <td>
-                                                
-                                                    <!-- Button trigger modal -->
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop<?= $a++ ?>">
-                                                        Detail
-                                                    </button>
-
+                                            <?php
+                                            $i = 1;
+                                            $a = 1;
+                                            $b = 1;
+                                            foreach ($data as $row) : ?>
+                                                <tr>
+                                                    <th scope=><?= $i++ ?>.</th>
+                                                    <td><?= $row['position_name']; ?></td>
+                                                    <td><?= $row['position_desc']; ?></td>
+                                                    <td>
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="staticBackdrop<?= $b++ ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
@@ -87,28 +81,27 @@
                                                                 <a href="position/edit/<?= $row['id'];?>" class="btn btn-primary">Edit</a>
                                                                 <a href="position/delete/<?= $row['id'];?>" class="btn btn-danger">Delete</a>
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></a>
-                                                                 
+                                                                
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <!-- /.Modal -->
-                                                </td>
-                                            </tr>
+                                                        <!-- /.Modal -->
+                                                    </td>
+                                                </tr>
                                             <?php endforeach; ?>
-                                           
+
                                         </tbody>
                                     </table>
                                     <!-- /.TABLE DATA PEGAWAI -->
                                 </div>
                                 <div class="card-footer clearfix">
-                                     <!-- /.ISI FOOTER TABEL -->
-                                    
+                                    <!-- /.ISI FOOTER TABEL -->
+
                                 </div>
                             </div>
                             
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

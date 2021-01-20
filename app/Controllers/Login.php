@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\EmployeModel;
 use CodeIgniter\Controller;
 use App\Models\UsersModel;
 
@@ -20,6 +21,10 @@ class Login extends Controller
         $nip = $this->request->getVar('nip');
         $password = $this->request->getVar('password');
         $data = $model->where('nip', $nip)->first();
+
+        $m_employe = new EmployeModel();
+        $employe = $m_employe->where('nip', $nip)->first();
+
         if ($data) {
             $pass = $data['password'];
             // $verify_pass = password_verify($password, $pass);
@@ -27,6 +32,8 @@ class Login extends Controller
             if ($verify_pass) {
                 $ses_data = [
                     'id'   => $data['id'],
+                    'nama'  => $employe['first_name'] . " " . $employe['last_name'],
+                    'foto' => $employe['foto'],
                     'nip'  => $data['nip'],
                     'logged_in'     => TRUE
                 ];

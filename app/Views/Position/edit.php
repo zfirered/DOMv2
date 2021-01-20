@@ -33,7 +33,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form class="form-horizontal" action="/position/update" method="post" >
+                    <form class="form-horizontal" action="/position/update" method="post">
                         <div class="card-body">
                             <div class="form">
                                 <div class="row">
@@ -70,24 +70,24 @@
                                             </div>
                                     </div>
                                 </div>
-                                </div>
-                                </div>
-                                
-                                <!-- /.card-body -->
-                                <div class="card-footer" >
-                                <div class="float-right">
-                                <button type="submit" class="btn btn-info">Update</button>
-                                    <a href="/position" type="submit" class="btn btn-danger">Back</a> 
-                                    </div>
-                                </div>
-                                <!-- /.card-footer -->
                             </div>
                         </div>
-                    </form>
+
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-info">Update</button>
+                                <a href="/position" type="submit" class="btn btn-danger">Back</a>
+                            </div>
+                        </div>
+                        <!-- /.card-footer -->
                 </div>
-                <!-- /.card -->
             </div>
+            </form>
         </div>
+        <!-- /.card -->
     </div>
+</div>
+</div>
 </div>
 <?= $this->endSection(); ?>

@@ -1,16 +1,20 @@
-<?php namespace App\Controllers;
- 
+<?php
+
+namespace App\Controllers;
+
 use CodeIgniter\Controller;
 use App\Models\UsersModel;
- 
+use Config\Format;
+
 class Users extends Controller
 {
     public function index()
     {
+
         $model = new UsersModel();
         $data['data'] = $model->getData();
-        $data['title']= 'Home | Data Users';
-        echo view('/users/index',$data);
+        $data['title'] = 'Home | Data Users';
+        echo view('/users/index', $data);
     }
 
 
@@ -37,4 +41,3 @@ class Users extends Controller
         return redirect()->to('/users');
     }
 }
- 

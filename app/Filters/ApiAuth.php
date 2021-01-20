@@ -6,14 +6,14 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
-class Auth implements FilterInterface
+class ApiAuth implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
         $uri = service('uri');
-        $byPass = ['login', 'api'];
-        if (!in_array($uri->getSegment(1), $byPass)) {
-            if (!session()->get('logged_in')) {
+        $segment = ['api'];
+        if (in_array($uri->getSegment(1), $segment) && $uri->getSegment(2) != 'login') {
+            if (!session()->get('token')) {
                 // then redirct to login page
                 return redirect()->to('/login');
             }
