@@ -1,6 +1,6 @@
 <html>
 <style>
-
+   
     .header{
 
     text-align: center;
@@ -88,7 +88,15 @@
         color: white;
         background-color: lawngreen;
     }
+    .ket_attend{
+  font-size: 13px;
+  font-style: oblique;
+width: 15%;
+}
 
+.ket_attend td{
+ border: 0px;
+}
 </style>
 <body>
     <section>
@@ -292,6 +300,23 @@
 
                                     </tr>
                                     </table>
+                                    <br><br>
+                                    <div class="ket_attend">
+                                    <table>
+                                    <tr>
+                                    <td class="td_in">&nbsp;&nbsp;-&nbsp;&nbsp;</td>
+                                    <td>:Tidak absen</td>
+                                    </tr>
+                                    <tr>
+                                    <td class="td_in_late">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>:Absen masuk telat</td>
+                                    </tr>
+                                    <tr>
+                                    <td class="td_permit">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>:Cuti/Sakit</td>
+                                    </tr>
+                                    </table>
+                                    </div>
                                     </div>
 
                                     </section>

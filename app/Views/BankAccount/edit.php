@@ -47,7 +47,11 @@
                                     <div class="col-sm-6">
                                     <div class="form-group">
                                             <label>Bank Name</label>
-                                            <textarea class="form-control" rows="5" placeholder="Enter ..." type="text" name="bank_nm" required><?= $data->bank_name; ?></textarea>
+                                            <input type="text"  name="bank_nm_old" value="<?= $data->bank_name; ?>" hidden>
+                                            <textarea class="form-control <?= ($validation->hasError('bank_nm')) ? 'is-invalid' : '' ?>" rows="5" placeholder="Enter ..." type="text" name="bank_nm"><?= $data->bank_name; ?></textarea>
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('bank_nm'); ?>
+                                            </div>
                                             </div>
                                     </div>
                                 </div>

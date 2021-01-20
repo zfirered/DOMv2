@@ -229,6 +229,22 @@
 
                                     </tr>
                                     </table>
+                                    <div class="ket_attend">
+                                    <table>
+                                    <tr>
+                                    <td class="td_in">&nbsp;&nbsp;-&nbsp;&nbsp;</td>
+                                    <td>:Tidak absen</td>
+                                    </tr>
+                                    <tr>
+                                    <td class="td_in_late">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>:Absen masuk telat</td>
+                                    </tr>
+                                    <tr>
+                                    <td class="td_permit">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>:Cuti/Sakit</td>
+                                    </tr>
+                                    </table>
+                                    </div>
                                     </div>
                                     </pre>
                                    

@@ -32,30 +32,29 @@ function cekLate($hour)
 
 function cekSub($date, $nip)
 {
-    $model= new DiscSubmissionModel();
+    $model = new DiscSubmissionModel();
 
-    $cek= $model->cek_sub($nip);
-    $arr= array();
-    $i_arr=1;
-  
-  
-    foreach($cek as $i){
-        $start= $i['implementation_date_start'];
-        $end= $i['implementation_date_end'];
-        $range= range_date($start, $end);
-        
-        foreach($range as $d){
-            $arr[$i_arr++]= strftime('%Y-%m-%d', date($d));
+    $cek = $model->cek_sub($nip);
+    $arr = array();
+    $i_arr = 1;
+
+
+    foreach ($cek as $i) {
+        $start = $i['implementation_date_start'];
+        $end = $i['implementation_date_end'];
+        $range = range_date($start, $end);
+
+        foreach ($range as $d) {
+            $arr[$i_arr++] = strftime('%Y-%m-%d', date($d));
         }
-                if(array_search($date, $arr) == TRUE){
-                $data['status']= 'Y';
-                $data['sub'][]= $i['submission_for'];
-                }else{
-                    $data['status']= 'N';
-            }
- } 
- return $data;
-
+        if (array_search($date, $arr) == TRUE) {
+            $data['status'] = 'Y';
+            $data['sub'][] = $i['submission_for'];
+        } else {
+            $data['status'] = 'N';
+        }
+    }
+    return $data;
 }
 
  

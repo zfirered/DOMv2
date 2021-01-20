@@ -117,3 +117,8 @@
   display: inline-flex;
   float: right;
 }
+
+.ket_attend{
+  font-size: 13px;
+  font-style: oblique;
+}

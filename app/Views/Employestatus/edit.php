@@ -42,13 +42,20 @@
                                         <div class="form-group">
                                             <label>Status Name</label>
                                             <input type="text" name="id" value="<?= $data->id; ?>" hidden>
-                                            <input type="text" class="form-control" placeholder="Enter ..." name="stat_nm" value="<?= $data->status_name; ?>" required>
+                                            <input type="text" name="stat_nm_old" value="<?= $data->status_name; ?>" hidden>
+                                            <input type="text" class="form-control <?= ($validation->hasError('stat_nm')) ? 'is-invalid' : '' ?>" placeholder="Enter ..." name="stat_nm" value="<?= (old('stat_nm')==FALSE) ? $data->status_name : old('stat_nm') ?>">
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('stat_nm'); ?>
+                                            </div>
                                            </div>
                                     </div>
                                     <div class="col-sm-6">
                                     <div class="form-group">
                                             <label>Describe</label>
-                                            <textarea class="form-control" rows="5" placeholder="Enter ..." type="text" name="stat_desc"  required><?= $data->status_desc; ?></textarea>
+                                            <textarea class="form-control <?= ($validation->hasError('stat_desc')) ? 'is-invalid' : '' ?>" rows="5" placeholder="Enter ..." type="text" name="stat_desc"><?= (old('stat_desc')==FALSE) ? $data->status_desc : old('stat_desc') ?></textarea>
+                                            <div class="invalid-feedback">
+                                            <?= $validation->getError('stat_desc'); ?>
+                                            </div>
                                             </div>
                                     </div>
                                 </div>
