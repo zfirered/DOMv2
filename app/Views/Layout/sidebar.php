@@ -144,7 +144,7 @@
                                 <p>Data Administrator</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" hidden>
                             <a href="/userSubmission" class="nav-link <?php if ($title == 'Home | User Submission') {
                                                                             print 'active';
                                                                         } ?>">
@@ -153,7 +153,7 @@
 
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" hidden>
                             <a href="/userSubmissionOvertime" class="nav-link <?php if ($title == 'Home | User Submission Overtime') {
                                                                                     print 'active';
                                                                                 } ?>">
@@ -161,7 +161,7 @@
                                 <p>User Submission Overtime</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" hidden>
                             <a href="/userAttendance" class="nav-link <?php if ($title == 'Home | User Attendance') {
                                                                             print 'active';
                                                                         } ?>">
@@ -169,7 +169,7 @@
                                 <p>User Attendance</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" hidden>
                             <a href="/userAbsence" class="nav-link <?php if ($title == 'Home | User Absence') {
                                                                         print 'active';
                                                                     } ?>">
@@ -177,7 +177,7 @@
                                 <p>User Absence</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" hidden>
                             <a href="/userMemo" class="nav-link <?php if ($title == 'Home | User Memo') {
                                                                     print 'active';
                                                                 } ?>">
@@ -185,7 +185,7 @@
                                 <p>Memo</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" hidden>
                             <a href="/PdfController" class="nav-link <?php if ($title == 'Home | Laporan') {
                                                                             print 'active';
                                                                         } ?>">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2021 at 04:47 PM
+-- Generation Time: Jan 21, 2021 at 01:32 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -20,6 +20,75 @@ SET time_zone = "+00:00";
 --
 -- Database: `dom`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `about_us`
+--
+
+CREATE TABLE `about_us` (
+  `id` int(11) NOT NULL,
+  `naper` varchar(255) DEFAULT NULL,
+  `alamatKantor` varchar(255) DEFAULT NULL,
+  `notelp` varchar(12) DEFAULT NULL,
+  `nofax` varchar(12) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `logo` varchar(50) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `about_us`
+--
+
+INSERT INTO `about_us` (`id`, `naper`, `alamatKantor`, `notelp`, `nofax`, `email`, `website`, `logo`, `created_at`, `updated_at`) VALUES
+(1, '8 Bit', 'Jl. Jend. Sudirman No.Kav 44-46, RT.14/RW.1, 1, Bend. Hilir, Kecamatan Tanah Abang, Kota Jakarta Pusat', '0217561858', '0217561858', '8bit@gmail.com', 'www.8bit.com', 'ICON.png', NULL, '2021-01-21 02:19:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id_admin` int(11) NOT NULL,
+  `admin_name` varchar(50) NOT NULL,
+  `admin_password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `admin_name`, `admin_password`) VALUES
+(1, 'adminsatu', 'admin1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `announcement`
+--
+
+CREATE TABLE `announcement` (
+  `id` int(11) NOT NULL,
+  `title` varchar(250) DEFAULT NULL,
+  `thumbnail` varchar(250) DEFAULT NULL,
+  `body` varchar(250) DEFAULT NULL,
+  `created_by` varchar(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `announcement`
+--
+
+INSERT INTO `announcement` (`id`, `title`, `thumbnail`, `body`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'Libur Natal', 'PohonNatal.jpg', 'Memperingati hari raya Natal', NULL, '2021-01-20 17:20:08', '2021-01-20 18:56:40'),
+(6, 'Tahun Baru', 'TahunBaru.jpg', 'Memperingati hari raya tahun baru', NULL, '2021-01-20 17:41:24', '2021-01-20 18:40:31');
 
 -- --------------------------------------------------------
 
@@ -42,12 +111,7 @@ CREATE TABLE `attendance` (
 --
 
 INSERT INTO `attendance` (`id`, `nip`, `date`, `check_in`, `check_out`, `overtime_in`, `overtime_out`) VALUES
-(1, '11190002', '2020-12-07', '08:00:18', NULL, NULL, NULL),
-(2, '11190002', '2020-11-30', '22:59:26', NULL, NULL, NULL),
-(3, '11190003', '2020-12-17', NULL, '22:01:19', NULL, NULL),
-(4, '11190587', '2020-12-19', NULL, '22:28:18', NULL, NULL),
-(9, '11190002', '2021-01-11', '19:11:23', '19:11:52', '19:12:08', '19:12:25'),
-(18, '11190002', '2021-01-13', '12:07:08', '21:31:48', NULL, NULL);
+(19, '202101160001', '2021-01-18', '16:36:53', '20:07:23', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -221,7 +285,11 @@ CREATE TABLE `calendar` (
 --
 
 INSERT INTO `calendar` (`id`, `agenda`, `color`, `start`, `end`, `created_at`, `updated_at`) VALUES
-(1, 'Cuti Bersama', 'Red', '2021-01-01 17:52:56', '2021-01-01 17:52:56', '2021-01-01 17:52:56', '2021-01-01 17:52:56');
+(1, 'Cuti Bersama', 'Red', '2021-01-01 17:52:56', '2021-01-01 17:52:56', '2021-01-01 17:52:56', '2021-01-01 17:52:56'),
+(3, 'Cuti Bersama', 'Red', '2021-01-18 17:52:56', '2021-01-18 17:52:56', '2021-01-18 20:17:07', '0000-00-00 00:00:00'),
+(5, 'LIBUR', 'rgb(167, 29, 42)', '2021-01-22 09:01:00', '2021-01-22 10:01:00', '2021-01-20 18:49:28', '2021-01-20 18:49:28'),
+(6, 'Lunch', 'rgb(40, 167, 69)', '2021-01-23 08:01:00', '2021-01-23 09:01:00', '2021-01-20 18:50:15', '2021-01-20 18:50:15'),
+(7, 'Go home', 'rgb(255, 193, 7)', '2021-01-14 09:01:00', '2021-01-14 10:01:00', '2021-01-20 18:50:59', '2021-01-20 18:50:59');
 
 -- --------------------------------------------------------
 
@@ -238,9 +306,9 @@ CREATE TABLE `disc_submission` (
   `approve_date` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `implementation_date_start` timestamp NULL DEFAULT NULL,
   `implementation_date_end` timestamp NULL DEFAULT NULL,
-  `user_desc` varchar(50) DEFAULT NULL,
-  `approver_desc` varchar(50) DEFAULT NULL,
-  `attachment` varchar(50) DEFAULT NULL,
+  `user_desc` varchar(100) DEFAULT NULL,
+  `approver_desc` varchar(100) DEFAULT NULL,
+  `attachment` varchar(100) DEFAULT NULL,
   `status_sub` varchar(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -249,9 +317,7 @@ CREATE TABLE `disc_submission` (
 --
 
 INSERT INTO `disc_submission` (`id_sub`, `user`, `approver`, `submission_for`, `submission_date`, `approve_date`, `implementation_date_start`, `implementation_date_end`, `user_desc`, `approver_desc`, `attachment`, `status_sub`) VALUES
-(31, '11190002', '11190004', 'SAKIT', '2021-01-08 16:23:39', '2021-01-08 16:23:39', '2021-01-12 17:00:00', '2021-01-13 17:00:00', 'PUSING', NULL, '', 'Y'),
-(32, '11190003', '11190587', 'CUTI', '2021-01-08 18:49:52', '2021-01-08 18:49:52', '2021-01-06 17:00:00', '2021-01-08 17:00:00', 'Izin', NULL, '', 'Y'),
-(37, '11190002', '11190004', 'SAKIT', '2021-01-09 15:22:13', '2021-01-09 15:22:13', '2021-01-19 17:00:00', '2021-01-20 17:00:00', 'istirahat', ' okedeh', 'boxed-bg.jpg', 'P');
+(60, '202101160001', '202101170001', 'CUTI', '2021-01-16 17:00:00', NULL, '2021-01-17 17:00:00', '2021-01-18 17:00:00', 'Melahirkan', NULL, NULL, 'P');
 
 -- --------------------------------------------------------
 
@@ -272,7 +338,9 @@ CREATE TABLE `division` (
 INSERT INTO `division` (`id`, `division_name`, `division_desc`) VALUES
 (3, 'Human Resource', 'Divisi yang memanajemen sumber daya manusia'),
 (4, 'Akutansi & Keuangan', 'Divisi yang memanejemen keuangan'),
-(5, 'MAP', 'Divisi yang menangani pengadaan');
+(5, 'MAP', 'Divisi yang menangani pengadaan'),
+(12, 'Marketing dan Sales', 'Divisi yang menangani marketing dan sales'),
+(13, 'Manajemen resiko', 'Divisi yang menangani analisa resiko perusahaan');
 
 -- --------------------------------------------------------
 
@@ -286,7 +354,7 @@ CREATE TABLE `employe` (
   `last_name` varchar(20) DEFAULT NULL,
   `division` int(11) DEFAULT NULL,
   `position` int(11) DEFAULT NULL,
-  `right_to_leave` varchar(5) DEFAULT NULL,
+  `right_to_leave` int(2) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `no_telp` varchar(15) DEFAULT NULL,
   `join_date` timestamp NULL DEFAULT NULL,
@@ -308,11 +376,16 @@ CREATE TABLE `employe` (
 --
 
 INSERT INTO `employe` (`nip`, `first_name`, `last_name`, `division`, `position`, `right_to_leave`, `email`, `no_telp`, `join_date`, `status`, `bank_code`, `bank_no`, `bank_account`, `bpjs_ks`, `bpjs_tk`, `insurance`, `ktp`, `address`, `education`, `foto`) VALUES
-('11190002', 'Ahmad', 'Nurjati', 4, 2, '2', 'nurjati@gmail.com', '089653834999', '2020-12-06 07:26:22', 1, '002', '096501011604999', 'Nurjati', '0001454326999', '0001454327999', '9999999999999', '32760214049409999', 'Jakarta', 'S1 Ekonomi', 'user7-128x128.jpg'),
-('11190003', 'Ihsan', 'Bagus', 5, 1, '12', 'bagus@gmail.com', '089653834333', '2020-12-07 16:30:13', 1, '002', '096501011604333', 'Bagus', '0001454326333', '0001454327333', '9999999999333', '32760214049403333', 'Bogor', 'D3 Akutansi', 'user8-128x128.jpg'),
-('11190004', 'Abdur', 'Rozak', 4, 1, '12', 'rozak@gmail.com', '089653831444', '2020-12-21 14:26:58', 1, '002', '096501011604444', 'Abdur Rozak', '0001454326444', '0001454327444', '9999999999444', '32760214049409444', 'Bekasi', 'D3 Akutansi', 'user2-160x160.jpg'),
-('11190005', 'Andy', 'Basuki', 3, 3, '12', 'andy@gmail.com', '089653834111', '2021-01-06 13:12:52', 1, '002', '096501011604111', 'Andy Basuki', '0001454326111', '0001454327111', '9999999999111', '32760214049409111', 'Pasar Minggu - Jakarta Selatan', 'S1 Hukum', 'avatar04.png'),
-('11190587', 'Ardi', 'Nurdin', 3, 3, '12', 'ardinurdin89@gmail.com', '089653834136', '2020-12-06 07:21:49', 1, '002', '096501011604534', 'Ardi Nurdin', '0001454326918', '0001454327018', '9999999999888', '3276021404940001', 'Depok', 'S1 Sistem Informasi', 'user6-128x128.jpg');
+('202101160001', 'Muhammad', 'Hilman', 3, 3, 12, 'hilman@gmail.com', '089653834111', '2021-01-16 07:55:34', 1, '002', '1234567890001', 'Muhammad Hilman', '1234567890001', '1234567890001', '', '3276021404940001', 'Jatiwaringin - Bekasi', 'S1 Komputer', '202101160001-profil.jpg'),
+('202101170001', 'Andi', 'Saryoko', 3, 3, 12, 'andy@gmail.com', '089653834111', '2021-01-17 07:34:16', 1, '002', '1234567890001', 'Andi Saryoko', '1234567890001', '1234567890001', '', '3276021404940001', 'Tambun- Bekasi', 'S1 Komputer', '202101170001-profil.jpg'),
+('202101180001', 'Abdur', 'Rozak', 4, 1, 12, 'rozak@gmail.com', '089653834111', '2021-01-18 08:03:51', 1, '002', '1234567890001', 'Abdur Rozak', '1234567890001', '1234567890001', '', '3276021404940001', 'Bekasi', 'S1 Ekonomi', '202101180001-profil.jpg'),
+('202101210001', 'Ihsan', 'Bagus', 5, 1, 12, 'bagus@gmail.com', '089675232093', '2021-01-20 18:00:12', 1, '002', '123456789', 'Ihsan Bagus', '123456789', '123456789', '123456789', '3201013108930001', 'Bekasi barat - Bekasi', 'S1 Manajemen', '202101210001-profil.jpg'),
+('202101210002', 'Ardi', 'Nurdin', 13, 1, 12, 'ardy@gmail.com', '089675233872', '2021-01-20 18:03:22', 1, '002', '123456789', 'Ardi Nurdin', '123456789', '123456789', '123456111', '3201013108930002', 'Cilodong - Depok', 'S1 Ekonomi', '202101210002-profil.jpg'),
+('202101210003', 'Ahmad', 'Nurjati', 12, 1, 12, 'anurjati16@gmail.com', '089675232093', '2021-01-20 18:05:38', 1, '002', '123456789', 'Ahmad Nurjati', '123456789', '123456789', '', '3201013108930005', 'Sentul - Bogor', 'S1 Aktuaria', '202101210003-profil.jpg'),
+('202101210004', 'Pegawai', 'Satu', 4, 1, 12, 'pegawaisatu@gmail.com', '089675232111', '2021-01-20 18:08:33', 1, '002', '123456789', 'Pegawai Satu', '123456789', '123456789', '123456789', '3201013108930003', 'Jatiwaringin - Bekasi', 'S1 Ekonomi', '202101210004-profil.jpg'),
+('202101210005', 'Pegawai', 'Dua', 5, 5, 12, 'pegawaidua@gmail.com', '08961111222', '2021-01-20 18:11:12', 1, '002', '123456789', 'Pegawai Dua', '123456789', '123456789', '', '3201013108930003', 'Pasar minggu - Jakarta', 'S1 Administrasi', '202101210005-profil.jpg'),
+('202101210006', 'Pegawai', 'Tiga', 12, 7, 12, 'pegawaitiga@gmail.com', '089811113333', '2021-01-20 18:13:25', 1, '002', '123456789', 'Pegawai Tiga', '123456789', '123456789', '123456789', '3276021404940002', 'Blok M - Jakarta', 'S1 Akuntansi', '202101210006-profil.jpg'),
+('202101210007', 'Pegawai', 'Empat', 13, 5, 12, 'pegawaiempat@gmail.com', '089675232093', '2021-01-20 18:15:51', 1, '002', '123456789', 'Pegawai Empat', '123456789', '123456789', '', '3276021404940003', 'Pondok gede - Bekasi', 'S1 Aktuaria', '202101210007-profil.jpg');
 
 -- --------------------------------------------------------
 
@@ -351,31 +424,6 @@ CREATE TABLE `memo` (
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `memo`
---
-
-INSERT INTO `memo` (`id`, `sender`, `receiver`, `title`, `body`, `attachment`, `created_at`) VALUES
-(2, '11190004', '11190002', 'Judul', 'isiiii', 'photo1.png', '2021-01-11 14:29:32'),
-(3, '11190002', '11190004', 'Judul  juga', 'isiii juga', NULL, '2021-01-11 15:06:15');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `news`
---
-
-CREATE TABLE `news` (
-  `id` int(11) NOT NULL,
-  `title` varchar(20) DEFAULT NULL,
-  `thumbnail` varchar(20) DEFAULT NULL,
-  `body` text DEFAULT NULL,
-  `created_by` varchar(20) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  `deleted_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 -- --------------------------------------------------------
 
 --
@@ -389,18 +437,10 @@ CREATE TABLE `overtime_submission` (
   `submission_date` timestamp NULL DEFAULT NULL,
   `approve_date` timestamp NULL DEFAULT NULL,
   `implementation_date` timestamp NULL DEFAULT NULL,
-  `user_desc` varchar(50) DEFAULT NULL,
-  `approver_desc` varchar(50) DEFAULT NULL,
+  `user_desc` varchar(100) DEFAULT NULL,
+  `approver_desc` varchar(100) DEFAULT NULL,
   `status_sub_ot` varchar(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `overtime_submission`
---
-
-INSERT INTO `overtime_submission` (`id_sub_ot`, `user`, `approver`, `submission_date`, `approve_date`, `implementation_date`, `user_desc`, `approver_desc`, `status_sub_ot`) VALUES
-(6, '11190002', '11190004', '2021-01-11 17:00:00', '2021-01-11 17:00:00', '2021-01-11 17:00:00', 'izin lembur bosku', ' bole', 'Y'),
-(7, '11190002', '11190004', '2021-01-11 17:00:00', NULL, '2021-01-12 17:00:00', 'lembur dong', NULL, 'P');
 
 -- --------------------------------------------------------
 
@@ -422,19 +462,10 @@ CREATE TABLE `position` (
 INSERT INTO `position` (`id`, `position_name`, `position_desc`, `level`) VALUES
 (1, 'Kepala Divisi', 'Bertanggung jawab atas proses bisnis divisi', 2),
 (2, 'Wakil Kepala Divisi', 'Bertanggung jawab dalam membantu kepala divisi', 3),
-(3, 'HR', 'Bertanggung jawab dalam approve kepala divisi', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `subsidy`
---
-
-CREATE TABLE `subsidy` (
-  `id` int(11) NOT NULL,
-  `subsidy_name` varchar(20) DEFAULT NULL,
-  `nominal` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(3, 'HR', 'Bertanggung jawab dalam approve kepala divisi', 1),
+(5, 'Staff Administrasi', 'Bertanggungjawab atas laporan administrasi', 3),
+(6, 'Staff IT', 'Bertanggungjawab atas IT support', 3),
+(7, 'Staff Keuangan', 'Bertanggungjawab atas laporan keuangan', 3);
 
 -- --------------------------------------------------------
 
@@ -453,8 +484,8 @@ CREATE TABLE `time` (
 --
 
 INSERT INTO `time` (`id_time`, `start`, `status`) VALUES
-(1, '07:00:59', 'in'),
-(2, '16:00:59', 'out');
+(1, '07:01:59', 'in'),
+(2, '16:01:59', 'out');
 
 -- --------------------------------------------------------
 
@@ -479,15 +510,38 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nip`, `password`, `last_login`, `role`, `created_at`, `updated_at`, `deleted_at`, `allow`) VALUES
-(3, '11190587', '12345', NULL, NULL, '2020-12-06 07:21:49', '2021-01-02 04:50:25', NULL, 'Y'),
-(4, '11190002', '12345', NULL, NULL, '2020-12-06 07:26:22', '2020-12-06 07:51:23', NULL, 'N'),
-(6, '11190003', '12345', NULL, NULL, '2020-12-07 16:30:13', NULL, NULL, 'N'),
-(7, '11190004', '12345', NULL, NULL, '2020-12-21 14:26:58', NULL, NULL, 'N'),
-(8, '11190005', '12345', NULL, NULL, '2021-01-06 13:12:52', NULL, NULL, 'N');
+(11, '202101160001', '12345', NULL, NULL, '2021-01-16 07:55:34', '2021-01-17 04:30:09', NULL, 'Y'),
+(12, '202101170001', '12345', NULL, NULL, '2021-01-17 07:34:16', '2021-01-20 10:42:32', NULL, 'Y'),
+(16, '202101180001', '12345', NULL, NULL, '2021-01-18 08:03:51', '2021-01-20 10:59:46', NULL, 'Y'),
+(17, '202101210001', '12345', NULL, NULL, '2021-01-20 18:00:12', '2021-01-20 18:05:59', NULL, 'Y'),
+(18, '202101210002', '12345', NULL, NULL, '2021-01-20 18:03:22', '2021-01-20 18:06:02', NULL, 'Y'),
+(19, '202101210003', '12345', NULL, NULL, '2021-01-20 18:05:38', '2021-01-20 18:06:06', NULL, 'Y'),
+(20, '202101210004', '12345', NULL, NULL, '2021-01-20 18:08:33', NULL, NULL, 'N'),
+(21, '202101210005', '12345', NULL, NULL, '2021-01-20 18:11:12', NULL, NULL, 'N'),
+(22, '202101210006', '12345', NULL, NULL, '2021-01-20 18:13:25', NULL, NULL, 'N'),
+(23, '202101210007', '12345', NULL, NULL, '2021-01-20 18:15:51', NULL, NULL, 'N');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `about_us`
+--
+ALTER TABLE `about_us`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id_admin`);
+
+--
+-- Indexes for table `announcement`
+--
+ALTER TABLE `announcement`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `attendance`
@@ -547,13 +601,6 @@ ALTER TABLE `memo`
   ADD KEY `fk_memo_employe_2` (`receiver`);
 
 --
--- Indexes for table `news`
---
-ALTER TABLE `news`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_news_employe_1` (`created_by`);
-
---
 -- Indexes for table `overtime_submission`
 --
 ALTER TABLE `overtime_submission`
@@ -563,12 +610,6 @@ ALTER TABLE `overtime_submission`
 -- Indexes for table `position`
 --
 ALTER TABLE `position`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `subsidy`
---
-ALTER TABLE `subsidy`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -589,28 +630,46 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `about_us`
+--
+ALTER TABLE `about_us`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `announcement`
+--
+ALTER TABLE `announcement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `calendar`
 --
 ALTER TABLE `calendar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `disc_submission`
 --
 ALTER TABLE `disc_submission`
-  MODIFY `id_sub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id_sub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `division`
 --
 ALTER TABLE `division`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `employe_status`
@@ -625,12 +684,6 @@ ALTER TABLE `memo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `news`
---
-ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `overtime_submission`
 --
 ALTER TABLE `overtime_submission`
@@ -640,13 +693,7 @@ ALTER TABLE `overtime_submission`
 -- AUTO_INCREMENT for table `position`
 --
 ALTER TABLE `position`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `subsidy`
---
-ALTER TABLE `subsidy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `time`
@@ -658,7 +705,7 @@ ALTER TABLE `time`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
@@ -692,12 +739,6 @@ ALTER TABLE `employe`
 ALTER TABLE `memo`
   ADD CONSTRAINT `fk_memo_employe_1` FOREIGN KEY (`sender`) REFERENCES `employe` (`nip`),
   ADD CONSTRAINT `fk_memo_employe_2` FOREIGN KEY (`receiver`) REFERENCES `employe` (`nip`);
-
---
--- Constraints for table `news`
---
-ALTER TABLE `news`
-  ADD CONSTRAINT `fk_news_employe_1` FOREIGN KEY (`created_by`) REFERENCES `employe` (`nip`);
 
 --
 -- Constraints for table `user`
